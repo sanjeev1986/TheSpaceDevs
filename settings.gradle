@@ -1,2 +1,3 @@
+include ':upcoming-launches'
 include ':app'
 rootProject.name = "TheSpaceDevs"

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.sample.thespacedevs"
-        minSdkVersion 18
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -68,6 +68,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation project(path: ':upcoming-launches')
     def activity_version = "1.2.0-rc01"
 
     // Kotlin
