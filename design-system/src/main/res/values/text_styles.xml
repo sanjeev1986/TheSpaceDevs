@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.DS" parent="TextAppearance.AppCompat" />
+
+    <style name="TextAppearance.DS.Title" />
+
+    <style name="TextAppearance.DS.Toolbar" />
+
+    <style name="TextAppearance.DS.ListItem" />
+
+    <style name="TextAppearance.DS.Toolbar.Title">
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.DS.ListItem.Title">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.DS.ListItem.SubTitle">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.DS.ListItem.Body">
+        <item name="android:fontFamily">sans-serif-condensed-light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>

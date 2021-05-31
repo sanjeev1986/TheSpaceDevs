@@ -15,23 +15,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_margin">
 
-            <EditText
+            <com.sample.ds.SearchWidget
                 android:id="@+id/etSearchText"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:fontFamily="sans-serif-condensed-medium"
                 android:hint="@string/type_here_and_click_search"
-                android:imeOptions="actionSearch"
                 android:importantForAutofill="no"
-                android:inputType="text"
-                android:maxLines="1"
-                android:minHeight="32dp"
-                android:padding="8dp"
-                android:scrollHorizontally="true"
-                android:textColor="#000000"
-                android:textColorHint="#000000"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
