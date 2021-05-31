@@ -3,3 +3,4 @@ include ':app'
 rootProject.name = "TheSpaceDevs"
 include ':design-system'
 include ':common'
+include ':data-web-services'

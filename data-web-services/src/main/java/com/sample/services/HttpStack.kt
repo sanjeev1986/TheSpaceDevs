@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.utils.network
+package com.sample.services
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
@@ -25,7 +25,7 @@ class HttpStack(
         builder.build()
     }
 
-    val retrofit: Retrofit by lazy {
+    private val retrofit: Retrofit by lazy {
         val retrofitBuilder = Retrofit.Builder()
         retrofitBuilder
             .baseUrl(baseUrl)
@@ -33,4 +33,6 @@ class HttpStack(
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
+    fun <T> create(cls: Class<T>): T = retrofit.create(cls)
 }

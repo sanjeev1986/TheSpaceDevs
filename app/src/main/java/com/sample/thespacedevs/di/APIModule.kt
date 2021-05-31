@@ -1,9 +1,8 @@
 package com.sample.thespacedevs.di
 
 import com.google.gson.Gson
-import com.sample.thespacedevs.BuildConfig
-import com.sample.thespacedevs.api.TheSpaceDevsRestApi
-import com.sample.thespacedevs.utils.network.HttpStack
+import com.sample.services.HttpStack
+import com.sample.services.BuildConfig
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,13 +12,13 @@ class APIModule {
 
     @Provides
     @Singleton
-    fun provideHttpStack(gson: Gson): HttpStack {
-        return HttpStack(BuildConfig.BASE_URL, gson)
+    fun provideHttpStack(): HttpStack {
+        return HttpStack(BuildConfig.BASE_URL, Gson())
     }
 
     @Provides
     @Singleton
-    fun provideLaunchApi(httpStack: HttpStack): TheSpaceDevsRestApi.LaunchApi {
-        return httpStack.retrofit.create(TheSpaceDevsRestApi.LaunchApi::class.java)
+    fun provideLaunchApi(httpStack: HttpStack): com.sample.services.TheSpaceDevsRestApi.LaunchApi {
+        return httpStack.create(com.sample.services.TheSpaceDevsRestApi.LaunchApi::class.java)
     }
 }

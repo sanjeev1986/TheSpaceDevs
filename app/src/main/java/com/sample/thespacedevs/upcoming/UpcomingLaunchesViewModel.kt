@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.sample.thespacedevs.api.launch.Results
+import com.sample.services.launch.Results
 import com.sample.thespacedevs.repository.LaunchRepository
 import com.sample.thespacedevs.utils.RepoResult
 import kotlinx.coroutines.launch
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class UpcomingLaunchesViewModel(
     private val repository: LaunchRepository
 ) : ViewModel() {
-    private val _upcomingLaunchesLiveData = MutableLiveData<Result<List<Results>>>()
+    private val _upcomingLaunchesLiveData = MutableLiveData<Result<List<com.sample.services.launch.Results>>>()
     val upcomingLaunchesLiveData = _upcomingLaunchesLiveData
 
     fun fetchUpcomingLaunches(refresh: Boolean) {

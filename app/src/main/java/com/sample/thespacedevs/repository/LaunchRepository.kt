@@ -1,14 +1,13 @@
 package com.sample.thespacedevs.repository
 
-import com.sample.thespacedevs.api.TheSpaceDevsRestApi
-import com.sample.thespacedevs.api.launch.Results
+import com.sample.services.TheSpaceDevsRestApi
+import com.sample.services.launch.Results
 import com.sample.thespacedevs.localstorage.InMemoryCache
 import com.sample.thespacedevs.platform.errors.NotConnectedToInternet
 import com.sample.thespacedevs.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.utils.OpenForTesting
 import com.sample.thespacedevs.utils.RepoResult
 import com.sample.thespacedevs.utils.ui.AppDispatchers
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,19 +18,19 @@ class LaunchRepository @Inject constructor(
     private val dispatchers: AppDispatchers,
     private val connectivityApiManager: ConnectivityApiManager,
     private val inMemoryCache: InMemoryCache,
-    private val launchApi: TheSpaceDevsRestApi.LaunchApi
+    private val launchApi: com.sample.services.TheSpaceDevsRestApi.LaunchApi
 ) {
 
     suspend fun getUpcomingLaunches(
         limit: Int,
         refresh: Boolean = true
-    ): RepoResult<List<Results>> {
+    ): RepoResult<List<com.sample.services.launch.Results>> {
         return try {
             RepoResult.Success(
                 if (refresh) {
                     fetchUpcomingLaunches(limit)
                 } else {
-                    inMemoryCache.getDataFromCache<List<Results>>(LaunchRepository::class.java.name)
+                    inMemoryCache.getDataFromCache<List<com.sample.services.launch.Results>>(LaunchRepository::class.java.name)
                         ?: fetchUpcomingLaunches(limit)
                 }
             )
@@ -40,7 +39,7 @@ class LaunchRepository @Inject constructor(
         }
     }
 
-    private suspend fun fetchUpcomingLaunches(limit: Int): List<Results> {
+    private suspend fun fetchUpcomingLaunches(limit: Int): List<com.sample.services.launch.Results> {
         if (!connectivityApiManager.isConnectedToInternet()) {
             throw NotConnectedToInternet()
         }

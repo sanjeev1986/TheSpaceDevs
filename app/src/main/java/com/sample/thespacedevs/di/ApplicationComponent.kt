@@ -9,7 +9,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        GsonModule::class,
         APIModule::class,
         PlatformModule::class,
         StorageModule::class,

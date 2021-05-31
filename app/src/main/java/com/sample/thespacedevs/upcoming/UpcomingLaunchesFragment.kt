@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.sample.thespacedevs.R
 import com.sample.thespacedevs.TheSpaceDevApp
-import com.sample.thespacedevs.api.launch.Results
+import com.sample.services.launch.Results
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.*
 import javax.inject.Inject
 
@@ -97,9 +97,9 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches){
         viewModel.fetchUpcomingLaunches(false)
     }
 
-    inner class LaunchListAdapter(private val launchItems: MutableList<Results>) :
+    inner class LaunchListAdapter(private val launchItems: MutableList<com.sample.services.launch.Results>) :
         RecyclerView.Adapter<LaunchViewHolder>() {
-        fun submit(items: List<Results>) {
+        fun submit(items: List<com.sample.services.launch.Results>) {
             val diffResult = DiffUtil.calculateDiff(LaunchItemDiffs(launchItems, items))
             launchItems.clear()
             launchItems.addAll(items)
@@ -124,7 +124,7 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches){
         private val launchTitle = view.findViewById<TextView>(R.id.launchTitle)
         private val launchDescription = view.findViewById<TextView>(R.id.launchDescription)
 
-        fun bind(launch: Results) {
+        fun bind(launch: com.sample.services.launch.Results) {
             launchTitle.text = launch.name
             launchDescription.text = launch.mission?.name
             view.setOnClickListener {
@@ -136,8 +136,8 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches){
     }
 
     inner class LaunchItemDiffs(
-        private val oldItems: List<Results>,
-        private val newItems: List<Results>
+        private val oldItems: List<com.sample.services.launch.Results>,
+        private val newItems: List<com.sample.services.launch.Results>
     ) : DiffUtil.Callback() {
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldItems[oldItemPosition].id == newItems[newItemPosition].id

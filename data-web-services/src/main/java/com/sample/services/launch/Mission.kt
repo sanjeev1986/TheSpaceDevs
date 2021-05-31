@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.api.launch
+package com.sample.services.launch
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

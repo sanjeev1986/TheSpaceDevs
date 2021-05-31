@@ -2,7 +2,7 @@ package com.sample.thespacedevs.di
 
 import com.google.gson.Gson
 import com.sample.thespacedevs.repository.LaunchRepository
-import com.sample.thespacedevs.utils.network.HttpStack
+import com.sample.services.HttpStack
 import dagger.Module
 import dagger.Provides
 import io.mockk.mockk

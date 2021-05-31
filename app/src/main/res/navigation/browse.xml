@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_launch_details">
         <argument
             android:name="result"
-            app:argType="com.sample.thespacedevs.api.launch.Results"
+            app:argType="com.sample.services.launch.Results"
             app:nullable="false" />
     </fragment>
 </navigation>

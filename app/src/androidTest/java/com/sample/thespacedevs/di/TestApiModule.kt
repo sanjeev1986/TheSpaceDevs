@@ -1,8 +1,7 @@
 package com.sample.thespacedevs.di
 
-import com.google.gson.Gson
-import com.sample.thespacedevs.api.TheSpaceDevsRestApi
-import com.sample.thespacedevs.utils.network.HttpStack
+import com.sample.services.TheSpaceDevsRestApi
+import com.sample.services.HttpStack
 import dagger.Module
 import dagger.Provides
 import io.mockk.mockk
@@ -16,5 +15,5 @@ class TestApiModule {
 
     @Provides
     @Singleton
-    fun provideLaunchApi() = mockk<TheSpaceDevsRestApi.LaunchApi>()
+    fun provideLaunchApi() = mockk<com.sample.services.TheSpaceDevsRestApi.LaunchApi>()
 }
