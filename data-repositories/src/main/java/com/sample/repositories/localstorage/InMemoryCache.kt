@@ -1,10 +1,9 @@
-package com.sample.thespacedevs.localstorage
+package com.sample.repositories.localstorage
 
 import android.util.LruCache
-import com.sample.thespacedevs.utils.OpenForTesting
 import javax.inject.Singleton
 
-@OpenForTesting
+//@OpenForTesting
 @Singleton
 class InMemoryCache(size: Int = 1 * 1024 * 1024/* Default 1 MB cache*/) {
     private val memoryCache = LruCache<String, Any>(size)

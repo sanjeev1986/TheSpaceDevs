@@ -1,12 +1,7 @@
 package com.sample.thespacedevs.repository
 
-import com.sample.services.TheSpaceDevsRestApi
-import com.sample.services.launch.Mission
-import com.sample.services.launch.Pad
-import com.sample.services.launch.Results
-import com.sample.services.launch.UpcomingLaunchesResponse
-import com.sample.thespacedevs.localstorage.InMemoryCache
-import com.sample.thespacedevs.platform.hardware.ConnectivityApiManager
+import com.sample.repositories.localstorage.InMemoryCache
+import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.utils.ui.AppDispatchers
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -18,8 +13,8 @@ import org.junit.Test
 
 class LaunchRepositoryTest {
     private var dispatchers: AppDispatchers = AppDispatchers(Dispatchers.IO, Dispatchers.IO)
-    private var connectivityApiManager: ConnectivityApiManager = mockk(relaxed = true)
-    private var inMemoryCache: InMemoryCache = mockk(relaxed = true)
+    private var connectivityApiManager: com.sample.platform.hardware.ConnectivityApiManager = mockk(relaxed = true)
+    private var inMemoryCache: com.sample.repositories.localstorage.InMemoryCache = mockk(relaxed = true)
     private var launchApi: com.sample.services.TheSpaceDevsRestApi.LaunchApi = mockk(relaxed = true)
     private val successResponse = com.sample.services.launch.UpcomingLaunchesResponse(
         results = listOf(
@@ -74,7 +69,12 @@ class LaunchRepositoryTest {
         coEvery { launchApi.fetchUpcomingLaunches(eq(10)) } returns successResponse
         every { inMemoryCache.getDataFromCache<List<com.sample.services.launch.Results>>(any()) } returns null
         runBlocking {
-            val repository = LaunchRepository(dispatchers, connectivityApiManager, inMemoryCache, launchApi)
+            val repository = com.sample.repositories.LaunchRepository(
+                dispatchers,
+                connectivityApiManager,
+                inMemoryCache,
+                launchApi
+            )
             repository.getUpcomingLaunches(10, true)
             coVerify(exactly = 1) { launchApi.fetchUpcomingLaunches(eq(10)) }
         }
@@ -87,7 +87,12 @@ class LaunchRepositoryTest {
         coEvery { launchApi.fetchUpcomingLaunches(eq(10)) } returns successResponse
         every { inMemoryCache.getDataFromCache<List<com.sample.services.launch.Results>>(any()) } returns successResponse.results
         runBlocking {
-            val repository = LaunchRepository(dispatchers, connectivityApiManager, inMemoryCache, launchApi)
+            val repository = com.sample.repositories.LaunchRepository(
+                dispatchers,
+                connectivityApiManager,
+                inMemoryCache,
+                launchApi
+            )
             repository.getUpcomingLaunches(10, false)
             coVerify(exactly = 0) { launchApi.fetchUpcomingLaunches(eq(10)) }
         }
@@ -99,7 +104,12 @@ class LaunchRepositoryTest {
         coEvery { launchApi.fetchUpcomingLaunches(eq(10)) } returns successResponse
         every { inMemoryCache.getDataFromCache<List<com.sample.services.launch.Results>>(any()) } returns null
         runBlocking {
-            val repository = LaunchRepository(dispatchers, connectivityApiManager, inMemoryCache, launchApi)
+            val repository = com.sample.repositories.LaunchRepository(
+                dispatchers,
+                connectivityApiManager,
+                inMemoryCache,
+                launchApi
+            )
             repository.getUpcomingLaunches(10, false)
             coVerify(exactly = 1) { launchApi.fetchUpcomingLaunches(eq(10)) }
         }

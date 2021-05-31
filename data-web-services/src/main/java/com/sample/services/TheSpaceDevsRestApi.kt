@@ -8,6 +8,6 @@ interface TheSpaceDevsRestApi {
 
     interface LaunchApi {
         @GET("launch/upcoming")
-        suspend fun fetchUpcomingLaunches(@Query("limit") limit: Int): com.sample.services.launch.UpcomingLaunchesResponse
+        suspend fun fetchUpcomingLaunches(@Query("limit") limit: Int): UpcomingLaunchesResponse
     }
 }

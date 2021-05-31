@@ -10,13 +10,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.sample.thespacedevs.R
 import com.sample.thespacedevs.TheSpaceDevApp
-import com.sample.services.launch.Mission
-import com.sample.services.launch.Pad
-import com.sample.services.launch.Results
-import com.sample.services.launch.UpcomingLaunchesResponse
 import com.sample.thespacedevs.di.DaggerTestApplicationComponent
-import com.sample.thespacedevs.repository.LaunchRepository
-import com.sample.thespacedevs.utils.RepoResult
+import com.sample.repositories.LaunchRepository
+import com.sample.repositories.RepoResult
 import io.mockk.coEvery
 import org.junit.Rule
 import org.junit.Test
@@ -31,7 +27,7 @@ class UpcomingLaunchesFragmentTest {
     val rule = InstantTaskExecutorRule()
 
     @Inject
-    lateinit var repository: LaunchRepository
+    lateinit var repository: com.sample.repositories.LaunchRepository
 
     init {
         ((InstrumentationRegistry.getInstrumentation().targetContext.applicationContext as TheSpaceDevApp)
@@ -88,7 +84,7 @@ class UpcomingLaunchesFragmentTest {
 
     @Test
     fun testConnectivityErrorHandling() {
-        coEvery { repository.getUpcomingLaunches(any(), any()) } returns RepoResult.Failure(
+        coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Failure(
             IOException()
         )
         launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)
@@ -97,7 +93,7 @@ class UpcomingLaunchesFragmentTest {
 
     @Test
     fun testUpcomingListIsDisplayed() {
-        coEvery { repository.getUpcomingLaunches(any(), any()) } returns RepoResult.Success(
+        coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Success(
             successResponse.results
         )
         launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)
@@ -113,7 +109,7 @@ class UpcomingLaunchesFragmentTest {
 
     @Test
     fun testSearchUpcomingLaunches() {
-        coEvery { repository.getUpcomingLaunches(any(), any()) } returns RepoResult.Success(
+        coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Success(
             successResponse.results
         )
         launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)

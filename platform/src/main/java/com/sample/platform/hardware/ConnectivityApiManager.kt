@@ -1,12 +1,12 @@
-package com.sample.thespacedevs.platform.hardware
+package com.sample.platform.hardware
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.sample.thespacedevs.utils.OpenForTesting
+//import com.sample.thespacedevs.utils.OpenForTesting
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@OpenForTesting
+//@OpenForTesting
 @Singleton
 class ConnectivityApiManager @Inject constructor(context: Context) {
     private val connectivityManager =

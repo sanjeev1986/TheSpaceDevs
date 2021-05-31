@@ -1,7 +1,7 @@
 package com.sample.thespacedevs.di
 
 import android.content.Context
-import com.sample.thespacedevs.localstorage.InMemoryCache
+import com.sample.repositories.localstorage.InMemoryCache
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class StorageModule {
     @Provides
     @Singleton
-    fun provideInMemoryCache(context: Context): InMemoryCache {
-        return InMemoryCache()
+    fun provideInMemoryCache(context: Context): com.sample.repositories.localstorage.InMemoryCache {
+        return com.sample.repositories.localstorage.InMemoryCache()
     }
 }

@@ -1,8 +1,6 @@
 package com.sample.thespacedevs.di
 
-import com.google.gson.Gson
-import com.sample.thespacedevs.repository.LaunchRepository
-import com.sample.services.HttpStack
+import com.sample.repositories.LaunchRepository
 import dagger.Module
 import dagger.Provides
 import io.mockk.mockk
@@ -12,8 +10,8 @@ import javax.inject.Singleton
 class RepoModule {
     @Provides
     @Singleton
-    fun provideRepository(): LaunchRepository{
-        return mockk<LaunchRepository>()
+    fun provideRepository(): com.sample.repositories.LaunchRepository {
+        return mockk<com.sample.repositories.LaunchRepository>()
     }
 
 }
