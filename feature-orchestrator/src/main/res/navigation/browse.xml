@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/launchDetailsFragment"
-        android:name="com.sample.thespacedevs.details.LaunchDetailsFragment"
+        android:name="com.sample.thespacedevs.feature.details.LaunchDetailsFragment"
         app:popUpToInclusive="@id/upcomingLaunchesFragment"
         tools:layout="@layout/fragment_launch_details">
         <argument

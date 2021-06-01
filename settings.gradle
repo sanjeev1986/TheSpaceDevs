@@ -1,9 +1,10 @@
 include ':app'
 rootProject.name = "TheSpaceDevs"
 include ':feature-upcoming-launches'
-include ':feature-common'
+include ':feature-orchestrator'
 include ':design-system'
 include ':data-web-services'
 include ':data-repositories'
 include ':platform'
 
+include ':feature-launch-details'

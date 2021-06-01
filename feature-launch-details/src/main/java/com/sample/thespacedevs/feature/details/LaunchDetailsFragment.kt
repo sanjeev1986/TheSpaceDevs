@@ -1,9 +1,10 @@
-package com.sample.thespacedevs.details
+package com.sample.thespacedevs.feature.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,47 +14,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.sample.thespacedevs.R
+import com.google.android.material.appbar.MaterialToolbar
 import com.sample.thespacedevs.utils.convertToBitmapDescriptor
-import kotlinx.android.synthetic.main.fragment_launch_details.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
     OnMapReadyCallback {
-
-    private val args by navArgs<LaunchDetailsFragmentArgs>()
-    var simpleDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
-    var windowStartDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-
-    override fun onMapReady(googleMap: GoogleMap?) {//its been a few yrs since i worked on maps, can't say it GoogleMap will be null, so default kotlin nullable
-        launchCoordinates?.apply {
-            if (latitude == 0.0 && longitude == 0.0) {
-                veil.visibility = View.VISIBLE
-            } else {
-                val ll = this
-                googleMap?.run {
-                    val cameraPosition = CameraPosition.Builder()
-                        .target(ll)
-                        .zoom(8f)
-                        .build()
-                    moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-                    addMarker(
-                        MarkerOptions()
-                            .position(ll)
-                            .title(launchTitle)
-                            .icon(
-                                this.convertToBitmapDescriptor(
-                                    requireActivity(),
-                                    R.drawable.ic_launch_marker
-                                )
-                            )
-                    )
-                }
-            }
-        }
-    }
-
     companion object {
         /**
          * Rocket launch name
@@ -86,6 +53,16 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
         const val EXTRA_LAUNCH_DESC = "com.sample.assessment.launch.details.EXTRA_LAUNCH_DESC"
     }
 
+    private lateinit var veil: View
+    private lateinit var toolbar: MaterialToolbar
+    private lateinit var missionDescription: TextView
+    private lateinit var agencyTitle: TextView
+    private lateinit var timerTxt: TextView
+
+    private val args by navArgs<LaunchDetailsFragmentArgs>()
+    private var simpleDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
+    private var windowStartDateFormat =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     private lateinit var launchTitle: String
     private var launchCountDown: Long = 0L
     private var launchCoordinates: LatLng? = null
@@ -96,10 +73,16 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        veil = view.findViewById(R.id.veil)
+        toolbar = view.findViewById(R.id.toolbar)
+        missionDescription = view.findViewById(R.id.missionDescription)
+        agencyTitle = view.findViewById(R.id.agencyTitle)
+        timerTxt = view.findViewById(R.id.timerTxt)
+
         if (savedInstanceState == null) {
             launchTitle = args.result.name
             launchCountDown = windowStartDateFormat.parse(args.result.window_start).time
-            launchCoordinates = LatLng(args.result.pad.latitude,args.result.pad.longitude)
+            launchCoordinates = LatLng(args.result.pad.latitude, args.result.pad.longitude)
             launchDescription = args.result.mission?.name
             launchAgencyName = args.result.pad.name
             //launchDate = intent.getStringExtra(EXTRA_LAUNCH_DATE)
@@ -113,7 +96,8 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
             //launchDate = savedInstanceState.getString(EXTRA_LAUNCH_DATE)
         }
         toolbar.title = launchTitle
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
         missionDescription.text = launchDescription
         agencyTitle.text = launchAgencyName
@@ -161,4 +145,32 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
         timer?.cancel()
     }
 
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        launchCoordinates?.apply {
+            if (latitude == 0.0 && longitude == 0.0) {
+                veil.visibility = View.VISIBLE
+            } else {
+                val ll = this
+                googleMap?.run {
+                    val cameraPosition = CameraPosition.Builder()
+                        .target(ll)
+                        .zoom(8f)
+                        .build()
+                    moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+                    addMarker(
+                        MarkerOptions()
+                            .position(ll)
+                            .title(launchTitle)
+                            .icon(
+                                this.convertToBitmapDescriptor(
+                                    requireActivity(),
+                                    R.drawable.ic_launch_marker
+                                )
+                            )
+                    )
+                }
+            }
+        }
+    }
 }

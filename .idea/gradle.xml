@@ -15,7 +15,8 @@
             <option value="$PROJECT_DIR$/data-repositories" />
             <option value="$PROJECT_DIR$/data-web-services" />
             <option value="$PROJECT_DIR$/design-system" />
-            <option value="$PROJECT_DIR$/feature-common" />
+            <option value="$PROJECT_DIR$/feature-launch-details" />
+            <option value="$PROJECT_DIR$/feature-orchestrator" />
             <option value="$PROJECT_DIR$/feature-upcoming-launches" />
             <option value="$PROJECT_DIR$/platform" />
           </set>
