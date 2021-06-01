@@ -11,8 +11,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.sample.thespacedevs.R
 import com.sample.thespacedevs.TheSpaceDevApp
 import com.sample.thespacedevs.di.DaggerTestApplicationComponent
-import com.sample.repositories.LaunchRepository
-import com.sample.repositories.RepoResult
 import io.mockk.coEvery
 import org.junit.Rule
 import org.junit.Test
@@ -87,7 +85,7 @@ class UpcomingLaunchesFragmentTest {
         coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Failure(
             IOException()
         )
-        launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)
+        launchFragmentInContainer<com.sample.feature.launches.UpcomingLaunchesFragment>(null, R.style.AppTheme)
         onView(withText(R.string.no_network)).check(matches(isDisplayed()))
     }
 
@@ -96,7 +94,7 @@ class UpcomingLaunchesFragmentTest {
         coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Success(
             successResponse.results
         )
-        launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)
+        launchFragmentInContainer<com.sample.feature.launches.UpcomingLaunchesFragment>(null, R.style.AppTheme)
         onView(withHint(R.string.type_here_and_click_search)).check(matches(isDisplayed()))
         onView(withText("New Shepard | NS-15")).check(matches(isDisplayed()))
         onView(withText("Falcon 9 Block 5 | SpX USCV-2 (NASA Crew Flight 2)")).check(
@@ -112,7 +110,7 @@ class UpcomingLaunchesFragmentTest {
         coEvery { repository.getUpcomingLaunches(any(), any()) } returns com.sample.repositories.RepoResult.Success(
             successResponse.results
         )
-        launchFragmentInContainer<UpcomingLaunchesFragment>(null, R.style.AppTheme)
+        launchFragmentInContainer<com.sample.feature.launches.UpcomingLaunchesFragment>(null, R.style.AppTheme)
         onView(withId(R.id.etSearchText)).perform(typeText("S"))
         onView(withText("Soyuz 2.1b/Fregat-M | OneWeb 6")).check(matches(isDisplayed()))
     }

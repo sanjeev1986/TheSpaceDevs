@@ -1,8 +1,8 @@
 package com.sample.thespacedevs.di
 
-import com.sample.thespacedevs.upcoming.UpcomingLaunchesFragment
-
+import com.sample.feature.launches.UpcomingLaunchesFragment
+import dagger.android.ContributesAndroidInjector
 
 interface DaggerComponent {
-    fun inject(fragment: UpcomingLaunchesFragment)
+
 }

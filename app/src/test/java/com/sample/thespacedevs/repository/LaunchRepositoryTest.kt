@@ -1,8 +1,6 @@
 package com.sample.thespacedevs.repository
 
-import com.sample.repositories.localstorage.InMemoryCache
-import com.sample.platform.hardware.ConnectivityApiManager
-import com.sample.thespacedevs.utils.ui.AppDispatchers
+import com.sample.thespacedevs.utils.AppDispatchers
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

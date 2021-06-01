@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sample.thespacedevs.R
-import com.sample.thespacedevs.utils.ui.convertToBitmapDescriptor
+import com.sample.thespacedevs.utils.convertToBitmapDescriptor
 import kotlinx.android.synthetic.main.fragment_launch_details.*
 import java.text.SimpleDateFormat
 import java.util.*

@@ -12,12 +12,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/data-repositories" />
             <option value="$PROJECT_DIR$/data-web-services" />
             <option value="$PROJECT_DIR$/design-system" />
+            <option value="$PROJECT_DIR$/feature-common" />
+            <option value="$PROJECT_DIR$/feature-upcoming-launches" />
             <option value="$PROJECT_DIR$/platform" />
-            <option value="$PROJECT_DIR$/upcoming-launches" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

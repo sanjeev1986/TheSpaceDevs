@@ -1,8 +1,9 @@
-include ':upcoming-launches'
 include ':app'
 rootProject.name = "TheSpaceDevs"
+include ':feature-upcoming-launches'
+include ':feature-common'
 include ':design-system'
-include ':common'
 include ':data-web-services'
 include ':data-repositories'
 include ':platform'
+

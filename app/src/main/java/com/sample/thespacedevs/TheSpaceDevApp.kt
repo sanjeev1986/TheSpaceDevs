@@ -1,21 +1,17 @@
 package com.sample.thespacedevs
 
-import android.app.Application
-import android.os.StrictMode
 import androidx.fragment.app.Fragment
 import com.sample.thespacedevs.di.DaggerApplicationComponent
-import com.sample.thespacedevs.di.DaggerComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-open class TheSpaceDevApp : Application() {
+open class TheSpaceDevApp : DaggerApplication() {
     companion object {
 
         fun getInstance(fragment: Fragment): TheSpaceDevApp =
             fragment.requireActivity().applicationContext as TheSpaceDevApp
     }
 
-    val applicationComponent: DaggerComponent by lazy {
-        createDaggerComponent()
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -35,7 +31,8 @@ open class TheSpaceDevApp : Application() {
         }*/
     }
 
-    open fun createDaggerComponent(): DaggerComponent {
-        return DaggerApplicationComponent.builder().application(this).context(this).build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.factory().create(this)
     }
+
 }
