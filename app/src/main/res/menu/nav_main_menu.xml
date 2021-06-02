@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/main_menu">
+        <item
+            android:id="@id/upcomingLaunchesFragment"
+            android:icon="@drawable/ic_launch_marker"
+            android:title="@string/upcoming_launches" />
+        <item
+            android:id="@id/spacecraftsListFragment"
+            android:icon="@drawable/ic_baseline_search_24px"
+            android:title="@string/spacecrafts" />
+    </group>
+</menu>

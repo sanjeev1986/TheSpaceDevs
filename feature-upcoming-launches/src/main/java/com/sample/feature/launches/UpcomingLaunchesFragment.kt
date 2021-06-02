@@ -9,12 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toolbar
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,10 +19,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 //import com.sample.thespacedevs.TheSpaceDevApp
-import com.sample.services.launch.Results
+import com.sample.thespacedevs.services.launch.Results
 import com.sample.thespacedevs.directions.LaunchDetails
 import com.sample.thespacedevs.directions.Navigator
-import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -112,7 +107,7 @@ class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launc
 
     inner class LaunchListAdapter(private val launchItems: MutableList<Results>) :
         RecyclerView.Adapter<LaunchViewHolder>() {
-        fun submit(items: List<com.sample.services.launch.Results>) {
+        fun submit(items: List<Results>) {
             val diffResult = DiffUtil.calculateDiff(LaunchItemDiffs(launchItems, items))
             launchItems.clear()
             launchItems.addAll(items)

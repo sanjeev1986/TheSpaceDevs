@@ -1,4 +1,4 @@
-package com.sample.services.launch
+package com.sample.thespacedevs.services.launch
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

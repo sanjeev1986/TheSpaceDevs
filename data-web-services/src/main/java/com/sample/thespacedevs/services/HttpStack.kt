@@ -1,4 +1,4 @@
-package com.sample.services
+package com.sample.thespacedevs.services
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient

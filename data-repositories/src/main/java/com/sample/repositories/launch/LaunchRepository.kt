@@ -1,10 +1,11 @@
-package com.sample.repositories
+package com.sample.repositories.launch
 
 import com.sample.repositories.localstorage.InMemoryCache
-import com.sample.services.TheSpaceDevsRestApi
-import com.sample.services.launch.Results
+import com.sample.thespacedevs.services.TheSpaceDevsService
+import com.sample.thespacedevs.services.launch.Results
 import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
+import com.sample.repositories.RepoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 class LaunchRepository @Inject constructor(
     private val connectivityApiManager: ConnectivityApiManager,
     private val inMemoryCache: InMemoryCache,
-    private val launchApi: TheSpaceDevsRestApi.LaunchApi
+    private val launchApi: TheSpaceDevsService.LaunchApi
 ) {
 
     suspend fun getUpcomingLaunches(
@@ -28,7 +29,8 @@ class LaunchRepository @Inject constructor(
                     fetchUpcomingLaunches(limit)
                 } else {
                     inMemoryCache.getDataFromCache<List<Results>>(
-                        LaunchRepository::class.java.name)
+                        LaunchRepository::class.java.name
+                    )
                         ?: fetchUpcomingLaunches(limit)
                 }
             )

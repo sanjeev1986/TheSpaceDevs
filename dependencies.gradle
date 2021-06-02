@@ -1,0 +1,8 @@
+ext.versions = [
+        corektx_version         : '1.3.2',
+        appcompat_version       : "1.2.0",
+        constraintlayout_version: "2.0.4",
+        material_version        : "1.3.0",
+        activity_version        : "1.2.0-rc01",
+        fragment_version        : "1.3.0-rc01"
+]

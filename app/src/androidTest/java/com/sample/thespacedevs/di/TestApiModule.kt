@@ -1,7 +1,7 @@
 package com.sample.thespacedevs.di
 
-import com.sample.services.TheSpaceDevsRestApi
-import com.sample.services.HttpStack
+import com.sample.thespacedevs.services.HttpStack
+import com.sample.thespacedevs.services.TheSpaceDevsService
 import dagger.Module
 import dagger.Provides
 import io.mockk.mockk
@@ -15,5 +15,5 @@ class TestApiModule {
 
     @Provides
     @Singleton
-    fun provideLaunchApi() = mockk<com.sample.services.TheSpaceDevsRestApi.LaunchApi>()
+    fun provideLaunchApi() = mockk<TheSpaceDevsService.LaunchApi>()
 }

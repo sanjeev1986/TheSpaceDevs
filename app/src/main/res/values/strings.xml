@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TheSpaceDevsApp</string>
+    <string name="upcoming_launches">Upcoming</string>
+    <string name="spacecrafts">Spacecrafts</string>
 </resources>

@@ -63,6 +63,7 @@ dependencies {
     implementation project(path: ':feature-upcoming-launches')
     implementation project(path: ':feature-launch-details')
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation project(path: ':feature-vehicles')
     //dagger
     def dagger_version = "2.28.1"
 

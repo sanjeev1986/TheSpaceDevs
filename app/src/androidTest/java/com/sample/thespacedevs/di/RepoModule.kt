@@ -1,6 +1,6 @@
 package com.sample.thespacedevs.di
 
-import com.sample.repositories.LaunchRepository
+import com.sample.repositories.launch.LaunchRepository
 import dagger.Module
 import dagger.Provides
 import io.mockk.mockk
@@ -10,8 +10,8 @@ import javax.inject.Singleton
 class RepoModule {
     @Provides
     @Singleton
-    fun provideRepository(): com.sample.repositories.LaunchRepository {
-        return mockk<com.sample.repositories.LaunchRepository>()
+    fun provideRepository(): LaunchRepository {
+        return mockk<LaunchRepository>()
     }
 
 }

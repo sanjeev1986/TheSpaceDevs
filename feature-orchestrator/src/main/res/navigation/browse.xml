@@ -27,7 +27,12 @@
         tools:layout="@layout/fragment_launch_details">
         <argument
             android:name="result"
-            app:argType="com.sample.services.launch.Results"
+            app:argType="com.sample.thespacedevs.services.launch.Results"
             app:nullable="false" />
     </fragment>
+
+    <fragment
+        android:id="@+id/spacecraftsListFragment"
+        android:name="com.sample.thespacedevs.feature.spacecrafts.SpacecraftListFragment"
+        tools:layout="@layout/fragment_spacecraft_list" />
 </navigation>

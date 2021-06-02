@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.sample.feature.launches.UpcomingLaunchesFragment
 import com.sample.thespacedevs.TheSpaceDevApp
+import com.sample.thespacedevs.feature.spacecrafts.SpacecraftListFragment
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,4 +21,7 @@ abstract class FeatureModule {
 
     @ContributesAndroidInjector
     abstract fun injectUpcomingLaunchesFragment(): UpcomingLaunchesFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectSpacecraftListFragment(): SpacecraftListFragment
 }
