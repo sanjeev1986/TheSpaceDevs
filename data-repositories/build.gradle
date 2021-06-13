@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.3.0'
     api project(path: ':data-web-services')
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
-    implementation project(path: ':platform')
+    implementation project(path: ':android-platform')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

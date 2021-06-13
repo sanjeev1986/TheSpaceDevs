@@ -2,10 +2,10 @@ include ':app'
 rootProject.name = "TheSpaceDevs"
 include ':feature-upcoming-launches'
 include ':feature-orchestrator'
-include ':design-system'
+include ':ui-design-system'
 include ':data-web-services'
 include ':data-repositories'
-include ':platform'
+include ':android-platform'
 
 include ':feature-launch-details'
 include ':feature-vehicles'
