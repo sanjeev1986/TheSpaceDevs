@@ -15,7 +15,6 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.appbar.MaterialToolbar
-import com.sample.thespacedevs.utils.convertToBitmapDescriptor
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -163,7 +162,7 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
                             .position(ll)
                             .title(launchTitle)
                             .icon(
-                                this.convertToBitmapDescriptor(
+                                convertToBitmapDescriptor(
                                     requireActivity(),
                                     R.drawable.ic_launch_marker
                                 )

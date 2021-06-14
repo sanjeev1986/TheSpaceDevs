@@ -39,13 +39,8 @@ android {
 }
 
 dependencies {
-    //dagger
-    def dagger_version = "2.28.1"
-    implementation("com.google.dagger:dagger:$dagger_version")
-    //Retrofit + Gson + Okhttp
-    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.8.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation libraries.dagger
+    implementation libraries.retrofit
+    implementation libraries.logging_interceptor
+    implementation libraries.converter_gson
 }

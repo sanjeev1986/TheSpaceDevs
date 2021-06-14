@@ -1,13 +1,12 @@
-package com.sample.thespacedevs.utils
+package com.sample.thespacedevs.feature.details
 
 import android.content.Context
 import android.graphics.Canvas
 import androidx.annotation.DrawableRes
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
-fun GoogleMap.convertToBitmapDescriptor(context: Context, @DrawableRes drawable: Int): BitmapDescriptor {
+fun convertToBitmapDescriptor(context: Context, @DrawableRes drawable: Int): BitmapDescriptor {
     val background = androidx.core.content.ContextCompat.getDrawable(context, drawable)
     background!!.setBounds(0, 0, background.intrinsicWidth, background.intrinsicHeight)
     val vectorDrawable = androidx.core.content.ContextCompat.getDrawable(context, drawable)
