@@ -1,6 +1,8 @@
 package com.sample.thespacedevs.services
 
+import android.content.Context
 import com.google.gson.Gson
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,13 +16,15 @@ import javax.inject.Singleton
 @Singleton
 class HttpStack(
     private val baseUrl: String,
-    private val gson: Gson
+    private val gson: Gson,
+    private val context: Context
 ) {
     private val okhttpClient: OkHttpClient by lazy {
         val builder = OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
+            .cache(Cache(context.cacheDir, 2000))
             .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         builder.build()
     }

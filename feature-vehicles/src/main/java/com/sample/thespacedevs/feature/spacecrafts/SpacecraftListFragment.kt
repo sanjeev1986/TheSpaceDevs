@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sample.repositories.RepoResult
 import com.sample.thespacedevs.services.spacecraft.Results
 import dagger.android.support.DaggerFragment
@@ -30,9 +32,6 @@ class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list)
         spaceCraftListView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             setAdapter(adapter)
-            addItemDecoration(
-                DividerItemDecoration(requireContext(), RecyclerView.VERTICAL)
-            )
         }
         viewModel.spacecraftsLiveData.observe(viewLifecycleOwner, {
             when (it) {
@@ -73,11 +72,15 @@ class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list)
     inner class SpacecraftViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
 
         private val launchTitle = view.findViewById<TextView>(R.id.titleSpacecraft)
+        private val spacecraftImage = view.findViewById<ImageView>(R.id.imageSpacecraft)
 
         fun bind(launch: Results) {
             launchTitle.text = launch.name
+            Glide.with(this@SpacecraftListFragment)
+                .load(launch.spacecraft_config.image_url)
+                .into(spacecraftImage)
             view.setOnClickListener {
-
+               
             }
         }
     }

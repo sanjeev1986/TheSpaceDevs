@@ -1,5 +1,6 @@
 package com.sample.thespacedevs.di
 
+import android.content.Context
 import com.google.gson.Gson
 import com.sample.thespacedevs.services.HttpStack
 import com.sample.services.BuildConfig
@@ -13,8 +14,8 @@ class APIModule {
 
     @Provides
     @Singleton
-    fun provideHttpStack(): HttpStack {
-        return HttpStack(BuildConfig.BASE_URL, Gson())
+    fun provideHttpStack(context: Context): HttpStack {
+        return HttpStack(BuildConfig.BASE_URL, Gson(), context)
     }
 
     @Provides

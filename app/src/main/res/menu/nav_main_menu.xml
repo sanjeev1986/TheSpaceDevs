@@ -3,11 +3,11 @@
     <group android:id="@+id/main_menu">
         <item
             android:id="@id/upcomingLaunchesFragment"
-            android:icon="@drawable/ic_launch_marker"
+            android:icon="@drawable/ic_launch_site"
             android:title="@string/upcoming_launches" />
         <item
             android:id="@id/spacecraftsListFragment"
-            android:icon="@drawable/ic_baseline_search_24px"
+            android:icon="@drawable/ic_space_vehicle"
             android:title="@string/spacecrafts" />
     </group>
 </menu>

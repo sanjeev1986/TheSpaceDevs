@@ -20,37 +20,6 @@ import java.util.*
 
 class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
     OnMapReadyCallback {
-    companion object {
-        /**
-         * Rocket launch name
-         */
-        const val EXTRA_LAUNCH_NAME = "com.sample.assessment.launch.details.EXTRA_LAUNCH_NAME"
-
-        /**
-         * Agency name
-         */
-        const val EXTRA_LAUNCH_AGENCY = "com.sample.assessment.launch.details.EXTRA_LAUNCH_AGENCY"
-
-        /**
-         * Count down time if started
-         */
-        const val EXTRA_LAUNCH_TIME = "com.sample.assessment.launch.details.EXTRA_LAUNCH_TIME"
-
-        /**
-         * Date of laucnh
-         */
-        const val EXTRA_LAUNCH_DATE = "com.sample.assessment.launch.details.EXTRA_LAUNCH_DATE"
-
-        /**
-         * Coordinates of the launch site
-         */
-        const val EXTRA_LAUNCH_LAT_LNG = "com.sample.assessment.launch.details.EXTRA_LAUNCH_LAT_LNG"
-
-        /**
-         * Mission description
-         */
-        const val EXTRA_LAUNCH_DESC = "com.sample.assessment.launch.details.EXTRA_LAUNCH_DESC"
-    }
 
     private lateinit var veil: View
     private lateinit var toolbar: MaterialToolbar
@@ -77,23 +46,11 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
         missionDescription = view.findViewById(R.id.missionDescription)
         agencyTitle = view.findViewById(R.id.agencyTitle)
         timerTxt = view.findViewById(R.id.timerTxt)
-
-        if (savedInstanceState == null) {
-            launchTitle = args.result.name
-            launchCountDown = windowStartDateFormat.parse(args.result.window_start).time
-            launchCoordinates = LatLng(args.result.pad.latitude, args.result.pad.longitude)
-            launchDescription = args.result.mission?.name
-            launchAgencyName = args.result.pad.name
-            //launchDate = intent.getStringExtra(EXTRA_LAUNCH_DATE)
-        } else {
-            launchTitle = savedInstanceState.getString(EXTRA_LAUNCH_NAME)
-                ?: throw IllegalStateException("Launch name cannot be empty")
-            launchCountDown = savedInstanceState.getLong(EXTRA_LAUNCH_TIME)
-            launchCoordinates = savedInstanceState.getParcelable(EXTRA_LAUNCH_LAT_LNG)
-            launchDescription = savedInstanceState.getString(EXTRA_LAUNCH_DESC)
-            launchAgencyName = savedInstanceState.getString(EXTRA_LAUNCH_AGENCY)
-            //launchDate = savedInstanceState.getString(EXTRA_LAUNCH_DATE)
-        }
+        launchTitle = args.result.name
+        launchCountDown = windowStartDateFormat.parse(args.result.window_start).time
+        launchCoordinates = LatLng(args.result.pad.latitude, args.result.pad.longitude)
+        launchDescription = args.result.mission?.name
+        launchAgencyName = args.result.pad.name
         toolbar.title = launchTitle
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -127,16 +84,6 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
             //timerTxt.text = launchDate//display launch date if count down has'nt begun
         }
 
-    }
-
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(EXTRA_LAUNCH_NAME, launchTitle)
-        outState.putString(EXTRA_LAUNCH_DESC, launchDescription)
-        outState.putString(EXTRA_LAUNCH_AGENCY, launchAgencyName)
-        outState.putLong(EXTRA_LAUNCH_TIME, launchCountDown)
-        outState.putParcelable(EXTRA_LAUNCH_LAT_LNG, launchCoordinates)
     }
 
     override fun onDestroy() {
