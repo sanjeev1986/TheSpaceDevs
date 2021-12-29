@@ -4,32 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sample.repositories.RepoResult
+import com.sample.thespacedevs.feature.spacecrafts.databinding.FragmentSpacecraftListBinding
+import com.sample.thespacedevs.feature.spacecrafts.databinding.ItemVehicleSpacecraftBinding
 import com.sample.thespacedevs.services.spacecraft.Results
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list) {
+class SpacecraftListFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: SpacecraftListViewModel.Factory
 
+    private var _binding: FragmentSpacecraftListBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel by viewModels<SpacecraftListViewModel> { viewModelFactory }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSpacecraftListBinding.inflate(inflater, container, false)
+        return _binding?.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val spaceCraftListView = view.findViewById<RecyclerView>(R.id.spaceCraftListView)
         val adapter = SpacecraftListAdapter(mutableListOf())
-        spaceCraftListView.apply {
+        binding.spaceCraftListView.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             setAdapter(adapter)
         }
@@ -46,6 +55,11 @@ class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list)
         viewModel.fetchSpacecrafts()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     inner class SpacecraftListAdapter(private val currentItems: MutableList<Results>) :
         RecyclerView.Adapter<SpacecraftViewHolder>() {
         fun submit(items: List<Results>) {
@@ -57,8 +71,11 @@ class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list)
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpacecraftViewHolder =
             SpacecraftViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_vehicle_spacecraft, parent, false)
+                ItemVehicleSpacecraftBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
 
         override fun onBindViewHolder(holder: SpacecraftViewHolder, position: Int) {
@@ -69,18 +86,19 @@ class SpacecraftListFragment : DaggerFragment(R.layout.fragment_spacecraft_list)
 
     }
 
-    inner class SpacecraftViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
+    inner class SpacecraftViewHolder(private val viewBinding: ItemVehicleSpacecraftBinding) :
+        RecyclerView.ViewHolder(viewBinding.root) {
 
-        private val launchTitle = view.findViewById<TextView>(R.id.titleSpacecraft)
-        private val spacecraftImage = view.findViewById<ImageView>(R.id.imageSpacecraft)
+        private val launchTitle = viewBinding.titleSpacecraft
+        private val spacecraftImage = viewBinding.imageSpacecraft
 
         fun bind(launch: Results) {
             launchTitle.text = launch.name
             Glide.with(this@SpacecraftListFragment)
                 .load(launch.spacecraft_config.image_url)
                 .into(spacecraftImage)
-            view.setOnClickListener {
-               
+            viewBinding.root.setOnClickListener {
+
             }
         }
     }

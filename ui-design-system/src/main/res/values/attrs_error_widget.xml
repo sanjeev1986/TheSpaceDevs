@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ErrorWidget">
+        <attr name="text" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="actionIconTint" format="color" />
+        <attr name="anim" format="enum">
+            <enum name="slide_up_reveal" value="1" />
+            <enum name="slide_down_reveal" value="2" />
+            <enum name="alpha_reveal" value="3" />
+        </attr>
+    </declare-styleable>
+</resources>

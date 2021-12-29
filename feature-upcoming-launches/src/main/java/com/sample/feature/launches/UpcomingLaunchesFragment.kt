@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
+import com.sample.feature.launches.databinding.FragmentUpcomingLaunchesBinding
+import com.sample.feature.launches.databinding.ItemLaunchBinding
 //import com.sample.thespacedevs.TheSpaceDevApp
 import com.sample.thespacedevs.services.launch.Results
 import com.sample.thespacedevs.directions.LaunchDetails
@@ -26,40 +28,41 @@ import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launches) {
+class UpcomingLaunchesFragment : DaggerFragment() {
 
 
     @Inject
     lateinit var viewModelFactory: UpcomingLaunchesViewModel.VMFactory
+    private var _binding: FragmentUpcomingLaunchesBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel by viewModels<UpcomingLaunchesViewModel> { viewModelFactory }
-
-    private lateinit var etSearchText: EditText
-    private lateinit var refreshLayout: SwipeRefreshLayout
-    private lateinit var toolbar: MaterialToolbar
-    private lateinit var launchListView: RecyclerView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         AndroidSupportInjection.inject(this)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentUpcomingLaunchesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        etSearchText = view.findViewById(R.id.etSearchText)
-        refreshLayout = view.findViewById(R.id.refreshLayout)
-        toolbar = view.findViewById(R.id.toolbar)
-        launchListView = view.findViewById(R.id.launchListView)
-
-        etSearchText.addTextChangedListener(object : TextWatcher {
+        binding.etSearchText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(newText: Editable?) {
                 newText?.trim()
                     ?.let {
                         if (it.isEmpty()) {
-                            refreshLayout.isEnabled = true
+                            binding.refreshLayout.isEnabled = true
                             viewModel.fetchUpcomingLaunches(false)
                         } else {
-                            refreshLayout.isEnabled = false
+                            binding.refreshLayout.isEnabled = false
                             viewModel.search(it.toString())
                         }
                     }
@@ -70,13 +73,13 @@ class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launc
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
         })
-        toolbar.title = getString(R.string.launch_list_title)
-        refreshLayout.isRefreshing = true
+        binding.toolbar.title = getString(R.string.launch_list_title)
+        binding.refreshLayout.isRefreshing = true
         val dividerItemDecoration = DividerItemDecoration(
             requireContext(), RecyclerView.VERTICAL
         )
         var launchListAdapter = LaunchListAdapter(mutableListOf())
-        launchListView.apply {
+        binding.launchListView.apply {
             adapter = launchListAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             addItemDecoration(dividerItemDecoration)
@@ -92,10 +95,10 @@ class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launc
                     Snackbar.LENGTH_LONG
                 ).show()
             }
-            refreshLayout.isRefreshing = false
+            binding.refreshLayout.isRefreshing = false
         })
 
-        refreshLayout.apply {
+        binding.refreshLayout.apply {
             setProgressBackgroundColorSchemeColor(resources.getColor(R.color.white))
             setColorSchemeColors(resources.getColor(R.color.colorAccent))
             setOnRefreshListener {
@@ -116,7 +119,7 @@ class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launc
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder =
             LaunchViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_launch, parent, false)
+                ItemLaunchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             )
 
         override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
@@ -127,15 +130,14 @@ class UpcomingLaunchesFragment : DaggerFragment(R.layout.fragment_upcoming_launc
 
     }
 
-    inner class LaunchViewHolder(private var view: View) : RecyclerView.ViewHolder(view) {
+    inner class LaunchViewHolder(private var itembinding: ItemLaunchBinding) :
+        RecyclerView.ViewHolder(itembinding.root) {
 
-        private val launchTitle = view.findViewById<TextView>(R.id.launchTitle)
-        private val launchDescription = view.findViewById<TextView>(R.id.launchDescription)
 
         fun bind(launch: Results) {
-            launchTitle.text = launch.name
-            launchDescription.text = launch.mission?.name
-            view.setOnClickListener {
+            itembinding.launchTitle.text = launch.name
+            itembinding.launchDescription.text = launch.mission?.name
+            itembinding.root.setOnClickListener {
                 (requireActivity() as Navigator).navigateTo(LaunchDetails(launch))
             }
         }
