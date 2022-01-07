@@ -14,7 +14,13 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.5"
+    }
+
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
@@ -48,7 +54,8 @@ dependencies {
     implementation(Libs.core_ktx)
     implementation(Libs.appcompat)
     implementation(Libs.material)
-
+    implementation(Libs.compose_compiler)
+    implementation(Libs.compose_runtime)
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)
