@@ -11,7 +11,7 @@ interface Navigator {
             is LaunchDetails -> {
                 navController.navigate(
                     UpcomingLaunchesFragmentDirections.actionUpcomingLaunchesFragmentToLaunchDetailsFragment(
-                        path.results
+                        path.id
                     )
                 )
             }

@@ -5,5 +5,5 @@ data class SpacecraftResponse (
 	val count : Int,
 	val next : String,
 	val previous : String,
-	val results : List<Results>
+	val results : List<SpaceCraft>
 )

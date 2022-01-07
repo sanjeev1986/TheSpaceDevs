@@ -12,7 +12,7 @@ object Versions {
     const val navigation_components = "2.3.5"
     const val dagger = "2.40.5"
     const val swiperefreshlayout = "1.1.0"
-    const val kotlinx_coroutines_android = "1.4.1"
+    const val kotlinx_coroutines_android = "1.6.0"
     const val android_architecture_components = "2.3.1"
     const val runner = "1.3.0"
     const val espresso = "3.3.0"

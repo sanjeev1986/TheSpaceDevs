@@ -47,18 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(Libs.lifecycle_viewmodel_ktx)
-    implementation(Libs.lifecycle_runtime_ktx)
     implementation(project(":feature-orchestrator"))
-    implementation(Libs.kotlin_stdlib)
-    implementation(Libs.core_ktx)
-    implementation(Libs.appcompat)
-    implementation(Libs.material)
-    implementation(Libs.compose_compiler)
-    implementation(Libs.compose_runtime)
-    implementation(Libs.activity_compose)
-    implementation(Libs.ui_compose)
-    implementation(Libs.material_compose)
     implementation("com.google.accompanist:accompanist-swiperefresh:0.22.0-rc")
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

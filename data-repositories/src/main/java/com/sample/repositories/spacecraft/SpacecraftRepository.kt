@@ -4,7 +4,7 @@ import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.repositories.RepoResult
 import com.sample.repositories.localstorage.InMemoryCache
 import com.sample.thespacedevs.services.TheSpaceDevsService
-import com.sample.thespacedevs.services.spacecraft.Results
+import com.sample.thespacedevs.services.spacecraft.SpaceCraft
 import javax.inject.Inject
 
 class SpacecraftRepository @Inject constructor(
@@ -16,13 +16,13 @@ class SpacecraftRepository @Inject constructor(
         private val LIMIT = 20
     }
 
-    suspend fun getSpacecrafts(refresh: Boolean = false): RepoResult<List<Results>> {
+    suspend fun getSpacecrafts(refresh: Boolean = false): RepoResult<List<SpaceCraft>> {
         return try {
             RepoResult.Success(
                 if (refresh) {
                     spacecraftApi.fetchSpacecrafts(LIMIT).results
                 } else {
-                    inMemoryCache.getDataFromCache<List<Results>>(
+                    inMemoryCache.getDataFromCache<List<SpaceCraft>>(
                         SpacecraftRepository::class.java.name
                     )
                         ?: spacecraftApi.fetchSpacecrafts(LIMIT).results

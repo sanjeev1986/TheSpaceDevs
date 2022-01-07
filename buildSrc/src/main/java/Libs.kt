@@ -4,8 +4,10 @@ object Libs {
     const val JUNIT = "junit:junit:${Versions.JUNIT}"
 
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    const val kotlin_couroutines =
+    const val kotlin_android_couroutines =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val kotlin_couroutines =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val core_ktx = "androidx.core:core-ktx:${Versions.corektx}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
@@ -45,10 +47,14 @@ object Libs {
     const val material_compose = "androidx.compose.material:material:${Versions.compose_version}"
     const val animation_compose = "androidx.compose.animation:animation:${Versions.compose_version}"
     const val ui_compose = "androidx.compose.ui:ui-tooling:${Versions.compose_version}"
-    const val mdc_compose = "com.google.android.material:compose-theme-adapter:${Versions.compose_version}"
+    const val mdc_compose =
+        "com.google.android.material:compose-theme-adapter:${Versions.compose_version}"
     const val appcompat_compose = "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
     const val compose_runtime = "androidx.compose.runtime:runtime:${Versions.compose_version}"
     const val compose_compiler = "androidx.compose.compiler:compiler:${Versions.compose_version}"
+    const val compose_livedata =
+        "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
+    const val livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 }
 
 object UnitTestLibraries {
