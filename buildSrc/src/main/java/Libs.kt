@@ -40,14 +40,15 @@ object Libs {
     const val converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
 
     const val activity_compose = "androidx.activity:activity-compose:1.3.1"
-    const val material_compose = "androidx.compose.material:material:1.0.5"
-    const val animation_compose = "androidx.compose.material:material:1.0.5"
-    const val ui_compose = "androidx.compose.ui:ui-tooling:1.0.5"
     const val viewmodel_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
-    const val mdc_compose = "com.google.android.material:compose-theme-adapter:1.0.5"
+
+    const val material_compose = "androidx.compose.material:material:${Versions.compose_version}"
+    const val animation_compose = "androidx.compose.animation:animation:${Versions.compose_version}"
+    const val ui_compose = "androidx.compose.ui:ui-tooling:${Versions.compose_version}"
+    const val mdc_compose = "com.google.android.material:compose-theme-adapter:${Versions.compose_version}"
     const val appcompat_compose = "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
-    const val compose_runtime = "androidx.compose.runtime:runtime:1.0.5"
-    const val compose_compiler = "androidx.compose.compiler:compiler:1.0.5"
+    const val compose_runtime = "androidx.compose.runtime:runtime:${Versions.compose_version}"
+    const val compose_compiler = "androidx.compose.compiler:compiler:${Versions.compose_version}"
 }
 
 object UnitTestLibraries {

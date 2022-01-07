@@ -7,23 +7,18 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.TabRowDefaults.Divider
+import androidx.compose.runtime.Composable
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.appbar.MaterialToolbar
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.android.material.snackbar.Snackbar
+import com.sample.ds.dividerGrey
+import com.sample.ds.platformBlack
 import com.sample.feature.launches.databinding.FragmentUpcomingLaunchesBinding
-import com.sample.feature.launches.databinding.ItemLaunchBinding
-//import com.sample.thespacedevs.TheSpaceDevApp
-import com.sample.thespacedevs.services.launch.Results
-import com.sample.thespacedevs.directions.LaunchDetails
-import com.sample.thespacedevs.directions.Navigator
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -36,6 +31,7 @@ class UpcomingLaunchesFragment : DaggerFragment() {
     private var _binding: FragmentUpcomingLaunchesBinding? = null
     private val binding get() = _binding!!
 
+
     private val viewModel by viewModels<UpcomingLaunchesViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -47,7 +43,7 @@ class UpcomingLaunchesFragment : DaggerFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentUpcomingLaunchesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -74,20 +70,16 @@ class UpcomingLaunchesFragment : DaggerFragment() {
 
         })
         binding.toolbar.title = getString(R.string.launch_list_title)
-        binding.refreshLayout.isRefreshing = true
-        val dividerItemDecoration = DividerItemDecoration(
-            requireContext(), RecyclerView.VERTICAL
-        )
-        var launchListAdapter = LaunchListAdapter(mutableListOf())
-        binding.launchListView.apply {
-            adapter = launchListAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            addItemDecoration(dividerItemDecoration)
-            setHasFixedSize(true)
+        binding.refreshLayout.setContent {
+            UpcomingLaunches()
         }
-        viewModel.upcomingLaunchesLiveData.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccess) {
-                launchListAdapter.submit(it.getOrDefault(emptyList()))
+        viewModel.upcomingLaunchesLiveData.observe(viewLifecycleOwner, Observer { result ->
+            if (result.isSuccess) {
+                binding.refreshLayout.setContent {
+                    UpcomingLaunches(
+                        result.getOrDefault(emptyList())
+                            .map { LaunchItem(it.name, it.mission?.description ?: "") })
+                }
             } else {
                 Snackbar.make(
                     requireActivity().findViewById(android.R.id.content),
@@ -95,71 +87,23 @@ class UpcomingLaunchesFragment : DaggerFragment() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
-            binding.refreshLayout.isRefreshing = false
         })
-
-        binding.refreshLayout.apply {
-            setProgressBackgroundColorSchemeColor(resources.getColor(R.color.white))
-            setColorSchemeColors(resources.getColor(R.color.colorAccent))
-            setOnRefreshListener {
-                viewModel.fetchUpcomingLaunches(true)
-            }
-        }
         viewModel.fetchUpcomingLaunches(false)
     }
 
-    inner class LaunchListAdapter(private val launchItems: MutableList<Results>) :
-        RecyclerView.Adapter<LaunchViewHolder>() {
-        fun submit(items: List<Results>) {
-            val diffResult = DiffUtil.calculateDiff(LaunchItemDiffs(launchItems, items))
-            launchItems.clear()
-            launchItems.addAll(items)
-            diffResult.dispatchUpdatesTo(this)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder =
-            LaunchViewHolder(
-                ItemLaunchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            )
-
-        override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
-            holder.bind(launchItems[position])
-        }
-
-        override fun getItemCount(): Int = launchItems.size
-
-    }
-
-    inner class LaunchViewHolder(private var itembinding: ItemLaunchBinding) :
-        RecyclerView.ViewHolder(itembinding.root) {
-
-
-        fun bind(launch: Results) {
-            itembinding.launchTitle.text = launch.name
-            itembinding.launchDescription.text = launch.mission?.name
-            itembinding.root.setOnClickListener {
-                (requireActivity() as Navigator).navigateTo(LaunchDetails(launch))
+    @Composable
+    fun UpcomingLaunches(items: List<LaunchItem> = emptyList()) {
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(viewModel.isRefreshing),
+            onRefresh  = { viewModel.fetchUpcomingLaunches(true) }) {
+            LazyColumn {
+                this.items(items) { item ->
+                    UpcomingLaunchItem(item)
+                    Divider(color = dividerGrey)
+                }
             }
-        }
-    }
-
-    inner class LaunchItemDiffs(
-        private val oldItems: List<Results>,
-        private val newItems: List<Results>
-    ) : DiffUtil.Callback() {
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldItems[oldItemPosition].id == newItems[newItemPosition].id
-        }
-
-        override fun getOldListSize(): Int = oldItems.size
-
-        override fun getNewListSize(): Int = newItems.size
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldItems[oldItemPosition].id == newItems[newItemPosition].id
-                    && return oldItems[oldItemPosition].name == newItems[newItemPosition].name
-                    && return oldItems[oldItemPosition].mission == newItems[newItemPosition].mission
         }
 
     }
 }
+

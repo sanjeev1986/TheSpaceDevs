@@ -15,7 +15,10 @@ class UpcomingLaunchesViewModel(
     private val _upcomingLaunchesLiveData = MutableLiveData<Result<List<Results>>>()
     val upcomingLaunchesLiveData = _upcomingLaunchesLiveData
 
+    var isRefreshing: Boolean = false
+
     fun fetchUpcomingLaunches(refresh: Boolean) {
+        isRefreshing = true
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {
                 is com.sample.repositories.RepoResult.Success -> {
@@ -25,6 +28,7 @@ class UpcomingLaunchesViewModel(
                     _upcomingLaunchesLiveData.value = Result.failure(result.error)
                 }
             }
+            isRefreshing = false
         }
     }
 

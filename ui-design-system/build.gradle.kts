@@ -35,10 +35,24 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.5"
+    }
 }
 
 dependencies {
     implementation (Libs.kotlin_stdlib)
     implementation (Libs.appcompat)
     implementation (Libs.material)
+    implementation(Libs.material_compose)
+    implementation(Libs.compose_compiler)
+    implementation(Libs.compose_runtime)
+    implementation(Libs.ui_compose)
+    implementation(Libs.viewmodel_compose)
+    implementation(Libs.activity_compose)
 }

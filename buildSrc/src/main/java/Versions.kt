@@ -7,8 +7,8 @@ object Versions {
     const val appcompat = "1.2.0"
     const val constraintlayout = "2.0.4"
     const val material = "1.3.0"
-    const val activity = "1.2.0-rc01"
-    const val fragment = "1.3.0-rc01"
+    const val activity = "1.3.0"
+    const val fragment = "1.3.0"
     const val navigation_components = "2.3.5"
     const val dagger = "2.40.5"
     const val swiperefreshlayout = "1.1.0"
@@ -31,4 +31,5 @@ object Versions {
     const val mockk = "1.10.0"
     const val lifecycle_viewmodel_ktx = "2.3.1"
     const val lifecycle_runtime_ktx = "2.3.1"
+    const val compose_version = "1.0.5"
 }
