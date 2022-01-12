@@ -48,15 +48,15 @@ dependencies {
     implementation(project(":feature-orchestrator"))
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)
-    implementation(Libs.kotlin_stdlib)
+    implementation(Libs.Kotlin.kotlin_stdlib)
     implementation(Libs.core_ktx)
     implementation(Libs.appcompat)
     implementation(Libs.material)
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)
 
-    implementation(Libs.compose_compiler)
-    implementation(Libs.compose_runtime)
+    implementation(Libs.Compose.compose_compiler)
+    implementation(Libs.Compose.compose_runtime)
 
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

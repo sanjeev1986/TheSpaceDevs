@@ -78,11 +78,11 @@ dependencies {
     implementation(Libs.play_services_maps)
     implementation(project(":feature-vehicles"))
     runtimeOnly(Libs.play_services_maps)
-    kapt(Libs.dagger_compiler)
-    kapt(Libs.dagger_android_processor)
+    kapt(Libs.Dagger.dagger_compiler)
+    kapt(Libs.Dagger.dagger_android_processor)
 
-    implementation(Libs.compose_compiler)
-    implementation(Libs.compose_runtime)
+    implementation(Libs.Compose.compose_compiler)
+    implementation(Libs.Compose.compose_runtime)
 
     //unit testing
     testImplementation(UnitTestLibraries.junit)

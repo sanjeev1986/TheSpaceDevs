@@ -46,13 +46,13 @@ android {
 }
 
 dependencies {
-    implementation (Libs.kotlin_stdlib)
+    implementation (Libs.Kotlin.kotlin_stdlib)
     implementation (Libs.appcompat)
     implementation (Libs.material)
-    implementation(Libs.material_compose)
-    implementation(Libs.compose_compiler)
-    implementation(Libs.compose_runtime)
-    implementation(Libs.ui_compose)
-    implementation(Libs.viewmodel_compose)
-    implementation(Libs.activity_compose)
+    implementation(Libs.Compose.material_compose)
+    implementation(Libs.Compose.compose_compiler)
+    implementation(Libs.Compose.compose_runtime)
+    implementation(Libs.Compose.ui_compose)
+    implementation(Libs.Compose.viewmodel_compose)
+    implementation(Libs.Compose.activity_compose)
 }

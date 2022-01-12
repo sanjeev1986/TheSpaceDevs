@@ -42,14 +42,14 @@ android {
 
 dependencies {
 
-    implementation(Libs.kotlinx_coroutines_android)
-    implementation(Libs.kotlin_couroutines)
+    implementation(Libs.Kotlin.kotlinx_coroutines_android)
+    implementation(Libs.Kotlin.kotlin_coroutines)
     testImplementation(Libs.JUNIT)
 
     api(project(":data-web-services"))
     implementation(project(":android-platform"))
-    implementation(Libs.dagger)
-    implementation(Libs.kotlin_stdlib)
+    implementation(Libs.Dagger.dagger)
+    implementation(Libs.Kotlin.kotlin_stdlib)
     implementation(Libs.core_ktx)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
 

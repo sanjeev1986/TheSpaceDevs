@@ -52,15 +52,15 @@ dependencies {
     api(Libs.lifecycle_viewmodel_ktx)
     api(Libs.lifecycle_runtime_ktx)
 
-    api(Libs.compose_compiler)
-    api(Libs.compose_runtime)
-    api(Libs.activity_compose)
-    api(Libs.ui_compose)
-    api(Libs.material_compose)
+    api(Libs.Compose.compose_compiler)
+    api(Libs.Compose.compose_runtime)
+    api(Libs.Compose.activity_compose)
+    api(Libs.Compose.ui_compose)
+    api(Libs.Compose.material_compose)
     api(Libs.livedata_ktx)
-    api(Libs.compose_livedata)
+    api(Libs.Compose.compose_livedata)
 
-    api(Libs.kotlin_stdlib)
+    api(Libs.Kotlin.kotlin_stdlib)
     api(Libs.core_ktx)
     api(Libs.appcompat)
     api(Libs.material)
@@ -69,19 +69,18 @@ dependencies {
     api(Libs.activity_ktx)
     api(Libs.fragment_ktx)
 
-    api(Libs.navigation_ui_ktx)
-    api(Libs.navigation_fragment_ktx)
+    api(Libs.Navigation.ui_ktx)
+    api(Libs.Navigation.fragment_ktx)
 
-    api(Libs.dagger)
-    kapt(Libs.dagger_compiler)
-    kapt(Libs.dagger_android_processor)
-    kaptAndroidTest(Libs.dagger_compiler)
-    api(Libs.dagger_android_support)
+    api(Libs.Dagger.dagger)
+    kapt(Libs.Dagger.dagger_compiler)
+    kapt(Libs.Dagger.dagger_android_processor)
+    kaptAndroidTest(Libs.Dagger.dagger_compiler)
+    api(Libs.Dagger.dagger_android_support)
 
 
-    api(Libs.swiperefreshlayout)
-    api(Libs.kotlin_couroutines)
-    api(Libs.kotlin_android_couroutines)
+    api(Libs.Kotlin.kotlin_coroutines)
+    api(Libs.Kotlin.kotlinx_coroutines_android)
 
     //UI testing
     androidTestApi(UnitTestLibraries.junit)
@@ -95,7 +94,7 @@ dependencies {
     androidTestApi(UnitTestLibraries.core_testing)
     androidTestApi(UnitTestLibraries.core_runtime)
     api(UnitTestLibraries.espresso_idling_resource)
-    api(Libs.gson)
+    api(Libs.Retrofit.gson)
     api("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
 }

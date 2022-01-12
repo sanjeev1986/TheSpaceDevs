@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation(Libs.DAGGER)
-    implementation(Libs.KOTLIN_STD_LIB)
+    implementation(Libs.Dagger.dagger)
+    implementation(Libs.Kotlin.kotlin_stdlib)
     testImplementation(Libs.JUNIT)
 }

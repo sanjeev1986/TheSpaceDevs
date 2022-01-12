@@ -42,8 +42,8 @@ android {
 }
 
 dependencies {
-    implementation(Libs.dagger)
-    implementation(Libs.retrofit)
-    implementation(Libs.logging_interceptor)
-    implementation(Libs.converter_gson)
+    implementation(Libs.Dagger.dagger)
+    implementation(Libs.Retrofit.retrofit)
+    implementation(Libs.Retrofit.logging_interceptor)
+    implementation(Libs.Retrofit.converter_gson)
 }
