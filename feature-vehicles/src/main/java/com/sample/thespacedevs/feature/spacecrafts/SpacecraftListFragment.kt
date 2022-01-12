@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.sample.repositories.RepoResult
 import com.sample.thespacedevs.feature.spacecrafts.databinding.FragmentSpacecraftListBinding
 import com.sample.thespacedevs.feature.spacecrafts.databinding.ItemVehicleSpacecraftBinding
-import com.sample.thespacedevs.services.spacecraft.Results
+import com.sample.thespacedevs.services.spacecraft.SpaceCraft
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -60,9 +60,9 @@ class SpacecraftListFragment : DaggerFragment() {
         _binding = null
     }
 
-    inner class SpacecraftListAdapter(private val currentItems: MutableList<Results>) :
+    inner class SpacecraftListAdapter(private val currentItems: MutableList<SpaceCraft>) :
         RecyclerView.Adapter<SpacecraftViewHolder>() {
-        fun submit(items: List<Results>) {
+        fun submit(items: List<SpaceCraft>) {
             val diffResult = DiffUtil.calculateDiff(SpacecraftItemDiffs(currentItems, items))
             currentItems.clear()
             currentItems.addAll(items)
@@ -92,7 +92,7 @@ class SpacecraftListFragment : DaggerFragment() {
         private val launchTitle = viewBinding.titleSpacecraft
         private val spacecraftImage = viewBinding.imageSpacecraft
 
-        fun bind(launch: Results) {
+        fun bind(launch: SpaceCraft) {
             launchTitle.text = launch.name
             Glide.with(this@SpacecraftListFragment)
                 .load(launch.spacecraft_config.image_url)
@@ -104,8 +104,8 @@ class SpacecraftListFragment : DaggerFragment() {
     }
 
     inner class SpacecraftItemDiffs(
-        private val oldItems: List<Results>,
-        private val newItems: List<Results>
+        private val oldItems: List<SpaceCraft>,
+        private val newItems: List<SpaceCraft>
     ) : DiffUtil.Callback() {
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             return oldItems[oldItemPosition].id == newItems[newItemPosition].id

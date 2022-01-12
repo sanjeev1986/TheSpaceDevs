@@ -42,8 +42,8 @@ android {
 
 dependencies {
 
-    implementation(Libs.DAGGER)
-    implementation(Libs.KOTLIN_STD_LIB)
+    implementation(Libs.kotlinx_coroutines_android)
+    implementation(Libs.kotlin_couroutines)
     testImplementation(Libs.JUNIT)
 
     api(project(":data-web-services"))
@@ -51,9 +51,6 @@ dependencies {
     implementation(Libs.dagger)
     implementation(Libs.kotlin_stdlib)
     implementation(Libs.core_ktx)
-    implementation(Libs.appcompat)
-    implementation(Libs.material)
-    implementation(Libs.kotlin_couroutines)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
 
     androidTestImplementation(UnitTestLibraries.espresso_core)

@@ -26,8 +26,8 @@
         app:popUpToInclusive="@id/upcomingLaunchesFragment"
         tools:layout="@layout/fragment_launch_details">
         <argument
-            android:name="result"
-            app:argType="com.sample.thespacedevs.services.launch.Results"
+            android:name="missionId"
+            app:argType="string"
             app:nullable="false" />
     </fragment>
 

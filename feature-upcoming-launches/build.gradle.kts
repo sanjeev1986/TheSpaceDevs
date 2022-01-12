@@ -14,7 +14,13 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.5"
+    }
+
     buildTypes {
         getByName("debug") {
             isMinifyEnabled = false
@@ -41,14 +47,8 @@ android {
 }
 
 dependencies {
-    implementation(Libs.lifecycle_viewmodel_ktx)
-    implementation(Libs.lifecycle_runtime_ktx)
     implementation(project(":feature-orchestrator"))
-    implementation(Libs.kotlin_stdlib)
-    implementation(Libs.core_ktx)
-    implementation(Libs.appcompat)
-    implementation(Libs.material)
-
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.22.0-rc")
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)

@@ -1,6 +1,6 @@
 package com.sample.thespacedevs.services.spacecraft
 
-data class Results (
+data class SpaceCraft (
 
 	val id : Int,
 	val url : String,

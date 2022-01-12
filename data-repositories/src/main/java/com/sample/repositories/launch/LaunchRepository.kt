@@ -48,7 +48,10 @@ class LaunchRepository @Inject constructor(
             launchApi.fetchUpcomingLaunches(limit).let { it.results }.also {
                 inMemoryCache.saveToInMemoryCache(LaunchRepository::class.java.name, it)
             }
-
         }
+    }
+
+    fun getLaunchDetailsById(id: String): Results? {
+        return inMemoryCache.getDataFromCache<List<Results>>( LaunchRepository::class.java.name)?.find { it.id == id }
     }
 }

@@ -1,28 +1,39 @@
 package com.sample.feature.launches
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sample.repositories.launch.LaunchRepository
-import com.sample.thespacedevs.services.launch.Results
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class UpcomingLaunchesViewModel(
+    launchListMapper: LaunchListMapper = LaunchListMapper(),
+    loadingMapper: LoadingMapper = LoadingMapper(),
+    errorMapper: ErrorMapper = ErrorMapper(),
     private val repository: LaunchRepository
 ) : ViewModel() {
-    private val _upcomingLaunchesLiveData = MutableLiveData<Result<List<Results>>>()
-    val upcomingLaunchesLiveData = _upcomingLaunchesLiveData
+
+    private val state = MutableStateFlow(LaunchDisplayModel())
+    val upcomingLaunches = state.asLiveData().map { launchListMapper.map(it) }
+    val loading = state.asLiveData().map { loadingMapper.map(it) }
+    val error = state.asLiveData().map { errorMapper.map(it) }
 
     fun fetchUpcomingLaunches(refresh: Boolean) {
+        state.update { it.copy(isLoading = true, isError = false) }
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {
                 is com.sample.repositories.RepoResult.Success -> {
-                    _upcomingLaunchesLiveData.value = Result.success(result.result)
+                    state.update {
+                        it.copy(
+                            isLoading = false,
+                            results = result.result,
+                            isError = false
+                        )
+                    }
                 }
                 is com.sample.repositories.RepoResult.Failure -> {
-                    _upcomingLaunchesLiveData.value = Result.failure(result.error)
+                    state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
         }
@@ -32,11 +43,20 @@ class UpcomingLaunchesViewModel(
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, false)) {
                 is com.sample.repositories.RepoResult.Success -> {
-                    _upcomingLaunchesLiveData.value =
-                        Result.success(result.result.filter { it.name.startsWith(name, ignoreCase = true) })
+                    state.update { launchDisplayModel ->
+                        launchDisplayModel.copy(
+                            isLoading = false,
+                            isError = false,
+                            results = result.result.filter {
+                                it.name.startsWith(
+                                    name,
+                                    ignoreCase = true
+                                )
+                            })
+                    }
                 }
                 is com.sample.repositories.RepoResult.Failure -> {
-                    _upcomingLaunchesLiveData.value = Result.failure(result.error)
+                    state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
         }
@@ -47,7 +67,7 @@ class UpcomingLaunchesViewModel(
         private val repository: LaunchRepository
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return UpcomingLaunchesViewModel(repository) as T
+            return UpcomingLaunchesViewModel(repository = repository) as T
         }
     }
 }

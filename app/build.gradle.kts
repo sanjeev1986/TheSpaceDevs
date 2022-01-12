@@ -62,6 +62,12 @@ android {
     testOptions {
         animationsDisabled = true
     }
+    buildFeatures {
+        compose  = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.0.5"
+    }
 }
 
 dependencies {
@@ -74,6 +80,9 @@ dependencies {
     runtimeOnly(Libs.play_services_maps)
     kapt(Libs.dagger_compiler)
     kapt(Libs.dagger_android_processor)
+
+    implementation(Libs.compose_compiler)
+    implementation(Libs.compose_runtime)
 
     //unit testing
     testImplementation(UnitTestLibraries.junit)

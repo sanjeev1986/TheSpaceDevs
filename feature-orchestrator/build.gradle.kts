@@ -49,6 +49,17 @@ dependencies {
     api(project(":ui-design-system"))
     api(project(":data-web-services"))
 
+    api(Libs.lifecycle_viewmodel_ktx)
+    api(Libs.lifecycle_runtime_ktx)
+
+    api(Libs.compose_compiler)
+    api(Libs.compose_runtime)
+    api(Libs.activity_compose)
+    api(Libs.ui_compose)
+    api(Libs.material_compose)
+    api(Libs.livedata_ktx)
+    api(Libs.compose_livedata)
+
     api(Libs.kotlin_stdlib)
     api(Libs.core_ktx)
     api(Libs.appcompat)
@@ -70,6 +81,7 @@ dependencies {
 
     api(Libs.swiperefreshlayout)
     api(Libs.kotlin_couroutines)
+    api(Libs.kotlin_android_couroutines)
 
     //UI testing
     androidTestApi(UnitTestLibraries.junit)
