@@ -1,11 +1,9 @@
 package com.sample.thespacedevs.feature.details
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.widget.TextView
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -33,20 +31,11 @@ import com.sample.ds.compose.ListItemTitle
 import com.sample.ds.compose.Title
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
 
-    private lateinit var veil: View
-    private lateinit var timerTxt: TextView
-
     private val args by navArgs<LaunchDetailsFragmentArgs>()
-    private var simpleDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
-    private var launchCountDown: Long = 0L
-    private var launchCoordinates: LatLng? = null
-    private var launchDate: String? = null
     private var timer: CountDownTimer? = null
 
     @Inject
@@ -60,7 +49,6 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        veil = view.findViewById(R.id.veil)
         view.findViewById<ComposeView>(R.id.toolbar).setContent {
             val state = viewModel.launchDetails.observeAsState()
             state.value?.apply {
@@ -82,39 +70,11 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
                 style = MaterialTheme.typography.ListItemTitle
             )
         }
-        //launchCountDown = windowStartDateFormat.parse(args.result.window_start).time
-        //launchCoordinates = LatLng(args.result.pad.latitude, args.result.pad.longitude)
         view.findViewById<ComposeView>(R.id.mapFragment).setContent {
             PlotLaunchCoordinates()
         }
         view.findViewById<ComposeView>(R.id.launchDetails).setContent {
             LaunchDetails()
-        }
-        if (launchCountDown > 0) {//check if count down has began;count down is represented by "wsstamp" with a non zero value
-            launchCountDown -= System.currentTimeMillis()
-            if (launchCountDown > 0) {//ensure the event is in the future
-                timer = object : CountDownTimer(launchCountDown, 1000) {
-
-                    private val calendar = Calendar.getInstance()
-
-
-                    @SuppressLint("SetTextI18n")
-                    override fun onTick(millisUntilFinished: Long) {
-                        calendar.timeInMillis = millisUntilFinished
-                        timerTxt.text =
-                            "T - " + simpleDateFormat.format(calendar.time)
-                    }
-
-                    override fun onFinish() {
-                        timerTxt.text = getString(R.string.mission_concluded)
-                    }
-                }
-                timer?.start()
-            } else {
-                //timerTxt.text = launchDate//display launch date if count down has'nt begun
-            }
-        } else {
-            //timerTxt.text = launchDate//display launch date if count down has'nt begun
         }
         viewModel.fetchMissionDetails(args.missionId)
     }
@@ -127,9 +87,13 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
     @Composable
     fun LaunchDetails() {
         val state = viewModel.launchDetails.observeAsState()
-
         state.value?.apply {
             Column(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.screen_margin))) {
+                LaunchRow(
+                    label = stringResource(id = R.string.lbl_launch_date),
+                    state.value!!.launchDate
+                )
+                Divider(color = dividerGrey)
                 LaunchRow(
                     label = stringResource(id = R.string.lbl_agency_name),
                     state.value!!.launchAgencyName
@@ -192,9 +156,9 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
             val mapView = rememberMapViewWithLifecycle()
             val coroutineScope = rememberCoroutineScope()
 
-            AndroidView({ mapView }, update = { mapView ->
+            AndroidView({ mapView }, update = { mv ->
                 coroutineScope.launch {
-                    val googleMap = mapView.awaitMap()
+                    val googleMap = mv.awaitMap()
                     googleMap.apply {
                         uiSettings.isScrollGesturesEnabled = false
                         val cameraPosition = CameraPosition.Builder()

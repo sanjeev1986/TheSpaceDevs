@@ -9,6 +9,7 @@
     </string>
     <string name="sample_agency_name">Russian Federal Space Agency (ROSCOSMOS)</string>
     <string name="lbl_agency_name">Agency :</string>
+    <string name="lbl_launch_date">Launch Date :</string>
     <string name="unknown">Unknown</string>
     <string name="launch_location_not_available">Launch coordinates not available</string>
     <string name="mission_concluded">mission concluded</string>

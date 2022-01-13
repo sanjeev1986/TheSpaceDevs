@@ -2,7 +2,11 @@ package com.sample.thespacedevs.feature.details
 
 import androidx.lifecycle.*
 import com.sample.repositories.launch.LaunchRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 internal class LaunchDetailsViewModel(

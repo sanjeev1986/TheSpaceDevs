@@ -1,15 +1,14 @@
 package com.sample.thespacedevs.utils
 
 import android.os.CountDownTimer
+import androidx.lifecycle.MutableLiveData
 
 class LaunchCountDownTimer(millisInFuture: Long, countDownInterval: Long) :
     CountDownTimer(millisInFuture, countDownInterval) {
-    var onTick: ((Long) -> Unit)? = null
+    val timerLiveData = MutableLiveData<Long>()
     override fun onTick(p0: Long) {
-        onTick(p0)
+        timerLiveData.value = p0
     }
 
-    override fun onFinish() {
-        onTick = null
-    }
+    override fun onFinish() {}
 }

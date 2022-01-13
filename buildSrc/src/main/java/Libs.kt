@@ -16,6 +16,7 @@ object Libs {
             "androidx.compose.compiler:compiler:${Versions.compose_version}"
         const val compose_livedata =
             "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
     }
 
     object Dagger {

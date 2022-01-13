@@ -17,7 +17,8 @@ internal data class LaunchDetailsUiStateModel(
 internal data class LaunchDetails(
     val missionName: String = "",
     val launchDescription: String = "",
-    val launchAgencyName: String = ""
+    val launchAgencyName: String = "",
+    val launchDate: String = ""
 )
 
 internal data class LaunchTimer(
@@ -33,12 +34,19 @@ internal data class LaunchCoordinates(
 
 
 internal class LaunchDetailsMapper : UiStateMapper<LaunchDetailsUiStateModel, LaunchDetails> {
+    companion object {
+        private var displayDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
+        private var windowStartDateFormat =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    }
+
     override fun map(model: LaunchDetailsUiStateModel): LaunchDetails {
         return model.result?.let {
             LaunchDetails(
                 missionName = it.name,
                 launchAgencyName = it.mission?.name.orEmpty(),
-                launchDescription = it.mission?.description.orEmpty()
+                launchDescription = it.mission?.description.orEmpty(),
+                launchDate = displayDateFormat.format(Date(windowStartDateFormat.parse(it.window_start).time))
             )
         } ?: LaunchDetails()
     }
