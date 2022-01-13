@@ -22,13 +22,14 @@ internal data class LaunchDetails(
 
 internal data class LaunchTimer(
     val launchCountDown: Long = 0,
-    val launchDate: String = "",
-    val timer: CountDownTimer? = null
+    val launchDate: String = ""
 )
 
 internal data class LaunchCoordinates(
     val latLng: LatLng? = null
-)
+) {
+    fun isvalid() = latLng != null
+}
 
 
 internal class LaunchDetailsMapper : UiStateMapper<LaunchDetailsUiStateModel, LaunchDetails> {
@@ -53,10 +54,7 @@ internal class LaunchTimerMapper : UiStateMapper<LaunchDetailsUiStateModel, Laun
         return model.result?.let {
             LaunchTimer(
                 launchCountDown = windowStartDateFormat.parse(it.window_start)?.time ?: 0L,
-                launchDate = it.window_start,
-                timer = LaunchCountDownTimer(
-                    windowStartDateFormat.parse(it.window_start)?.time ?: 0L, 1000L
-                )
+                launchDate = it.window_start
             )
         } ?: LaunchTimer()
     }

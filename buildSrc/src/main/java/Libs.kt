@@ -18,14 +18,6 @@ object Libs {
             "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
     }
 
-    object Androidx {
-
-    }
-
-    object Material {
-
-    }
-
     object Dagger {
         const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
         const val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
@@ -56,6 +48,10 @@ object Libs {
             "androidx.navigation:navigation-ui-ktx:${Versions.navigation_components}"
         const val fragment_ktx =
             "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_components}"
+    }
+
+    object Maps {
+        const val maps_ktx = "com.google.maps.android:maps-ktx:3.2.1"
     }
 
     const val JUNIT = "junit:junit:${Versions.JUNIT}"

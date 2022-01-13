@@ -51,7 +51,6 @@ dependencies {
 
     api(Libs.lifecycle_viewmodel_ktx)
     api(Libs.lifecycle_runtime_ktx)
-
     api(Libs.Compose.compose_compiler)
     api(Libs.Compose.compose_runtime)
     api(Libs.Compose.activity_compose)

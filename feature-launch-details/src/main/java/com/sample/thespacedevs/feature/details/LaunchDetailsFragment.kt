@@ -6,50 +6,44 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.appbar.MaterialToolbar
+import com.google.maps.android.ktx.awaitMap
 import com.sample.ds.*
 import com.sample.ds.compose.ListItemSubTitle
 import com.sample.ds.compose.ListItemTitle
 import com.sample.ds.compose.Title
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
-    OnMapReadyCallback {
+class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
 
     private lateinit var veil: View
     private lateinit var timerTxt: TextView
 
     private val args by navArgs<LaunchDetailsFragmentArgs>()
     private var simpleDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
-    private lateinit var launchTitle: String
     private var launchCountDown: Long = 0L
     private var launchCoordinates: LatLng? = null
     private var launchDate: String? = null
@@ -90,9 +84,9 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
         }
         //launchCountDown = windowStartDateFormat.parse(args.result.window_start).time
         //launchCoordinates = LatLng(args.result.pad.latitude, args.result.pad.longitude)
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        view.findViewById<ComposeView>(R.id.mapFragment).setContent {
+            PlotLaunchCoordinates()
+        }
         view.findViewById<ComposeView>(R.id.launchDetails).setContent {
             LaunchDetails()
         }
@@ -129,36 +123,6 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
         super.onDestroy()
         timer?.cancel()
     }
-
-
-    override fun onMapReady(googleMap: GoogleMap?) {
-        launchCoordinates?.apply {
-            if (latitude == 0.0 && longitude == 0.0) {
-                veil.visibility = View.VISIBLE
-            } else {
-                val ll = this
-                googleMap?.run {
-                    val cameraPosition = CameraPosition.Builder()
-                        .target(ll)
-                        .zoom(8f)
-                        .build()
-                    moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-                    addMarker(
-                        MarkerOptions()
-                            .position(ll)
-                            .title(launchTitle)
-                            .icon(
-                                convertToBitmapDescriptor(
-                                    requireActivity(),
-                                    R.drawable.ic_launch_marker
-                                )
-                            )
-                    )
-                }
-            }
-        }
-    }
-
 
     @Composable
     fun LaunchDetails() {
@@ -199,6 +163,58 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details),
                     bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                 )
             )
+        }
+    }
+
+    @Composable
+    fun PlotLaunchCoordinates() {
+        val coordinates = viewModel.launchCoordinates.observeAsState()
+        coordinates.value?.takeIf { it.isvalid() }?.apply {
+            MapAvailable(latLng!!)
+        } ?: MapNotAvailable()
+    }
+
+    @Composable
+    fun MapNotAvailable() {
+        Text(
+            text = stringResource(id = R.string.launch_location_not_available),
+            modifier = Modifier.fillMaxWidth(),
+            style = MaterialTheme.typography.Title
+        )
+    }
+
+    @Composable
+    fun MapAvailable(coordinates: LatLng) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            val mapView = rememberMapViewWithLifecycle()
+            val coroutineScope = rememberCoroutineScope()
+
+            AndroidView({ mapView }, update = { mapView ->
+                coroutineScope.launch {
+                    val googleMap = mapView.awaitMap()
+                    googleMap.apply {
+                        uiSettings.isScrollGesturesEnabled = false
+                        val cameraPosition = CameraPosition.Builder()
+                            .target(coordinates)
+                            .zoom(8f)
+                            .build()
+                        moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+                        addMarker(
+                            MarkerOptions()
+                                .position(coordinates)
+                                .icon(
+                                    convertToBitmapDescriptor(
+                                        requireActivity(),
+                                        R.drawable.ic_launch_marker
+                                    )
+                                )
+                        )
+                    }
+                }
+            })
         }
     }
 }

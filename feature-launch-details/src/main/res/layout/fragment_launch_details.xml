@@ -10,18 +10,23 @@
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
         tools:context=".launch.details.LaunchDetailsActivity">
-
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/mapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            app:layout_constraintDimensionRatio="W,1:1.5"
+            app:layout_constraintTop_toTopOf="parent"/>
+<!--
         <fragment
             android:id="@+id/mapFragment"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="0px"
             app:layout_constraintDimensionRatio="W,1:1.5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
 
         <FrameLayout
             android:id="@+id/veil"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:background="#99FFFFFF"

@@ -10,6 +10,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${Versions.kotlin}")
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.0")
     }
 }
 
@@ -20,6 +21,6 @@ allprojects {
     }
 }
 
-tasks.register("clean"){
+tasks.register("clean") {
     delete("build")
 }
