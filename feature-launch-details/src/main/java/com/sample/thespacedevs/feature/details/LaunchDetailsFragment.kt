@@ -2,9 +2,12 @@ package com.sample.thespacedevs.feature.details
 
 import android.content.Context
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,10 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -29,6 +32,7 @@ import com.sample.ds.*
 import com.sample.ds.compose.ListItemSubTitle
 import com.sample.ds.compose.ListItemTitle
 import com.sample.ds.compose.Title
+import com.sample.thespacedevs.feature.details.databinding.FragmentLaunchDetailsBinding
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +40,8 @@ import javax.inject.Inject
 class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
 
     private val args by navArgs<LaunchDetailsFragmentArgs>()
-    private var timer: CountDownTimer? = null
+    private var _binding: FragmentLaunchDetailsBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     internal lateinit var viewModelFactory: LaunchDetailsViewModel.VMFactory
@@ -47,75 +52,111 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
         AndroidSupportInjection.inject(this)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLaunchDetailsBinding.inflate(inflater, container, false)
+        binding.root.setContent {
+            ScreenUI()
+        }
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ComposeView>(R.id.toolbar).setContent {
-            val state = viewModel.missionName.observeAsState()
-            state.value?.apply {
+        viewModel.fetchMissionDetails(args.missionId)
+    }
+
+    @Composable
+    fun ScreenUI() {
+        val scrollState = rememberScrollState()
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .verticalScroll(state = scrollState)
+        ) {
+            val (toolbarConstraint, mapsConstraint, detailsConstraint, timeTextConstraint) = createRefs()
+            val toolBarState = viewModel.missionName.observeAsState()
+            toolBarState.value?.apply {
                 TopAppBar(
                     title = {
                         Text(text = this, style = MaterialTheme.typography.Title)
                     },
-                    backgroundColor = platformWhite
+                    backgroundColor = platformWhite,
+                    modifier = Modifier
+                        .constrainAs(toolbarConstraint) {
+                            top.linkTo(parent.top)
+                        }
+                        .fillMaxWidth()
                 )
             }
-        }
-        view.findViewById<ComposeView>(R.id.timerTxt).setContent {
+            Box(
+                modifier = Modifier
+                    .constrainAs(mapsConstraint) {
+                        top.linkTo(toolbarConstraint.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                    .aspectRatio(1.25f)
+            ) {
+                val coordinates = viewModel.launchCoordinates.observeAsState()
+
+                coordinates.value?.apply {
+                    MapAvailable(this)
+                } ?: Text(
+                    text = stringResource(id = R.string.launch_location_not_available),
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.Title
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = dimensionResource(id = R.dimen.screen_margin))
+                    .constrainAs(detailsConstraint) {
+                        top.linkTo(mapsConstraint.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }) {
+                LaunchDate()
+                Divider(
+                    color = dividerGrey, modifier = Modifier.padding(
+                        start = dimensionResource(id = R.dimen.form_widget_margin_half),
+                        top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                        bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
+                    )
+                )
+                AgencyName()
+                Divider(
+                    color = dividerGrey, modifier = Modifier.padding(
+                        start = dimensionResource(id = R.dimen.form_widget_margin_half),
+                        top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                        bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
+                    )
+                )
+                MissionDescription()
+            }
+
             val state = viewModel.launchDate.observeAsState()
             state.value?.apply {
                 Text(
                     text = this,
-                    modifier = Modifier.padding(
-                        top = dimensionResource(id = R.dimen.form_widget_margin)
-                    ),
+                    modifier = Modifier
+                        .padding(
+                            top = dimensionResource(id = R.dimen.form_widget_margin)
+                        )
+                        .constrainAs(timeTextConstraint) {
+                            bottom.linkTo(mapsConstraint.bottom)
+                            end.linkTo(parent.end)
+                        },
                     style = MaterialTheme.typography.ListItemTitle
                 )
             }
-
-        }
-        view.findViewById<ComposeView>(R.id.mapFragment).setContent {
-            PlotLaunchCoordinates()
-        }
-        view.findViewById<ComposeView>(R.id.launchDetails).setContent {
-            LaunchDetails()
-        }
-        viewModel.fetchMissionDetails(args.missionId)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        timer?.cancel()
-    }
-
-    @Composable
-    fun LaunchDetails() {
-        Column(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.screen_margin))) {
-            LaunchDate()
-            Divider(
-                color = dividerGrey, modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
-                )
-            )
-            AgencyName()
-            Divider(
-                color = dividerGrey, modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
-                )
-            )
-            MissionDescription()
-            Divider(
-                color = dividerGrey, modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
-                )
-            )
         }
     }
+
 
     @Composable
     private fun LaunchDate() {
@@ -158,49 +199,33 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
     }
 
     @Composable
-    fun PlotLaunchCoordinates() {
-        val coordinates = viewModel.launchCoordinates.observeAsState()
-        coordinates.value?.apply {
-            MapAvailable(this)
-        } ?: Text(
-            text = stringResource(id = R.string.launch_location_not_available),
-            modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.Title
-        )
-    }
-
-    @Composable
     fun MapAvailable(coordinates: LatLng) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            val mapView = rememberMapViewWithLifecycle()
-            val coroutineScope = rememberCoroutineScope()
 
-            AndroidView({ mapView }, update = { mv ->
-                coroutineScope.launch {
-                    val googleMap = mv.awaitMap()
-                    googleMap.apply {
-                        uiSettings.isScrollGesturesEnabled = false
-                        val cameraPosition = CameraPosition.Builder()
-                            .target(coordinates)
-                            .zoom(8f)
-                            .build()
-                        moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-                        addMarker(
-                            MarkerOptions()
-                                .position(coordinates)
-                                .icon(
-                                    convertToBitmapDescriptor(
-                                        requireActivity(),
-                                        R.drawable.ic_launch_marker
-                                    )
+        val mapView = rememberMapViewWithLifecycle()
+        val coroutineScope = rememberCoroutineScope()
+
+        AndroidView({ mapView }, update = { mv ->
+            coroutineScope.launch {
+                val googleMap = mv.awaitMap()
+                googleMap.apply {
+                    uiSettings.isScrollGesturesEnabled = false
+                    val cameraPosition = CameraPosition.Builder()
+                        .target(coordinates)
+                        .zoom(8f)
+                        .build()
+                    moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+                    addMarker(
+                        MarkerOptions()
+                            .position(coordinates)
+                            .icon(
+                                convertToBitmapDescriptor(
+                                    requireActivity(),
+                                    R.drawable.ic_launch_marker
                                 )
-                        )
-                    }
+                            )
+                    )
                 }
-            })
-        }
+            }
+        })
     }
 }

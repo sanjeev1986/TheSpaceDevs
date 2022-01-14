@@ -47,9 +47,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-orchestrator"))
     implementation(Libs.Maps.maps_ktx)
     implementation(Libs.play_services_maps)
-    implementation(project(":feature-orchestrator"))
+    implementation(Libs.Compose.constraintLayout)
+    implementation(Libs.constraintlayout)
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)

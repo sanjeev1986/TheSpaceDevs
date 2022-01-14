@@ -41,6 +41,7 @@ internal class LaunchDetailsViewModel(
         state.asLiveData().map { launchDateWidgetMapper.map(it) }.distinctUntilChanged()
 
 
+
     fun fetchMissionDetails(id: String) {
         repository.getLaunchDetailsById(id)?.apply {
             state.value = LaunchDetailsUiStateModel(
