@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
@@ -32,16 +33,13 @@ import com.sample.ds.*
 import com.sample.ds.compose.ListItemSubTitle
 import com.sample.ds.compose.ListItemTitle
 import com.sample.ds.compose.Title
-import com.sample.thespacedevs.feature.details.databinding.FragmentLaunchDetailsBinding
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
+class LaunchDetailsFragment : Fragment() {
 
     private val args by navArgs<LaunchDetailsFragmentArgs>()
-    private var _binding: FragmentLaunchDetailsBinding? = null
-    private val binding get() = _binding!!
 
     @Inject
     internal lateinit var viewModelFactory: LaunchDetailsViewModel.VMFactory
@@ -57,11 +55,11 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLaunchDetailsBinding.inflate(inflater, container, false)
-        binding.root.setContent {
-            ScreenUI()
+        return ComposeView(requireContext()).apply {
+            setContent {
+                ScreenUI()
+            }
         }
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
