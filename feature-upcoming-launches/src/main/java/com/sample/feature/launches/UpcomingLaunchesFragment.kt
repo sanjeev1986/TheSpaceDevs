@@ -15,11 +15,11 @@ import androidx.fragment.app.viewModels
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.sample.ds.SearchWidget
 import com.sample.ds.dividerGrey
-import com.sample.feature.launches.databinding.FragmentUpcomingLaunchesBinding
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.thespacedevs.directions.LaunchDetails
 import com.sample.thespacedevs.directions.Navigator
@@ -29,9 +29,6 @@ class UpcomingLaunchesFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: UpcomingLaunchesViewModel.VMFactory
-    private var _binding: FragmentUpcomingLaunchesBinding? = null
-    private val binding get() = _binding!!
-
 
     private val viewModel by viewModels<UpcomingLaunchesViewModel> { viewModelFactory }
 
@@ -45,11 +42,11 @@ class UpcomingLaunchesFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUpcomingLaunchesBinding.inflate(inflater, container, false)
-        binding.root.setContent {
-            ScreenUI()
+        return ComposeView(requireContext()).apply {
+            setContent {
+                ScreenUI()
+            }
         }
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
