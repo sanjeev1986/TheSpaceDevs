@@ -20,7 +20,6 @@ import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.thespacedevs.directions.LaunchDetails
 import com.sample.thespacedevs.directions.Navigator
@@ -91,6 +90,5 @@ class UpcomingLaunchesFragment : DaggerFragment() {
             }
         }
     }
-
 }
 

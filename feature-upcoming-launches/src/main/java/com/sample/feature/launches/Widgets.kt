@@ -3,6 +3,7 @@ package com.sample.feature.launches
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -17,6 +18,7 @@ import com.sample.ds.compose.ListItemTitle
 internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: () -> Unit) {
     Column(modifier = Modifier
         .padding(8.dp)
+        .fillMaxWidth()
         .clickable { onClick() }) {
         Text(
             text = item.missionName,
