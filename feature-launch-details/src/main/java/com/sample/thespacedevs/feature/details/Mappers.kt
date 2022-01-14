@@ -1,9 +1,7 @@
 package com.sample.thespacedevs.feature.details
 
-import android.os.CountDownTimer
 import com.google.android.gms.maps.model.LatLng
 import com.sample.thespacedevs.services.launch.Results
-import com.sample.thespacedevs.utils.LaunchCountDownTimer
 import com.sample.thespacedevs.utils.UiStateMapper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,70 +9,49 @@ import java.util.*
 internal data class LaunchDetailsUiStateModel(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val result: Results? = null
-)
-
-internal data class LaunchDetails(
-    val missionName: String = "",
-    val launchDescription: String = "",
+    val missionName: String? = null,
+    val launchDescription: String? = null,
     val launchAgencyName: String = "",
-    val launchDate: String = ""
-)
-
-internal data class LaunchTimer(
+    val launchDate: String = "",
     val launchCountDown: Long = 0,
-    val launchDate: String = ""
+    val launchCoordinates: LatLng? = null
 )
 
-internal data class LaunchCoordinates(
-    val latLng: LatLng? = null
-) {
-    fun isvalid() = latLng != null
+internal class LoadingWidgetMapper : UiStateMapper<LaunchDetailsUiStateModel, Boolean> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.isLoading
 }
 
+internal class ErrorWidgetMapper : UiStateMapper<LaunchDetailsUiStateModel, Boolean> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.isError
+}
 
-internal class LaunchDetailsMapper : UiStateMapper<LaunchDetailsUiStateModel, LaunchDetails> {
+internal class MissionNameWidgetMapper : UiStateMapper<LaunchDetailsUiStateModel, String> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.missionName.orEmpty()
+}
+
+internal class LaunchDescriptionNameWidgetMapper :
+    UiStateMapper<LaunchDetailsUiStateModel, String> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.launchDescription.orEmpty()
+}
+
+internal class LaunchCountDownWidgetMapper :
+    UiStateMapper<LaunchDetailsUiStateModel, Long> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.launchCountDown
+}
+
+internal class LaunchCoordinatesWidgetMapper :
+    UiStateMapper<LaunchDetailsUiStateModel, LatLng?> {
+    override fun map(model: LaunchDetailsUiStateModel) = model.launchCoordinates
+}
+
+internal class LaunchDateWidgetMapper :
+    UiStateMapper<LaunchDetailsUiStateModel, String> {
     companion object {
         private var displayDateFormat = SimpleDateFormat("dd:HH:mm:ss", Locale.getDefault())
         private var windowStartDateFormat =
             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
     }
 
-    override fun map(model: LaunchDetailsUiStateModel): LaunchDetails {
-        return model.result?.let {
-            LaunchDetails(
-                missionName = it.name,
-                launchAgencyName = it.mission?.name.orEmpty(),
-                launchDescription = it.mission?.description.orEmpty(),
-                launchDate = displayDateFormat.format(Date(windowStartDateFormat.parse(it.window_start).time))
-            )
-        } ?: LaunchDetails()
-    }
-}
-
-internal class LaunchTimerMapper : UiStateMapper<LaunchDetailsUiStateModel, LaunchTimer> {
-    companion object {
-        private var windowStartDateFormat =
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
-    }
-
-    override fun map(model: LaunchDetailsUiStateModel): LaunchTimer {
-        return model.result?.let {
-            LaunchTimer(
-                launchCountDown = windowStartDateFormat.parse(it.window_start)?.time ?: 0L,
-                launchDate = it.window_start
-            )
-        } ?: LaunchTimer()
-    }
-}
-
-internal class LaunchCoordinatesMapper :
-    UiStateMapper<LaunchDetailsUiStateModel, LaunchCoordinates> {
-    override fun map(model: LaunchDetailsUiStateModel): LaunchCoordinates {
-        return model.result?.let {
-            LaunchCoordinates(
-                latLng = LatLng(it.pad.latitude, it.pad.longitude)
-            )
-        } ?: LaunchCoordinates()
-    }
+    override fun map(model: LaunchDetailsUiStateModel) =
+        windowStartDateFormat.parse(model.launchDate)?.let { displayDateFormat.format(it) } ?: ""
 }

@@ -50,25 +50,28 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.toolbar).setContent {
-            val state = viewModel.launchDetails.observeAsState()
+            val state = viewModel.missionName.observeAsState()
             state.value?.apply {
                 TopAppBar(
                     title = {
-                        Text(text = missionName, style = MaterialTheme.typography.Title)
+                        Text(text = this, style = MaterialTheme.typography.Title)
                     },
                     backgroundColor = platformWhite
                 )
             }
         }
         view.findViewById<ComposeView>(R.id.timerTxt).setContent {
-            val state = viewModel.launchTimers.observeAsState()
-            Text(
-                text = state.value?.launchDate.orEmpty(),
-                modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.form_widget_margin)
-                ),
-                style = MaterialTheme.typography.ListItemTitle
-            )
+            val state = viewModel.launchDate.observeAsState()
+            state.value?.apply {
+                Text(
+                    text = this,
+                    modifier = Modifier.padding(
+                        top = dimensionResource(id = R.dimen.form_widget_margin)
+                    ),
+                    style = MaterialTheme.typography.ListItemTitle
+                )
+            }
+
         }
         view.findViewById<ComposeView>(R.id.mapFragment).setContent {
             PlotLaunchCoordinates()
@@ -86,26 +89,50 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
 
     @Composable
     fun LaunchDetails() {
-        val state = viewModel.launchDetails.observeAsState()
-        state.value?.apply {
-            Column(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.screen_margin))) {
-                LaunchRow(
-                    label = stringResource(id = R.string.lbl_launch_date),
-                    state.value!!.launchDate
+        Column(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.screen_margin))) {
+            LaunchDate()
+            Divider(
+                color = dividerGrey, modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                 )
-                Divider(color = dividerGrey)
-                LaunchRow(
-                    label = stringResource(id = R.string.lbl_agency_name),
-                    state.value!!.launchAgencyName
+            )
+            AgencyName()
+            Divider(
+                color = dividerGrey, modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                 )
-                Divider(color = dividerGrey)
-                LaunchRow(
-                    label = stringResource(id = R.string.description),
-                    state.value!!.launchDescription
+            )
+            MissionDescription()
+            Divider(
+                color = dividerGrey, modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                 )
-                Divider(color = dividerGrey)
-            }
+            )
         }
+    }
+
+    @Composable
+    private fun LaunchDate() {
+        val state = viewModel.launchDate.observeAsState()
+        LaunchRow(stringResource(id = R.string.lbl_launch_date), state.value.orEmpty())
+    }
+
+    @Composable
+    private fun AgencyName() {
+        val state = viewModel.missionName.observeAsState()
+        LaunchRow(stringResource(id = R.string.lbl_agency_name), state.value.orEmpty())
+    }
+
+    @Composable
+    private fun MissionDescription() {
+        val state = viewModel.launchDescription.observeAsState()
+        LaunchRow(stringResource(id = R.string.description), state.value.orEmpty())
     }
 
     @Composable
@@ -133,14 +160,9 @@ class LaunchDetailsFragment : Fragment(R.layout.fragment_launch_details) {
     @Composable
     fun PlotLaunchCoordinates() {
         val coordinates = viewModel.launchCoordinates.observeAsState()
-        coordinates.value?.takeIf { it.isvalid() }?.apply {
-            MapAvailable(latLng!!)
-        } ?: MapNotAvailable()
-    }
-
-    @Composable
-    fun MapNotAvailable() {
-        Text(
+        coordinates.value?.apply {
+            MapAvailable(this)
+        } ?: Text(
             text = stringResource(id = R.string.launch_location_not_available),
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.Title

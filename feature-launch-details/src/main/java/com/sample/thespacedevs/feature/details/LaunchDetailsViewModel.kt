@@ -1,36 +1,57 @@
 package com.sample.thespacedevs.feature.details
 
 import androidx.lifecycle.*
+import com.google.android.gms.maps.model.LatLng
 import com.sample.repositories.launch.LaunchRepository
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 internal class LaunchDetailsViewModel(
-    launchCoordinatesMapper: LaunchCoordinatesMapper = LaunchCoordinatesMapper(),
-    launchDetailsMapper: LaunchDetailsMapper = LaunchDetailsMapper(),
-    launchTimerMapper: LaunchTimerMapper = LaunchTimerMapper(),
+    loadingWidgetMapper: LoadingWidgetMapper = LoadingWidgetMapper(),
+    errorWidgetMapper: ErrorWidgetMapper = ErrorWidgetMapper(),
+    missionNameWidgetMapper: MissionNameWidgetMapper = MissionNameWidgetMapper(),
+    launchDescriptionNameWidgetMapper: LaunchDescriptionNameWidgetMapper = LaunchDescriptionNameWidgetMapper(),
+    launchCountDownWidgetMapper: LaunchCountDownWidgetMapper = LaunchCountDownWidgetMapper(),
+    launchCoordinatesWidgetMapper: LaunchCoordinatesWidgetMapper = LaunchCoordinatesWidgetMapper(),
+    launchDateWidgetMapper: LaunchDateWidgetMapper = LaunchDateWidgetMapper(),
     val repository: LaunchRepository
 ) : ViewModel() {
 
     private val state = MutableStateFlow(LaunchDetailsUiStateModel())
 
-    val launchDetails: LiveData<LaunchDetails> =
-        state.asLiveData().map { launchDetailsMapper.map(it) }.distinctUntilChanged()
+    val loadingState: LiveData<Boolean> =
+        state.asLiveData().map { loadingWidgetMapper.map(it) }.distinctUntilChanged()
 
-    val launchTimers: LiveData<LaunchTimer> =
-        state.asLiveData().map { launchTimerMapper.map(it) }.distinctUntilChanged()
+    val errorState: LiveData<Boolean> =
+        state.asLiveData().map { errorWidgetMapper.map(it) }.distinctUntilChanged()
 
-    val launchCoordinates: LiveData<LaunchCoordinates> =
-        state.asLiveData().map { launchCoordinatesMapper.map(it) }.distinctUntilChanged()
+    val missionName: LiveData<String> =
+        state.asLiveData().map { missionNameWidgetMapper.map(it) }.distinctUntilChanged()
+
+    val launchDescription: LiveData<String> =
+        state.asLiveData().map { launchDescriptionNameWidgetMapper.map(it) }.distinctUntilChanged()
+
+    val launchCountDown: LiveData<Long> =
+        state.asLiveData().map { launchCountDownWidgetMapper.map(it) }.distinctUntilChanged()
+
+    val launchCoordinates: LiveData<LatLng?> =
+        state.asLiveData().map { launchCoordinatesWidgetMapper.map(it) }.distinctUntilChanged()
+
+    val launchDate: LiveData<String> =
+        state.asLiveData().map { launchDateWidgetMapper.map(it) }.distinctUntilChanged()
 
 
     fun fetchMissionDetails(id: String) {
         repository.getLaunchDetailsById(id)?.apply {
-            state.value = LaunchDetailsUiStateModel(result = this)
+            state.value = LaunchDetailsUiStateModel(
+                isLoading = false,
+                isError = false,
+                missionName = mission?.name ?: "",
+                launchDescription = mission?.description ?: "",
+                launchAgencyName = name,
+                launchDate = window_start,
+                launchCoordinates = LatLng(pad.latitude, pad.longitude)
+            )
         }
     }
 
