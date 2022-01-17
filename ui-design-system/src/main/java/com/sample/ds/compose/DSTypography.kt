@@ -1,14 +1,14 @@
 package com.sample.ds.compose
 
 import android.graphics.Typeface
-import androidx.compose.material.Typography
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import com.sample.ds.platformBlack
 
-val Typography.Title: TextStyle
-    get() = TextStyle(
+data class DSTypography(
+
+    val Title: TextStyle = TextStyle(
         color = platformBlack,
         fontFamily = FontFamily(
             typeface = Typeface.create(
@@ -17,11 +17,9 @@ val Typography.Title: TextStyle
             )
         ),
         fontSize = 18.sp
-    )
+    ),
 
-
-val Typography.ListItemTitle: TextStyle
-    get() = TextStyle(
+    val ListItemTitle: TextStyle = TextStyle(
         color = platformBlack,
         fontFamily = FontFamily(
             typeface = Typeface.create(
@@ -30,10 +28,9 @@ val Typography.ListItemTitle: TextStyle
             )
         ),
         fontSize = 16.sp
-    )
+    ),
 
-val Typography.ListItemSubTitle: TextStyle
-    get() = TextStyle(
+    val ListItemSubTitle: TextStyle = TextStyle(
         color = platformBlack,
         fontFamily = FontFamily(
             typeface = Typeface.create(
@@ -42,10 +39,9 @@ val Typography.ListItemSubTitle: TextStyle
             )
         ),
         fontSize = 14.sp
-    )
+    ),
 
-val Typography.ListItemBody: TextStyle
-    get() = TextStyle(
+    val ListItemBody: TextStyle = TextStyle(
         color = platformBlack,
         fontFamily = FontFamily(
             typeface = Typeface.create(
@@ -55,3 +51,6 @@ val Typography.ListItemBody: TextStyle
         ),
         fontSize = 12.sp
     )
+)
+
+internal val LocalDSTypographyConfiguration = staticCompositionLocalOf { DSTypography() }

@@ -14,13 +14,13 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.fragment.app.viewModels
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.sample.ds.SearchWidget
-import com.sample.ds.dividerGrey
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.sample.ds.compose.dividerGrey
 import com.sample.thespacedevs.directions.LaunchDetails
 import com.sample.thespacedevs.directions.Navigator
 
@@ -57,13 +57,6 @@ class UpcomingLaunchesFragment : DaggerFragment() {
     @Composable
     fun ScreenUI() {
         Column {
-            SearchWidget {
-                if (it.isEmpty()) {
-                    viewModel.fetchUpcomingLaunches(false)
-                } else {
-                    viewModel.search(it)
-                }
-            }
             UpcomingLaunches()
         }
     }
@@ -77,7 +70,16 @@ class UpcomingLaunchesFragment : DaggerFragment() {
             val state = viewModel.upcomingLaunches.observeAsState()
             state.value?.apply {
                 LazyColumn {
-                    this.items(this@apply) { item ->
+                    item {
+                        SearchWidget {
+                            if (it.isEmpty()) {
+                                viewModel.fetchUpcomingLaunches(false)
+                            } else {
+                                viewModel.search(it)
+                            }
+                        }
+                    }
+                    items(this@apply) { item ->
                         UpcomingLaunchItem(item){
                             (requireActivity() as Navigator).navigateTo(LaunchDetails(item.id))
                         }

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -29,10 +28,9 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.ktx.awaitMap
-import com.sample.ds.*
-import com.sample.ds.compose.ListItemSubTitle
-import com.sample.ds.compose.ListItemTitle
-import com.sample.ds.compose.Title
+import com.sample.ds.compose.DSTheme
+import com.sample.ds.compose.dividerGrey
+import com.sample.ds.compose.platformWhite
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -81,7 +79,7 @@ class LaunchDetailsFragment : Fragment() {
             toolBarState.value?.apply {
                 TopAppBar(
                     title = {
-                        Text(text = this, style = MaterialTheme.typography.Title)
+                        Text(text = this, style = DSTheme.typography.Title)
                     },
                     backgroundColor = platformWhite,
                     modifier = Modifier
@@ -107,7 +105,7 @@ class LaunchDetailsFragment : Fragment() {
                 } ?: Text(
                     text = stringResource(id = R.string.launch_location_not_available),
                     modifier = Modifier.fillMaxWidth(),
-                    style = MaterialTheme.typography.Title
+                    style = DSTheme.typography.Title
                 )
             }
             Column(
@@ -149,7 +147,7 @@ class LaunchDetailsFragment : Fragment() {
                             bottom.linkTo(mapsConstraint.bottom)
                             end.linkTo(parent.end)
                         },
-                    style = MaterialTheme.typography.ListItemTitle
+                    style = DSTheme.typography.ListItemTitle
                 )
             }
         }
@@ -182,11 +180,11 @@ class LaunchDetailsFragment : Fragment() {
                 modifier = Modifier.padding(
                     top = dimensionResource(id = R.dimen.form_widget_margin)
                 ),
-                style = MaterialTheme.typography.ListItemTitle
+                style = DSTheme.typography.ListItemTitle
             )
             Text(
                 text = data,
-                style = MaterialTheme.typography.ListItemSubTitle,
+                style = DSTheme.typography.ListItemSubTitle,
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.form_widget_margin_half),
                     top = dimensionResource(id = R.dimen.form_widget_margin_half),

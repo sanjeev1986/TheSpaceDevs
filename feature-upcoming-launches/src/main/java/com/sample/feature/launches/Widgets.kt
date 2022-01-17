@@ -5,14 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.sample.ds.compose.ListItemBody
-import com.sample.ds.compose.ListItemTitle
+import com.sample.ds.compose.DSTheme
 
 @Composable
 internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: () -> Unit) {
@@ -22,7 +20,7 @@ internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: () -> Unit) {
         .clickable { onClick() }) {
         Text(
             text = item.missionName,
-            style = MaterialTheme.typography.ListItemTitle,
+            style = DSTheme.typography.ListItemTitle,
             modifier = Modifier
                 .padding(
                     PaddingValues(
@@ -37,7 +35,7 @@ internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: () -> Unit) {
         )
         Text(
             text = item.missionDescription,
-            style = MaterialTheme.typography.ListItemBody,
+            style = DSTheme.typography.ListItemBody,
             modifier = Modifier
                 .padding(
                     PaddingValues(
