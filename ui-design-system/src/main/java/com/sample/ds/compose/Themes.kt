@@ -19,6 +19,16 @@ object DSTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalDSSizeConfiguration.current
+
+    val elevation: DSElevation
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalDSElevationConfiguration.current
+
+    val shape: DSShape
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalDSShapeConfiguration.current
 }
 
 @Composable

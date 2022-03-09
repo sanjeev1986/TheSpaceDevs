@@ -50,6 +50,17 @@ data class DSTypography(
             )
         ),
         fontSize = 12.sp
+    ),
+
+    val Widget: TextStyle = TextStyle(
+        color = platformBlack,
+        fontFamily = FontFamily(
+            typeface = Typeface.create(
+                "sans-serif-condensed-medium",
+                Typeface.NORMAL
+            )
+        ),
+        fontSize = 12.sp
     )
 )
 

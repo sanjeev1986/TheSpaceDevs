@@ -4,6 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
+import androidx.compose.ui.res.painterResource
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +50,7 @@ class SpacecraftListFragment : DaggerFragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             setAdapter(adapter)
         }
-        viewModel.spacecraftsLiveData.observe(viewLifecycleOwner, {
+        viewModel.spacecraftsLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is RepoResult.Success -> {
                     adapter.submit(it.result)
@@ -51,7 +59,7 @@ class SpacecraftListFragment : DaggerFragment() {
 
                 }
             }
-        })
+        }
         viewModel.fetchSpacecrafts()
     }
 
@@ -122,3 +130,4 @@ class SpacecraftListFragment : DaggerFragment() {
 
     }
 }
+

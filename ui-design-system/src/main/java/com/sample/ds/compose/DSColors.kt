@@ -28,8 +28,10 @@ val colorPrimaryDark = Color(0xff262626)
 val colorAccent = Color(0xff262626)
 val windowBackground = Color(0xff262626)
 
+val platformTransparent = Color.Transparent
 val platformWhite = Color.White
 val platformBlack = Color.Black
+val platformGrey = Color(0xff999999)
 val dividerGrey = Color(0xffaaaaaa)
 
 internal val LocalDSColorConfiguration = staticCompositionLocalOf {
@@ -39,6 +41,6 @@ internal val LocalDSColorConfiguration = staticCompositionLocalOf {
         accent = colorAccent,
         textPrimary = platformBlack,
         windowBackground = platformWhite,
-        error = colorPrimary
+        error = colorPrimary,
     )
 }
