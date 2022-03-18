@@ -9,7 +9,7 @@ object Versions {
     const val material = "1.3.0"
     const val activity = "1.3.0"
     const val fragment = "1.3.0"
-    const val navigation_components = "2.3.5"
+    const val navigation_components = "2.4.1"
     const val dagger = "2.40.5"
     const val swiperefreshlayout = "1.1.0"
     const val kotlinx_coroutines_android = "1.6.0"

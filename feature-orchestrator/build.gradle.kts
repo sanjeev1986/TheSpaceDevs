@@ -70,6 +70,7 @@ dependencies {
 
     api(Libs.Navigation.ui_ktx)
     api(Libs.Navigation.fragment_ktx)
+    api(Libs.Navigation.compose)
 
     api(Libs.Dagger.dagger)
     kapt(Libs.Dagger.dagger_compiler)

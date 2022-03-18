@@ -5,7 +5,7 @@
     android:id="@+id/browse"
     app:startDestination="@+id/upcomingLaunchesFragment">
 
-    <fragment
+<!--    <fragment
         android:id="@+id/upcomingLaunchesFragment"
         android:name="com.sample.feature.launches.UpcomingLaunchesFragment"
         android:label="Upcoming launches"
@@ -18,7 +18,7 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpToInclusive="@id/upcomingLaunchesFragment" />
-    </fragment>
+    </fragment>-->
 
     <fragment
         android:id="@+id/launchDetailsFragment"

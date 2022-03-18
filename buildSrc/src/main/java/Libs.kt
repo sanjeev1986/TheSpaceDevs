@@ -49,6 +49,7 @@ object Libs {
             "androidx.navigation:navigation-ui-ktx:${Versions.navigation_components}"
         const val fragment_ktx =
             "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_components}"
+        const val compose = "androidx.navigation:navigation-compose:${Versions.navigation_components}"
     }
 
     object Maps {
