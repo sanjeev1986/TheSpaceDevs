@@ -48,7 +48,7 @@ android {
 
 dependencies {
     implementation(project(":feature-orchestrator"))
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.22.0-rc")
+    implementation(Libs.Compose.swipeToRefreshLayout)
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)

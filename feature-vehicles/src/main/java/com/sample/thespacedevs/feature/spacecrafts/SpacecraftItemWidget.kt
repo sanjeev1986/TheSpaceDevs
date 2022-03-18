@@ -1,6 +1,7 @@
 package com.sample.thespacedevs.feature.spacecrafts
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -22,10 +23,13 @@ fun SpacecraftItemWidget(
     imageUrl: String,
     name: String,
     status: String,
-    text2: String,
-    text3: String
+    description: String,
+    text3: String,
+    onClick: () -> Unit
 ) {
-    ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+    ConstraintLayout(modifier = Modifier
+        .fillMaxWidth()
+        .clickable { onClick() }) {
         val (spaceCraftImageConstraint,
             spaceCraftNameConstraint,
             statusConstraint
@@ -60,7 +64,7 @@ fun SpacecraftItemWidget(
                     top.linkTo(spaceCraftNameConstraint.bottom)
                 }) {
             Chip(text = status)
-            Chip(text = text2)
+            Chip(text = description)
             Chip(text = text3)
         }
     }
@@ -73,8 +77,8 @@ fun sampleSpacecraftItemWidget() {
         imageUrl = "",
         name = "Mercury 7",
         status = "Active",
-        text2 = "Text 2",
-        text3 = "Text 3"
+        description = "Text 2",
+        text3 = "Text 3",
+        onClick = {}
     )
-
 }

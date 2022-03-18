@@ -17,6 +17,7 @@ object Libs {
         const val compose_livedata =
             "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
+        const val swipeToRefreshLayout = "com.google.accompanist:accompanist-swiperefresh:0.23.1"
     }
 
     object Dagger {

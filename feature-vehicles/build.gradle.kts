@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(project(":feature-orchestrator"))
+    implementation(Libs.Compose.swipeToRefreshLayout)
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)
     implementation(Libs.Kotlin.kotlin_stdlib)

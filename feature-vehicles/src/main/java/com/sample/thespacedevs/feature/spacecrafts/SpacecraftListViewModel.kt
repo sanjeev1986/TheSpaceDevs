@@ -12,8 +12,9 @@ import javax.inject.Inject
 
 class SpacecraftListViewModel(private val repository: SpacecraftRepository) : ViewModel() {
 
-    private val state = MutableStateFlow(null)
+    private val state = MutableStateFlow<List<SpaceCraft>>(emptyList())
     val spaceCrafts = state.asLiveData()
+    val loading = state.asLiveData().map { }
     private val _spacecraftsLiveData = MutableLiveData<RepoResult<List<SpaceCraft>>>()
     val spacecraftsLiveData: LiveData<RepoResult<List<SpaceCraft>>>
         get() = _spacecraftsLiveData
