@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SpacecraftListViewModel(private val repository: SpacecraftRepository) : ViewModel() {
+internal class SpacecraftListViewModel(private val repository: SpacecraftRepository) : ViewModel() {
 
     private val state = MutableStateFlow<List<SpaceCraft>>(emptyList())
     val spaceCrafts = state.asLiveData()
@@ -19,11 +19,8 @@ class SpacecraftListViewModel(private val repository: SpacecraftRepository) : Vi
     val spacecraftsLiveData: LiveData<RepoResult<List<SpaceCraft>>>
         get() = _spacecraftsLiveData
 
-    class Factory @Inject constructor(private val repository: SpacecraftRepository) :
-        ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return SpacecraftListViewModel(repository) as T
-        }
+    init {
+        fetchSpacecrafts(true)
     }
 
     fun fetchSpacecrafts(isRefresh: Boolean = false) {
@@ -33,5 +30,12 @@ class SpacecraftListViewModel(private val repository: SpacecraftRepository) : Vi
             }
             _spacecraftsLiveData.value = results
         }
+    }
+}
+
+open class SpacecraftListViewModelFactory @Inject constructor(private val repository: SpacecraftRepository) :
+    ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return SpacecraftListViewModel(repository) as T
     }
 }

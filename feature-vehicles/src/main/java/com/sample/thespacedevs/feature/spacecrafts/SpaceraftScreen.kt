@@ -8,21 +8,32 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavHostController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.ds.SearchWidget
 import com.sample.ds.compose.dividerGrey
+import com.sample.repositories.spacecraft.SpacecraftRepository
 
 @Composable
-fun SpaceCraftsScreen(navController: NavHostController) {
-    Text("Tee-Tee 2")
+fun SpaceCraftsScreen(
+    repository: SpacecraftRepository,
+    openSpacecraftDetails: (String) -> Unit,
+) {
+    SpaceCraftsScreenInternal(
+        openSpacecraftDetails, ViewModelProvider(
+            LocalViewModelStoreOwner.current!!,
+            SpacecraftListViewModelFactory(repository)
+        ).get(SpacecraftListViewModel::class.java)
+    )
 }
 
 @Composable
-internal fun SpaceCraftsScreen(
-    viewModel: SpacecraftListViewModel,
-    navController: NavHostController
+internal fun SpaceCraftsScreenInternal(
+    openSpacecraftDetails: (String) -> Unit,
+    viewModel: SpacecraftListViewModel
 ) {
     val isLoading by viewModel.loading.observeAsState()
     SwipeRefresh(

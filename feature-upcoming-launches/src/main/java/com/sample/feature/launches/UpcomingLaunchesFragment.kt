@@ -15,15 +15,11 @@ import androidx.compose.ui.platform.ComposeView
 class UpcomingLaunchesFragment : DaggerFragment() {
 
 
-    @Inject
+    /*@Inject
     lateinit var viewModelFactory: UpcomingLaunchesViewModel.VMFactory
 
     private val viewModel by viewModels<UpcomingLaunchesViewModel> { viewModelFactory }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        AndroidSupportInjection.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +36,6 @@ class UpcomingLaunchesFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchUpcomingLaunches(false)
-    }
+    }*/
 }
 

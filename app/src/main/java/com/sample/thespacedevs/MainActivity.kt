@@ -17,35 +17,50 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.findNavController
 import com.sample.feature.launches.UpcomingLaunches
 import com.sample.thespacedevs.directions.MainMenu
-import com.sample.thespacedevs.directions.Navigator
 import com.sample.thespacedevs.directions.Path
 import com.sample.thespacedevs.feature.spacecrafts.SpaceCraftsScreen
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import com.sample.repositories.launch.LaunchRepository
+import com.sample.repositories.spacecraft.SpacecraftRepository
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), Navigator {
-    override val navController: NavController
-        get() = findNavController(R.id.hostFragment)
+class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var launchRepository: LaunchRepository
+
+    @Inject
+    lateinit var spacecraftRepository: SpacecraftRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         setContent {
-            HomeScreen()
+            HomeScreen(launchRepository, spacecraftRepository)
         }
     }
 }
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    launchRepository: LaunchRepository,
+    spacecraftRepository: SpacecraftRepository
+) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { HomeBottomNavigation(navController) }
     ) {
-        NavigationGraph(navController = navController, modifier = Modifier.padding(it))
+        NavigationGraph(
+            navController = navController,
+            launchRepository,
+            spacecraftRepository,
+            modifier = Modifier.padding(it)
+        )
     }
 }
 
@@ -93,17 +108,25 @@ fun BottomNavLabel(label: String) {
 }
 
 @Composable
-fun NavigationGraph(navController: NavHostController, modifier: Modifier) {
+fun NavigationGraph(
+    navController: NavHostController,
+    launchRepository: LaunchRepository,
+    spacecraftRepository: SpacecraftRepository,
+    modifier: Modifier
+) {
     NavHost(
         navController = navController,
         startDestination = MainMenu.Upcoming.path.route,
         modifier = modifier
     ) {
         composable(MainMenu.Upcoming.path.route) {
-            UpcomingLaunches(navController)
+            UpcomingLaunches(launchRepository) {
+            }
         }
         composable(MainMenu.Spacecrafts.path.route) {
-            SpaceCraftsScreen(navController)
+            SpaceCraftsScreen(spacecraftRepository) {
+
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ package com.sample.thespacedevs.directions
 
 import com.sample.common.R
 
-sealed class Path(val route:String) {
+sealed class Path(val route: String) {
     object Upcoming : Path("Upcoming")
     object Spacecrafts : Path("Spacecrafts")
     class LaunchDetails(val id: String) : Path("LaunchDetails")

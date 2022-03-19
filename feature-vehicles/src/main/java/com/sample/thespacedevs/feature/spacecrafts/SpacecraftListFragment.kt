@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 class SpacecraftListFragment : DaggerFragment() {
 
-    @Inject
+    /*@Inject
     lateinit var viewModelFactory: SpacecraftListViewModel.Factory
 
     private var _binding: FragmentSpacecraftListBinding? = null
@@ -128,6 +128,6 @@ class SpacecraftListFragment : DaggerFragment() {
                     && return oldItems[oldItemPosition].name == newItems[newItemPosition].name
         }
 
-    }
+    }*/
 }
 

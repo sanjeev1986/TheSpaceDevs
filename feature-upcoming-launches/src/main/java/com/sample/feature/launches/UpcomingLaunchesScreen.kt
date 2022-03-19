@@ -4,26 +4,37 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.navigation.NavHostController
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.ds.SearchWidget
 import com.sample.ds.compose.dividerGrey
-import com.sample.thespacedevs.directions.Navigator
-import com.sample.thespacedevs.directions.Path
+import com.sample.repositories.launch.LaunchRepository
 
 
 @Composable
-fun UpcomingLaunches(navController: NavHostController) {
-    Text("Tee-Tee 1")
+fun UpcomingLaunches(
+    repository: LaunchRepository,
+    openLaunchDetails: (String) -> Unit,
+) {
+    UpcomingInternal(
+        openLaunchDetails,
+        ViewModelProvider(
+            LocalViewModelStoreOwner.current!!,
+            UpcomingLaunchesViewModelFactory(repository)
+        ).get(UpcomingLaunchesViewModel::class.java)
+    )
 }
 
 @Composable
-internal fun Upcoming(viewModel: UpcomingLaunchesViewModel, navController: NavHostController) {
+internal fun UpcomingInternal(
+    openLaunchDetails: (String) -> Unit,
+    viewModel: UpcomingLaunchesViewModel
+) {
     Column {
         val isLoading by viewModel.loading.observeAsState()
         SwipeRefresh(
@@ -43,9 +54,7 @@ internal fun Upcoming(viewModel: UpcomingLaunchesViewModel, navController: NavHo
                     }
                     items(this@apply) { item ->
                         UpcomingLaunchItem(item) {
-                            navController.navigate(
-                                Path.LaunchDetails(item.id).route
-                            )
+                            openLaunchDetails(item.id)
                         }
                         TabRowDefaults.Divider(color = dividerGrey)
                     }

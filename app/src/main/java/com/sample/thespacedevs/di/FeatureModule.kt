@@ -3,6 +3,7 @@ package com.sample.thespacedevs.di
 import android.content.Context
 import com.google.gson.Gson
 import com.sample.feature.launches.UpcomingLaunchesFragment
+import com.sample.thespacedevs.MainActivity
 import com.sample.thespacedevs.TheSpaceDevApp
 import com.sample.thespacedevs.feature.details.LaunchDetailsFragment
 import com.sample.thespacedevs.feature.spacecrafts.SpacecraftListFragment
@@ -21,10 +22,7 @@ abstract class FeatureModule {
     abstract fun provideContext(app: TheSpaceDevApp): Context
 
     @ContributesAndroidInjector
-    abstract fun injectUpcomingLaunchesFragment(): UpcomingLaunchesFragment
-
-    @ContributesAndroidInjector
-    abstract fun injectSpacecraftListFragment(): SpacecraftListFragment
+    abstract fun injectMainActivity(): MainActivity
 
     @ContributesAndroidInjector
     abstract fun injectLaunchDetailsFragment(): LaunchDetailsFragment

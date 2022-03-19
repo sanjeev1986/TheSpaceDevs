@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class UpcomingLaunchesViewModel(
+internal class UpcomingLaunchesViewModel(
     launchListMapper: LaunchListMapper = LaunchListMapper(),
     loadingMapper: LoadingMapper = LoadingMapper(),
     errorMapper: ErrorMapper = ErrorMapper(),
@@ -18,6 +18,10 @@ class UpcomingLaunchesViewModel(
     val upcomingLaunches = state.asLiveData().map { launchListMapper.map(it) }
     val loading = state.asLiveData().map { loadingMapper.map(it) }
     val error = state.asLiveData().map { errorMapper.map(it) }
+
+    init {
+        fetchUpcomingLaunches(true)
+    }
 
     fun fetchUpcomingLaunches(refresh: Boolean) {
         state.update { it.copy(isLoading = true, isError = false) }
@@ -61,13 +65,13 @@ class UpcomingLaunchesViewModel(
             }
         }
     }
+}
 
-    @Suppress("UNCHECKED_CAST")
-    class VMFactory @Inject constructor(
-        private val repository: LaunchRepository
-    ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return UpcomingLaunchesViewModel(repository = repository) as T
-        }
+@Suppress("UNCHECKED_CAST")
+class UpcomingLaunchesViewModelFactory @Inject constructor(
+    private val repository: LaunchRepository
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return UpcomingLaunchesViewModel(repository = repository) as T
     }
 }
