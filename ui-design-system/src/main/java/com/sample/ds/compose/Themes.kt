@@ -30,19 +30,3 @@ object DSTheme {
         @ReadOnlyComposable
         get() = LocalDSShapeConfiguration.current
 }
-
-@Composable
-fun AppTheme(
-    colors: DSColors = DSTheme.colors,
-    typography: DSTypography = DSTheme.typography,
-    sizes: DSSizes = DSTheme.sizes,
-    contentSlot: @Composable () -> Unit
-) {
-    CompositionLocalProvider(
-        LocalDSColorConfiguration provides colors,
-        LocalDSTypographyConfiguration provides typography,
-        LocalDSSizeConfiguration provides sizes
-    ) {
-        contentSlot()
-    }
-}

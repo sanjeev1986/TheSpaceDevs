@@ -1,9 +1,9 @@
 package com.sample.thespacedevs.services.spacecraft
 
-data class SpacecraftResponse (
+data class SpacecraftResponse(
 
-	val count : Int,
-	val next : String,
-	val previous : String,
-	val results : List<SpaceCraft>
+    val count: Int,
+    val next: String,
+    val previous: String,
+    val results: List<SpaceCraft>
 )

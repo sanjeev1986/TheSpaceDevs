@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="upcoming">Upcoming</string>
+    <string name="vehicles">Vehicles</string>
     <string name="launch_list_title">Top 10 Upcoming Launches</string>
     <string name="no_network">Check your internet and try again</string>
 </resources>

@@ -8,5 +8,5 @@ data class SpaceCraft (
 	val serial_number : String,
 	val status : Status,
 	val description : String,
-	val spacecraft_config : Spacecraft_config
+	val spacecraft_config : Spacecraft_config,
 )

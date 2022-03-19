@@ -58,6 +58,7 @@ dependencies {
     api(Libs.Compose.material_compose)
     api(Libs.livedata_ktx)
     api(Libs.Compose.compose_livedata)
+    api(Libs.Compose.coil)
 
     api(Libs.Kotlin.kotlin_stdlib)
     api(Libs.core_ktx)

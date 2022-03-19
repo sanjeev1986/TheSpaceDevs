@@ -33,6 +33,7 @@ val platformWhite = Color.White
 val platformBlack = Color.Black
 val platformGrey = Color(0xff999999)
 val dividerGrey = Color(0xffaaaaaa)
+val translucentTeal = Color(0xff009999)
 
 internal val LocalDSColorConfiguration = staticCompositionLocalOf {
     DSColors(

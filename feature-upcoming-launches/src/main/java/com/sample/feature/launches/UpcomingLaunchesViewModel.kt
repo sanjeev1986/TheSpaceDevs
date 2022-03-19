@@ -20,10 +20,10 @@ internal class UpcomingLaunchesViewModel(
     val error = state.asLiveData().map { errorMapper.map(it) }
 
     init {
-        fetchUpcomingLaunches(true)
+        fetchUpcomingLaunches()
     }
 
-    fun fetchUpcomingLaunches(refresh: Boolean) {
+    fun fetchUpcomingLaunches(refresh: Boolean = false) {
         state.update { it.copy(isLoading = true, isError = false) }
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {

@@ -18,6 +18,7 @@ object Libs {
             "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
         const val swipeToRefreshLayout = "com.google.accompanist:accompanist-swiperefresh:0.23.1"
+        const val coil = "io.coil-kt:coil-compose:2.0.0-rc01"
     }
 
     object Dagger {
@@ -50,7 +51,8 @@ object Libs {
             "androidx.navigation:navigation-ui-ktx:${Versions.navigation_components}"
         const val fragment_ktx =
             "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_components}"
-        const val compose = "androidx.navigation:navigation-compose:${Versions.navigation_components}"
+        const val compose =
+            "androidx.navigation:navigation-compose:${Versions.navigation_components}"
     }
 
     object Maps {

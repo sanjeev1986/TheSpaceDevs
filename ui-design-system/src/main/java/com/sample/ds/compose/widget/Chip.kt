@@ -21,24 +21,27 @@ fun Chip(
     isToggleOn: Boolean = false,
     onToggleListener: (Boolean) -> Unit = {}
 ) {
-    Surface(
-        elevation = DSTheme.elevation.raised,
-        shape = DSTheme.shape.roundedCornerWidget,
-        color = if (enableToggle) DSTheme.colors.accent else backgroundColor
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(DSTheme.sizes.widgetPadding)
-                .toggleable(
-                    value = isToggleOn,
-                    onValueChange = onToggleListener
-                )
+    if (text.isNotEmpty()) {
+        Surface(
+            elevation = DSTheme.elevation.raised,
+            shape = DSTheme.shape.roundedCornerWidget,
+            color = if (enableToggle) DSTheme.colors.accent else backgroundColor
         ) {
-            Text(
-                text = text,
-                color = textColor,
-                style = DSTheme.typography.Widget,
-            )
+
+            Row(
+                modifier = Modifier
+                    .padding(DSTheme.sizes.widgetPadding)
+                    .toggleable(
+                        value = isToggleOn,
+                        onValueChange = onToggleListener
+                    )
+            ) {
+                Text(
+                    text = text,
+                    color = textColor,
+                    style = DSTheme.typography.Widget,
+                )
+            }
         }
     }
 }

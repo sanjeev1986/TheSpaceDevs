@@ -8,5 +8,5 @@ data class Spacecraft_config (
 	val type : Type,
 	val agency : Agency,
 	val in_use : Boolean,
-	val image_url : String
+	val image_url: String?
 )

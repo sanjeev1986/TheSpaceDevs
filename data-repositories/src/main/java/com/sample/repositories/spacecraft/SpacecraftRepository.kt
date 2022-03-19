@@ -5,6 +5,7 @@ import com.sample.repositories.RepoResult
 import com.sample.repositories.localstorage.InMemoryCache
 import com.sample.thespacedevs.services.TheSpaceDevsService
 import com.sample.thespacedevs.services.spacecraft.SpaceCraft
+import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
 import javax.inject.Inject
 
 class SpacecraftRepository @Inject constructor(
@@ -16,20 +17,20 @@ class SpacecraftRepository @Inject constructor(
         private val LIMIT = 20
     }
 
-    suspend fun getSpacecrafts(refresh: Boolean = false): RepoResult<List<SpaceCraft>> {
+    suspend fun getSpacecrafts(refresh: Boolean = false): RepoResult<SpacecraftResponse> {
         return try {
             RepoResult.Success(
                 if (refresh) {
-                    spacecraftApi.fetchSpacecrafts(LIMIT).results
+                    spacecraftApi.fetchSpacecrafts(LIMIT)
                 } else {
-                    inMemoryCache.getDataFromCache<List<SpaceCraft>>(
+                    inMemoryCache.getDataFromCache<SpacecraftResponse>(
                         SpacecraftRepository::class.java.name
                     )
-                        ?: spacecraftApi.fetchSpacecrafts(LIMIT).results
+                        ?: spacecraftApi.fetchSpacecrafts(LIMIT)
                 }
             )
         } catch (e: Exception) {
-            RepoResult.Failure(e, emptyList())
+            RepoResult.Failure(e)
         }
     }
 }

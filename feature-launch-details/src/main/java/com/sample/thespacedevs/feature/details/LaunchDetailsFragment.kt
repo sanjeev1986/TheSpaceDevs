@@ -37,7 +37,6 @@ import javax.inject.Inject
 
 class LaunchDetailsFragment : Fragment() {
 
-    private val args by navArgs<LaunchDetailsFragmentArgs>()
 
     @Inject
     internal lateinit var viewModelFactory: LaunchDetailsViewModel.VMFactory
@@ -62,7 +61,6 @@ class LaunchDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchMissionDetails(args.missionId)
     }
 
     @Composable

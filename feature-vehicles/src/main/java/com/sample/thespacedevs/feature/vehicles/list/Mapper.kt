@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.feature.spacecrafts
+package com.sample.thespacedevs.feature.vehicles.list
 
 data class SpaceCraftModel(
     val imageUrl: String,

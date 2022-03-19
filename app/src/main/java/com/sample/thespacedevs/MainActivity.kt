@@ -20,12 +20,12 @@ import androidx.navigation.compose.rememberNavController
 import com.sample.feature.launches.UpcomingLaunches
 import com.sample.thespacedevs.directions.MainMenu
 import com.sample.thespacedevs.directions.Path
-import com.sample.thespacedevs.feature.spacecrafts.SpaceCraftsScreen
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
+import com.sample.ds.compose.platformBlack
+import com.sample.ds.compose.translucentTeal
 import com.sample.repositories.launch.LaunchRepository
 import com.sample.repositories.spacecraft.SpacecraftRepository
+import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -67,12 +67,12 @@ fun HomeScreen(
 @Composable
 fun HomeBottomNavigation(navController: NavController) {
     val items = listOf(
-        BottomNavMenu(R.string.launch_list_title, R.drawable.ic_launch_site, Path.Upcoming),
-        BottomNavMenu(R.string.spacecrafts, R.drawable.ic_launch_marker, Path.Spacecrafts)
+        BottomNavMenu(R.string.upcoming, R.drawable.sharp_rocket_launch_24, Path.Upcoming),
+        BottomNavMenu(R.string.vehicles, R.drawable.sharp_rocket_24, Path.Spacecrafts)
     )
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.colorAccent),
-        contentColor = Color.Black
+        backgroundColor = translucentTeal,
+        contentColor = platformBlack
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
