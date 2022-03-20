@@ -1,4 +1,4 @@
-package com.sample.repositories.localstorage
+package com.sample.thespacedevs.utils
 
 import android.util.LruCache
 import javax.inject.Singleton

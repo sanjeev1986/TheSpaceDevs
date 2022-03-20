@@ -1,9 +1,9 @@
 package com.sample.thespacedevs.feature.vehicles.list
 
 import androidx.lifecycle.*
-import com.sample.repositories.RepoResult
-import com.sample.repositories.spacecraft.SpacecraftRepository
+import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import com.sample.thespacedevs.services.spacecraft.SpaceCraft
+import com.sample.thespacedevs.utils.RepoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

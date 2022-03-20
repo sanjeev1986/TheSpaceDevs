@@ -2,7 +2,6 @@ package com.sample.thespacedevs.feature.details
 
 import androidx.lifecycle.*
 import com.google.android.gms.maps.model.LatLng
-import com.sample.repositories.launch.LaunchRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 

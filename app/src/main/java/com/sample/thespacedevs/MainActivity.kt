@@ -23,8 +23,8 @@ import com.sample.thespacedevs.directions.Path
 import androidx.compose.ui.Modifier
 import com.sample.ds.compose.platformBlack
 import com.sample.ds.compose.translucentTeal
-import com.sample.repositories.launch.LaunchRepository
-import com.sample.repositories.spacecraft.SpacecraftRepository
+import com.sample.feature.launches.LaunchRepository
+import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.android.AndroidInjection
 import javax.inject.Inject

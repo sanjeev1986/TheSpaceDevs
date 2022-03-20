@@ -13,7 +13,6 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.ds.SearchWidget
 import com.sample.ds.compose.dividerGrey
-import com.sample.repositories.launch.LaunchRepository
 
 
 @Composable

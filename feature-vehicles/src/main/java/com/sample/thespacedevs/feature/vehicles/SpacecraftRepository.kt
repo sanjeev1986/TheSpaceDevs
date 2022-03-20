@@ -1,11 +1,11 @@
-package com.sample.repositories.spacecraft
+package com.sample.thespacedevs.feature.vehicles
 
 import com.sample.platform.hardware.ConnectivityApiManager
-import com.sample.repositories.RepoResult
-import com.sample.repositories.localstorage.InMemoryCache
+
 import com.sample.thespacedevs.services.TheSpaceDevsService
-import com.sample.thespacedevs.services.spacecraft.SpaceCraft
 import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
+import com.sample.thespacedevs.utils.InMemoryCache
+import com.sample.thespacedevs.utils.RepoResult
 import javax.inject.Inject
 
 class SpacecraftRepository @Inject constructor(

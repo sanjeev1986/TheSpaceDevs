@@ -12,7 +12,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.ds.SearchWidget
 import com.sample.ds.compose.dividerGrey
-import com.sample.repositories.spacecraft.SpacecraftRepository
+import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 
 @Composable
 fun SpaceCraftsScreen(

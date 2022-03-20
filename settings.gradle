@@ -4,8 +4,9 @@ include ':feature-upcoming-launches'
 include ':feature-orchestrator'
 include ':ui-design-system'
 include ':data-web-services'
-include ':data-repositories'
 include ':android-platform'
 
+/*
 include ':feature-launch-details'
+*/
 include ':feature-vehicles'

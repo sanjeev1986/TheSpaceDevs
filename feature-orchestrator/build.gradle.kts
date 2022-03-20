@@ -45,7 +45,6 @@ android {
 
 dependencies {
     api(project(":android-platform"))
-    api(project(":data-repositories"))
     api(project(":ui-design-system"))
     api(project(":data-web-services"))
 

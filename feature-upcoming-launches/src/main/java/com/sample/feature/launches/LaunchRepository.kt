@@ -1,11 +1,11 @@
-package com.sample.repositories.launch
+package com.sample.feature.launches
 
-import com.sample.repositories.localstorage.InMemoryCache
 import com.sample.thespacedevs.services.TheSpaceDevsService
 import com.sample.thespacedevs.services.launch.Results
 import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
-import com.sample.repositories.RepoResult
+import com.sample.thespacedevs.utils.InMemoryCache
+import com.sample.thespacedevs.utils.RepoResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

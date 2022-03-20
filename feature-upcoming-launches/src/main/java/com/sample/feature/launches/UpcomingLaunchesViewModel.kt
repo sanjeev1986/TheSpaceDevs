@@ -1,7 +1,7 @@
 package com.sample.feature.launches
 
 import androidx.lifecycle.*
-import com.sample.repositories.launch.LaunchRepository
+import com.sample.thespacedevs.utils.RepoResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,7 +27,7 @@ internal class UpcomingLaunchesViewModel(
         state.update { it.copy(isLoading = true, isError = false) }
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {
-                is com.sample.repositories.RepoResult.Success -> {
+                is RepoResult.Success -> {
                     state.update {
                         it.copy(
                             isLoading = false,
@@ -36,7 +36,7 @@ internal class UpcomingLaunchesViewModel(
                         )
                     }
                 }
-                is com.sample.repositories.RepoResult.Failure -> {
+                is RepoResult.Failure -> {
                     state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
@@ -46,7 +46,7 @@ internal class UpcomingLaunchesViewModel(
     fun search(name: String) {
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, false)) {
-                is com.sample.repositories.RepoResult.Success -> {
+                is RepoResult.Success -> {
                     state.update { launchDisplayModel ->
                         launchDisplayModel.copy(
                             isLoading = false,
@@ -59,7 +59,7 @@ internal class UpcomingLaunchesViewModel(
                             })
                     }
                 }
-                is com.sample.repositories.RepoResult.Failure -> {
+                is RepoResult.Failure -> {
                     state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
