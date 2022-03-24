@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.feature.details
+package com.sample.feature.launches.details
 
 import com.google.android.gms.maps.MapView
 import android.os.Bundle

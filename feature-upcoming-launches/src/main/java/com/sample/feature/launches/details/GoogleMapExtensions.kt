@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.feature.details
+package com.sample.feature.launches.details
 
 import android.content.Context
 import android.graphics.Canvas

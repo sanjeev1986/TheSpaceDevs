@@ -74,7 +74,6 @@ android {
 dependencies {
     implementation(project(":feature-orchestrator"))
     implementation(project(":feature-upcoming-launches"))
-  //  implementation(project(":feature-launch-details"))
     implementation(Libs.play_services_maps)
     implementation(project(":feature-vehicles"))
     runtimeOnly(Libs.play_services_maps)

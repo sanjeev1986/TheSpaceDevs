@@ -5,7 +5,7 @@ import com.sample.common.R
 sealed class Path(val route: String) {
     object Upcoming : Path("Upcoming")
     object Spacecrafts : Path("Spacecrafts")
-    class LaunchDetails(val id: String) : Path("LaunchDetails")
+    object LaunchDetails: Path("LaunchDetails")
 }
 
 sealed class MainMenu(var title: String, var icon: Int, var path: Path) {

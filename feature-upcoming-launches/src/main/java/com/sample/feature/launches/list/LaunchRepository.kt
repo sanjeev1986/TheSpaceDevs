@@ -1,4 +1,4 @@
-package com.sample.feature.launches
+package com.sample.feature.launches.list
 
 import com.sample.thespacedevs.services.TheSpaceDevsService
 import com.sample.thespacedevs.services.launch.Results

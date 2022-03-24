@@ -17,13 +17,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.sample.feature.launches.UpcomingLaunches
+import com.sample.feature.launches.list.UpcomingLaunches
 import com.sample.thespacedevs.directions.MainMenu
 import com.sample.thespacedevs.directions.Path
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.sample.ds.compose.platformBlack
 import com.sample.ds.compose.translucentTeal
-import com.sample.feature.launches.LaunchRepository
+import com.sample.feature.launches.list.LaunchRepository
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.android.AndroidInjection
@@ -120,14 +121,12 @@ fun NavigationGraph(
         modifier = modifier
     ) {
         composable(MainMenu.Upcoming.path.route) {
-            UpcomingLaunches(launchRepository) {
-            }
+            UpcomingLaunches(launchRepository)
         }
         composable(MainMenu.Spacecrafts.path.route) {
-            SpaceCraftsScreen(spacecraftRepository) {
-
-            }
+            SpaceCraftsScreen(spacecraftRepository)
         }
+        composable(Path.LaunchDetails.route) {}
     }
 }
 

@@ -1,4 +1,4 @@
-package com.sample.feature.launches
+package com.sample.feature.launches.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -11,13 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.sample.ds.compose.DSTheme
+import com.sample.feature.launches.R
 
 @Composable
-internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: () -> Unit) {
+internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: (String) -> Unit) {
     Column(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()
-        .clickable { onClick() }) {
+        .clickable { onClick(item.id) }) {
         Text(
             text = item.missionName,
             style = DSTheme.typography.ListItemTitle,

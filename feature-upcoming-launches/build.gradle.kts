@@ -48,6 +48,9 @@ android {
 
 dependencies {
     implementation(project(":feature-orchestrator"))
+    implementation(Libs.Compose.constraintLayout)
+    implementation(Libs.Maps.maps_ktx)
+    implementation(Libs.play_services_maps)
     implementation(Libs.Compose.swipeToRefreshLayout)
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

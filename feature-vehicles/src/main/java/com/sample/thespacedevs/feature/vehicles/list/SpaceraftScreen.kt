@@ -15,12 +15,9 @@ import com.sample.ds.compose.dividerGrey
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 
 @Composable
-fun SpaceCraftsScreen(
-    repository: SpacecraftRepository,
-    openSpacecraftDetails: (String) -> Unit,
-) {
+fun SpaceCraftsScreen(repository: SpacecraftRepository) {
     SpaceCraftsScreenInternal(
-        openSpacecraftDetails, ViewModelProvider(
+        ViewModelProvider(
             LocalViewModelStoreOwner.current!!,
             SpacecraftListViewModelFactory(repository)
         ).get(SpacecraftListViewModel::class.java)
@@ -28,10 +25,7 @@ fun SpaceCraftsScreen(
 }
 
 @Composable
-internal fun SpaceCraftsScreenInternal(
-    openSpacecraftDetails: (String) -> Unit,
-    viewModel: SpacecraftListViewModel
-) {
+internal fun SpaceCraftsScreenInternal(viewModel: SpacecraftListViewModel) {
     val isLoading by viewModel.loading.observeAsState()
     SwipeRefresh(
         state = rememberSwipeRefreshState(false),

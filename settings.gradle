@@ -5,8 +5,4 @@ include ':feature-orchestrator'
 include ':ui-design-system'
 include ':data-web-services'
 include ':android-platform'
-
-/*
-include ':feature-launch-details'
-*/
 include ':feature-vehicles'

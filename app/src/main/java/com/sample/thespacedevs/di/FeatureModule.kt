@@ -1,6 +1,7 @@
 package com.sample.thespacedevs.di
 
 import android.content.Context
+import com.sample.feature.launches.details.LaunchDetailsActivity
 import com.sample.thespacedevs.MainActivity
 import com.sample.thespacedevs.TheSpaceDevApp
 import dagger.Binds
@@ -19,6 +20,7 @@ abstract class FeatureModule {
     @ContributesAndroidInjector
     abstract fun injectMainActivity(): MainActivity
 
-   /* @ContributesAndroidInjector
-    abstract fun injectLaunchDetailsFragment(): LaunchDetailsFragment*/
+    @ContributesAndroidInjector
+    abstract fun injectLaunchDetailsActivity(): LaunchDetailsActivity
+
 }

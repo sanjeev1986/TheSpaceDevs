@@ -1,4 +1,4 @@
-package com.sample.feature.launches
+package com.sample.feature.launches.list
 
 import com.google.accompanist.swiperefresh.SwipeRefreshState
 import com.sample.thespacedevs.services.launch.Results

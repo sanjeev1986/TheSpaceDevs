@@ -1,4 +1,4 @@
-package com.sample.feature.launches
+package com.sample.feature.launches.list
 
 import androidx.lifecycle.*
 import com.sample.thespacedevs.utils.RepoResult
