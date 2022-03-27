@@ -43,7 +43,7 @@ class UpcomingLaunchesFragmentTest {
             Results(
                 id = "1",
                 name = "New Shepard | NS-15",
-                window_start = "2021-04-14T12:00:00Z",
+                windowStart = "2021-04-14T12:00:00Z",
                 mission = Mission(
                     name = "NS-15",
                     description = "Fifteenth flight of Blue Origin's New Shepard rocket"
@@ -57,7 +57,7 @@ class UpcomingLaunchesFragmentTest {
             Results(
                 id = "2",
                 name = "Falcon 9 Block 5 | SpX USCV-2 (NASA Crew Flight 2)",
-                window_start = "2021-04-22T10:11:00Z",
+                windowStart = "2021-04-22T10:11:00Z",
                 mission = Mission(
                     name = "SpX USCV-2 (NASA Crew Flight 2)",
                     description = "SpaceX Crew-2 will be the second crewed operational flight of a Crew Dragon spacecraft, and the third overall crewed orbital flight. It will use the same Falcon 9 first stage as the Crew-1 mission and the same Crew Dragon capsule as the Demo-2 mission (Endeavour)."
@@ -71,7 +71,7 @@ class UpcomingLaunchesFragmentTest {
             Results(
                 id = "3",
                 name = "Soyuz 2.1b/Fregat-M | OneWeb 6",
-                window_start = "2021-04-25T00:00:00Z",
+                windowStart = "2021-04-25T00:00:00Z",
                 mission = Mission(
                     name = "OneWeb 6",
                     description = "A batch of 36 satellites for the OneWeb satellite constellation, which is intended to provide global Interned broadband service for individual consumers. The constellation is planned to have around 648 microsatellites (of which 60 are spares), around 150 kg each, operating in Ku-band from low Earth orbit."

@@ -1,7 +1,6 @@
 package com.sample.thespacedevs.services.spacecraft
 
-data class Spacecraft_config (
-
+data class SpacecraftConfiguration (
 	val id : Int,
 	val url : String,
 	val name : String,

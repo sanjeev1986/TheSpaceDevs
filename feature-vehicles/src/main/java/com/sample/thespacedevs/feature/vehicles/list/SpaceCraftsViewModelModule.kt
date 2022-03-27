@@ -2,7 +2,7 @@ package com.sample.thespacedevs.feature.vehicles.list
 
 import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
-import com.sample.thespacedevs.services.SpacecraftApi
+import com.sample.thespacedevs.services.spacecraft.SpacecraftApi
 import com.sample.platform.storage.InMemoryCache
 import dagger.Module
 import dagger.Provides

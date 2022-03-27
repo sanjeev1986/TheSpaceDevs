@@ -2,7 +2,6 @@ package com.sample.thespacedevs.feature.vehicles.list
 
 import androidx.lifecycle.*
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
-import com.sample.base.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +36,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                             isError = false,
                             spaceCrafts = response.result.results.map {
                                 SpaceCraftViewData(
-                                    imageUrl = it.spacecraft_config.image_url,
+                                    imageUrl = it.spacecraftConfiguration.image_url,
                                     name = it.name,
                                     status = it.status.name,
                                     description = it.description

@@ -3,9 +3,8 @@ package com.sample.thespacedevs.di
 import android.content.Context
 import com.google.gson.Gson
 import com.sample.thespacedevs.services.HttpStack
-import com.sample.services.BuildConfig
-import com.sample.thespacedevs.services.LaunchApi
-import com.sample.thespacedevs.services.SpacecraftApi
+import com.sample.thespacedevs.services.launch.LaunchApi
+import com.sample.thespacedevs.services.spacecraft.SpacecraftApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +25,7 @@ object APIModule {
     @HttpStackMarker
     @Provides
     fun provideHttpStack(@ApplicationContext context: Context): HttpStack {
-        return HttpStack(BuildConfig.BASE_URL, Gson(), context)
+        return HttpStack("https://ll.thespacedevs.com/2.0.0/", Gson(), context.cacheDir)
     }
 
     @Singleton

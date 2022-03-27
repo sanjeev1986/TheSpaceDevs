@@ -1,12 +1,15 @@
 package com.sample.thespacedevs.services.spacecraft
 
-data class SpaceCraft (
+import com.google.gson.annotations.SerializedName
 
-	val id : Int,
-	val url : String,
-	val name : String,
-	val serial_number : String,
-	val status : Status,
-	val description : String,
-	val spacecraft_config : Spacecraft_config,
+data class SpaceCraft(
+    val id: Int,
+    val url: String,
+    val name: String,
+    @SerializedName("serial_number")
+    val serialNumber: String,
+    val status: Status,
+    val description: String,
+    @SerializedName("Spacecraft_config")
+    val spacecraftConfiguration: SpacecraftConfiguration,
 )

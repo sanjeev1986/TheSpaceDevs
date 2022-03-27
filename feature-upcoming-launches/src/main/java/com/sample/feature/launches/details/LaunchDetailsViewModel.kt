@@ -27,7 +27,7 @@ internal class LaunchDetailsViewModel(
                 missionName = mission?.name ?: "",
                 launchDescription = mission?.description ?: "",
                 launchAgencyName = name,
-                launchDate = window_start,
+                launchDate = windowStart,
                 launchCoordinates = LatLng(pad.latitude, pad.longitude)
             )
         }
