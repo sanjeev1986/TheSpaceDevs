@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation(Libs.Hilt.hilt_android)
     implementation(Libs.Retrofit.retrofit)
     implementation(Libs.Retrofit.logging_interceptor)
     implementation(Libs.Retrofit.converter_gson)

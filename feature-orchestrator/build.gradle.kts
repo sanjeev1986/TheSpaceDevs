@@ -44,11 +44,9 @@ android {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.38.1")
     api(project(":android-platform"))
     api(project(":ui-design-system"))
     api(project(":data-web-services"))
-
     api(Libs.lifecycle_viewmodel_ktx)
     api(Libs.lifecycle_runtime_ktx)
     api(Libs.Compose.compose_compiler)
@@ -90,5 +88,6 @@ dependencies {
     androidTestApi(UnitTestLibraries.core_runtime)
     api(UnitTestLibraries.espresso_idling_resource)
     api(Libs.Retrofit.gson)
+    implementation(Libs.Hilt.hilt_android)
 }
 

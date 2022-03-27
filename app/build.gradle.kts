@@ -68,15 +68,15 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.5"
+        kotlinCompilerExtensionVersion = Versions.compose_version
     }
 }
 
 dependencies {
     implementation(project(":feature-orchestrator"))
     implementation(project(":feature-upcoming-launches"))
-    implementation(Libs.play_services_maps)
     implementation(project(":feature-vehicles"))
+    implementation(Libs.play_services_maps)
     runtimeOnly(Libs.play_services_maps)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)

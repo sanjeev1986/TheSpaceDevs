@@ -19,7 +19,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.0.5"
+        kotlinCompilerExtensionVersion = Versions.compose_version
     }
 
     buildTypes {
@@ -55,7 +55,7 @@ kapt {
 dependencies {
     implementation(project(":feature-orchestrator"))
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation(Libs.Hilt.hilt_android)
     implementation(Libs.Compose.swipeToRefreshLayout)
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)

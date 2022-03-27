@@ -31,5 +31,5 @@ android {
 dependencies {
     implementation(Libs.Kotlin.kotlin_stdlib)
     testImplementation(Libs.JUNIT)
-    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation(Libs.Hilt.hilt_android)
 }

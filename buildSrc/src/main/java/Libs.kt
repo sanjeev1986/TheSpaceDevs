@@ -26,15 +26,6 @@ object Libs {
         const val hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
     }
 
-    object Dagger {
-        const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-        const val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-        const val dagger_android_support =
-            "com.google.dagger:dagger-android-support:${Versions.dagger}"
-        const val dagger_android_processor =
-            "com.google.dagger:dagger-android-processor:${Versions.dagger}"
-    }
-
     object Kotlin {
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
         const val kotlinx_coroutines_android =
@@ -101,5 +92,5 @@ object UnitTestLibraries {
     const val core_runtime = "androidx.arch.core:core-runtime:${Versions.core_testing}"
     const val espresso_idling_resource =
         "androidx.test.espresso:espresso-idling-resource:${Versions.espresso}"
-    const val ui_test_compose = "androidx.compose.ui:ui-test-junit4:1.0.5"
+    const val ui_test_compose = "androidx.compose.ui:ui-test-junit4:${Versions.compose_version}"
 }
