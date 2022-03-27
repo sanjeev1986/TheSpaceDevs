@@ -81,7 +81,7 @@ dependencies {
     androidTestApi(UnitTestLibraries.espresso_contrib)
     androidTestApi(UnitTestLibraries.core)
     androidTestApi(UnitTestLibraries.core_ktx)
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestApi(UnitTestLibraries.junit_ktx)
     androidTestApi(UnitTestLibraries.mockk_android)
     androidTestApi(UnitTestLibraries.core_testing)

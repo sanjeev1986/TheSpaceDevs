@@ -29,9 +29,8 @@ class LaunchListMapper : UiStateMapper<LaunchDisplayModel, List<LaunchListItem>>
 
 }
 
-class LoadingMapper : UiStateMapper<LaunchDisplayModel, SwipeRefreshState> {
-    override fun map(model: LaunchDisplayModel): SwipeRefreshState =
-        SwipeRefreshState(model.isLoading)
+class LoadingMapper : UiStateMapper<LaunchDisplayModel, Boolean> {
+    override fun map(model: LaunchDisplayModel) = model.isLoading
 }
 
 class ErrorMapper : UiStateMapper<LaunchDisplayModel, Boolean> {

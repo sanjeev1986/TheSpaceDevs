@@ -23,11 +23,8 @@ import com.sample.thespacedevs.directions.Path
 import androidx.compose.ui.Modifier
 import com.sample.ds.compose.platformBlack
 import com.sample.ds.compose.translucentTeal
-import com.sample.feature.launches.list.LaunchRepository
-import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

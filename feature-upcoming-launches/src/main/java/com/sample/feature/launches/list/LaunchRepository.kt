@@ -5,7 +5,7 @@ import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.services.launch.LaunchApi
 import com.sample.platform.storage.InMemoryCache
-import com.sample.base.RepoResult
+import com.sample.base.IOResult
 import com.sample.thespacedevs.utils.OpenForTesting
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,9 +23,9 @@ class LaunchRepository @Inject constructor(
     suspend fun getUpcomingLaunches(
         limit: Int,
         refresh: Boolean = true
-    ): RepoResult<List<Results>> {
+    ): IOResult<List<Results>> {
         return try {
-            RepoResult.Success(
+            IOResult.Success(
                 if (refresh) {
                     fetchUpcomingLaunches(limit)
                 } else {
@@ -36,7 +36,7 @@ class LaunchRepository @Inject constructor(
                 }
             )
         } catch (e: Exception) {
-            com.sample.base.RepoResult.Failure(e, null)
+            IOResult.Failure(e, null)
         }
     }
 
@@ -45,8 +45,8 @@ class LaunchRepository @Inject constructor(
             throw NotConnectedToInternet()
         }
         return withContext(Dispatchers.IO) {
-            inMemoryCache.removeFromCache(LaunchRepository::class.java.name)
-            launchApi.fetchUpcomingLaunches(limit).let { it.results }.also {
+            inMemoryCache.removeFromCache<List<Results>>(LaunchRepository::class.java.name)
+            launchApi.fetchUpcomingLaunches(limit).results.also {
                 inMemoryCache.saveToInMemoryCache(LaunchRepository::class.java.name, it)
             }
         }

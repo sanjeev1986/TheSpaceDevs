@@ -71,6 +71,6 @@ dependencies {
     implementation(Libs.Compose.compose_runtime)
     kapt(Libs.Hilt.hilt_compiler)
     testImplementation(UnitTestLibraries.junit)
-    androidTestImplementation("androidx.test.ext:junit:1.1.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation(UnitTestLibraries.espresso_core)
 }

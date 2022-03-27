@@ -1,6 +1,5 @@
 package com.sample.thespacedevs
 
-import com.sample.thespacedevs.di.DaggerComponent
 import com.sample.thespacedevs.di.DaggerTestApplicationComponent
 
 class TheSpaceDevTestApp : TheSpaceDevApp() {

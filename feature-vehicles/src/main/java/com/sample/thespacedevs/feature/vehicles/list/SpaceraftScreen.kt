@@ -7,30 +7,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.sample.ds.SearchWidget
 import com.sample.ds.compose.dividerGrey
-import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 
 @Composable
 fun SpaceCraftsScreen() {
-    /*SpaceCraftsScreenInternal(
-        ViewModelProvider(
-            LocalViewModelStoreOwner.current!!,
-            SpacecraftListViewModelFactory(repository)
-        ).get(SpacecraftListViewModel::class.java)
-    )*/
-    SpaceCraftsScreenInternal(viewModel = hiltViewModel<SpacecraftListViewModel>())
+    SpaceCraftsScreenInternal(viewModel = hiltViewModel())
 }
 
 @Composable
 internal fun SpaceCraftsScreenInternal(viewModel: SpacecraftListViewModel) {
     val isLoading by viewModel.loading.observeAsState()
     SwipeRefresh(
-        state = rememberSwipeRefreshState(false),
+        state = rememberSwipeRefreshState(isLoading ?: false),
         onRefresh = { viewModel.fetchSpacecrafts(true) }) {
         val state = viewModel.spaceCrafts.observeAsState()
         state.value?.apply {

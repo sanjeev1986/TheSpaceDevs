@@ -26,7 +26,7 @@ class ErrorWidget(context: Context, attrs: AttributeSet?) : ConstraintLayout(con
                 .inflate(R.layout.layout_error_widget, this@ErrorWidget, true)
         messageText = view.findViewById(R.id.error_message)
         actionButton = view.findViewById(R.id.action_button)
-        context!!.theme.obtainStyledAttributes(
+        context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.ErrorWidget,
             0, 0

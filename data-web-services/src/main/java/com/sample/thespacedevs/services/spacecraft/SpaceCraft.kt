@@ -10,6 +10,6 @@ data class SpaceCraft(
     val serialNumber: String,
     val status: Status,
     val description: String,
-    @SerializedName("Spacecraft_config")
+    @SerializedName("spacecraft_config")
     val spacecraftConfiguration: SpacecraftConfiguration,
 )

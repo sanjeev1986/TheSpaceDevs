@@ -93,7 +93,7 @@ fun SpacecraftItemWidget(
 
 @Preview
 @Composable
-fun sampleSpacecraftItemWidget() {
+fun SampleSpacecraftItemWidget() {
     SpacecraftItemWidget(
         imageUrl = "",
         name = "Mercury 7",

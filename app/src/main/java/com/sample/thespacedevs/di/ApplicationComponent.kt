@@ -13,4 +13,4 @@ import dagger.hilt.components.SingletonComponent
         DispatchersModule::class
     ]
 )
-interface ApplicationModulesAggregator {}
+interface ApplicationModulesAggregator

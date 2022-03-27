@@ -15,7 +15,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
 
     private val state = MutableStateFlow(SpaceCraftsViewState())
     val spaceCrafts = state.asLiveData().map { it.spaceCrafts }
-    val loading = state.asLiveData().map { it.isError }
+    val loading = state.asLiveData().map { it.isLoading }
     val error = state.asLiveData().map { it.isError }
 
     init {
@@ -29,7 +29,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                 repository.getSpacecrafts(isRefresh)
             }
             when (response) {
-                is com.sample.base.RepoResult.Success -> {
+                is com.sample.base.IOResult.Success -> {
                     state.value =
                         state.value.copy(
                             isLoading = false,
@@ -43,7 +43,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                                 )
                             })
                 }
-                is com.sample.base.RepoResult.Failure -> {
+                is com.sample.base.IOResult.Failure -> {
                     state.value = state.value.copy(isLoading = false, isError = true)
                 }
             }

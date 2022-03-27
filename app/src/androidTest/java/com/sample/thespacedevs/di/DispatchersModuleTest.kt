@@ -10,5 +10,5 @@ import javax.inject.Singleton
 class DispatchersModuleTest {
     @Singleton
     @Provides
-    fun provideDispatchers() = com.sample.base.AppDispatchers(Dispatchers.Main, Dispatchers.Main)
+    fun provideDispatchers() = AppDispatchers(Dispatchers.Main, Dispatchers.Main)
 }
