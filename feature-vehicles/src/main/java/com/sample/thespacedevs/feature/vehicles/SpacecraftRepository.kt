@@ -4,8 +4,8 @@ import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.services.SpacecraftApi
 
 import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
-import com.sample.thespacedevs.utils.InMemoryCache
-import com.sample.thespacedevs.utils.RepoResult
+import com.sample.platform.storage.InMemoryCache
+import com.sample.base.RepoResult
 import javax.inject.Inject
 
 class SpacecraftRepository @Inject constructor(
@@ -17,7 +17,7 @@ class SpacecraftRepository @Inject constructor(
         private val LIMIT = 20
     }
 
-    suspend fun getSpacecrafts(refresh: Boolean = false): RepoResult<SpacecraftResponse> {
+    suspend fun getSpacecrafts(refresh: Boolean = false): com.sample.base.RepoResult<SpacecraftResponse> {
         return try {
             RepoResult.Success(
                 if (refresh) {

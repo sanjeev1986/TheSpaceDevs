@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.utils
+package com.sample.base
 
 //@OpenForTesting
 sealed class RepoResult<out R> {

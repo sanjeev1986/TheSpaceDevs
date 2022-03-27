@@ -1,7 +1,7 @@
 package com.sample.thespacedevs.di
 
 import android.content.Context
-import com.sample.thespacedevs.utils.InMemoryCache
+import com.sample.platform.storage.InMemoryCache
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

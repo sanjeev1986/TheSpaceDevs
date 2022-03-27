@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.utils
+package com.sample.platform.utils
 
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData

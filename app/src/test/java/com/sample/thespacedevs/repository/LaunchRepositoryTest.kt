@@ -6,7 +6,7 @@ import com.sample.thespacedevs.services.launch.Mission
 import com.sample.thespacedevs.services.launch.Pad
 import com.sample.thespacedevs.services.launch.Results
 import com.sample.thespacedevs.services.launch.UpcomingLaunchesResponse
-import com.sample.thespacedevs.utils.AppDispatchers
+import com.sample.base.AppDispatchers
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -16,7 +16,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class LaunchRepositoryTest {
-    private var dispatchers: AppDispatchers = AppDispatchers(Dispatchers.IO, Dispatchers.IO)
+    private var dispatchers: com.sample.base.AppDispatchers =
+        com.sample.base.AppDispatchers(Dispatchers.IO, Dispatchers.IO)
     private var connectivityApiManager: com.sample.platform.hardware.ConnectivityApiManager = mockk(relaxed = true)
     private var inMemoryCache: com.sample.repositories.localstorage.InMemoryCache = mockk(relaxed = true)
     private var launchApi: TheSpaceDevsService.LaunchApi = mockk(relaxed = true)

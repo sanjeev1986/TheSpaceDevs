@@ -1,6 +1,6 @@
 package com.sample.thespacedevs.di
 
-import com.sample.thespacedevs.utils.AppDispatchers
+import com.sample.base.AppDispatchers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

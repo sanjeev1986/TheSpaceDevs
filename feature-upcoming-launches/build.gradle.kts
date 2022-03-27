@@ -55,7 +55,8 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":feature-orchestrator"))
+    implementation(project(":navigation"))
+    implementation(project(":base"))
     implementation(Libs.Hilt.hilt_android)
     kapt(Libs.Hilt.hilt_compiler)
     implementation(Libs.Navigation.compose)

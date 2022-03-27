@@ -4,14 +4,15 @@ import com.sample.thespacedevs.services.launch.Results
 import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.services.LaunchApi
-import com.sample.thespacedevs.utils.InMemoryCache
-import com.sample.thespacedevs.utils.RepoResult
+import com.sample.platform.storage.InMemoryCache
+import com.sample.base.RepoResult
+import com.sample.thespacedevs.utils.OpenForTesting
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
-//@OpenForTesting
+@OpenForTesting
 @Singleton
 class LaunchRepository @Inject constructor(
     private val connectivityApiManager: ConnectivityApiManager,
@@ -35,7 +36,7 @@ class LaunchRepository @Inject constructor(
                 }
             )
         } catch (e: Exception) {
-            RepoResult.Failure(e, null)
+            com.sample.base.RepoResult.Failure(e, null)
         }
     }
 

@@ -2,7 +2,7 @@ package com.sample.thespacedevs.feature.vehicles.list
 
 import androidx.lifecycle.*
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
-import com.sample.thespacedevs.utils.RepoResult
+import com.sample.base.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +30,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                 repository.getSpacecrafts(isRefresh)
             }
             when (response) {
-                is RepoResult.Success -> {
+                is com.sample.base.RepoResult.Success -> {
                     state.value =
                         state.value.copy(
                             isLoading = false,
@@ -44,7 +44,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                                 )
                             })
                 }
-                is RepoResult.Failure -> {
+                is com.sample.base.RepoResult.Failure -> {
                     state.value = state.value.copy(isLoading = false, isError = true)
                 }
             }

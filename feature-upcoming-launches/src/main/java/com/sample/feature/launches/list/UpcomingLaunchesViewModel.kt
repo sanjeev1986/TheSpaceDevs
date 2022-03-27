@@ -1,7 +1,7 @@
 package com.sample.feature.launches.list
 
 import androidx.lifecycle.*
-import com.sample.thespacedevs.utils.RepoResult
+import com.sample.base.RepoResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -29,7 +29,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
         state.update { it.copy(isLoading = true, isError = false) }
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {
-                is RepoResult.Success -> {
+                is com.sample.base.RepoResult.Success -> {
                     state.update {
                         it.copy(
                             isLoading = false,
@@ -38,7 +38,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
                         )
                     }
                 }
-                is RepoResult.Failure -> {
+                is com.sample.base.RepoResult.Failure -> {
                     state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
@@ -48,7 +48,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
     fun search(name: String) {
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, false)) {
-                is RepoResult.Success -> {
+                is com.sample.base.RepoResult.Success -> {
                     state.update { launchDisplayModel ->
                         launchDisplayModel.copy(
                             isLoading = false,
@@ -61,7 +61,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
                             })
                     }
                 }
-                is RepoResult.Failure -> {
+                is com.sample.base.RepoResult.Failure -> {
                     state.update { it.copy(isLoading = false, isError = true) }
                 }
             }

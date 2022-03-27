@@ -1,6 +1,6 @@
 package com.sample.thespacedevs.di
 
-import com.sample.thespacedevs.utils.AppDispatchers
+import com.sample.base.AppDispatchers
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -10,5 +10,5 @@ import javax.inject.Singleton
 class DispatchersModuleTest {
     @Singleton
     @Provides
-    fun provideDispatchers() = AppDispatchers(Dispatchers.Main, Dispatchers.Main)
+    fun provideDispatchers() = com.sample.base.AppDispatchers(Dispatchers.Main, Dispatchers.Main)
 }

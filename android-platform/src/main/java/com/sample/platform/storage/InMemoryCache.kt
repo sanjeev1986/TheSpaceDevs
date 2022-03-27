@@ -1,9 +1,8 @@
-package com.sample.thespacedevs.utils
+package com.sample.platform.storage
 
 import android.util.LruCache
 import javax.inject.Singleton
 
-//@OpenForTesting
 @Singleton
 class InMemoryCache(size: Int = 1 * 1024 * 1024/* Default 1 MB cache*/) {
     private val memoryCache = LruCache<String, Any>(size)

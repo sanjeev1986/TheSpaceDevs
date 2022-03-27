@@ -73,7 +73,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature-orchestrator"))
+    implementation(project(":navigation"))
+    implementation(project(":base"))
     implementation(project(":feature-upcoming-launches"))
     implementation(project(":feature-vehicles"))
     implementation(Libs.play_services_maps)

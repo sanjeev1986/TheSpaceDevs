@@ -2,7 +2,7 @@ package com.sample.feature.launches.list
 
 import com.sample.platform.hardware.ConnectivityApiManager
 import com.sample.thespacedevs.services.LaunchApi
-import com.sample.thespacedevs.utils.InMemoryCache
+import com.sample.platform.storage.InMemoryCache
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

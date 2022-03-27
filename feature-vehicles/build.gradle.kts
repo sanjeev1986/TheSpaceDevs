@@ -53,7 +53,8 @@ kapt {
 }
 
 dependencies {
-    implementation(project(":feature-orchestrator"))
+    implementation(project(":navigation"))
+    implementation(project(":base"))
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation(Libs.Hilt.hilt_android)
     implementation(Libs.Compose.swipeToRefreshLayout)
