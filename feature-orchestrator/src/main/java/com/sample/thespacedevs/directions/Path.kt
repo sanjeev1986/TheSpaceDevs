@@ -1,6 +1,7 @@
 package com.sample.thespacedevs.directions
 
-import com.sample.common.R
+import com.sample.thespacedevs.R
+
 
 sealed class Path(val route: String) {
     object Upcoming : Path("Upcoming")

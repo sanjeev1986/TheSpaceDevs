@@ -21,45 +21,33 @@ import com.sample.feature.launches.list.UpcomingLaunches
 import com.sample.thespacedevs.directions.MainMenu
 import com.sample.thespacedevs.directions.Path
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.sample.ds.compose.platformBlack
 import com.sample.ds.compose.translucentTeal
 import com.sample.feature.launches.list.LaunchRepository
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
-import dagger.android.AndroidInjection
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var launchRepository: LaunchRepository
-
-    @Inject
-    lateinit var spacecraftRepository: SpacecraftRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
         setContent {
-            HomeScreen(launchRepository, spacecraftRepository)
+            HomeScreen()
         }
     }
 }
 
 @Composable
-fun HomeScreen(
-    launchRepository: LaunchRepository,
-    spacecraftRepository: SpacecraftRepository
-) {
+fun HomeScreen() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { HomeBottomNavigation(navController) }
     ) {
         NavigationGraph(
             navController = navController,
-            launchRepository,
-            spacecraftRepository,
             modifier = Modifier.padding(it)
         )
     }
@@ -111,8 +99,6 @@ fun BottomNavLabel(label: String) {
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    launchRepository: LaunchRepository,
-    spacecraftRepository: SpacecraftRepository,
     modifier: Modifier
 ) {
     NavHost(
@@ -121,10 +107,10 @@ fun NavigationGraph(
         modifier = modifier
     ) {
         composable(MainMenu.Upcoming.path.route) {
-            UpcomingLaunches(launchRepository)
+            UpcomingLaunches()
         }
         composable(MainMenu.Spacecrafts.path.route) {
-            SpaceCraftsScreen(spacecraftRepository)
+            SpaceCraftsScreen()
         }
         composable(Path.LaunchDetails.route) {}
     }

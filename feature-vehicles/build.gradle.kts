@@ -1,6 +1,9 @@
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -44,8 +47,15 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
 dependencies {
     implementation(project(":feature-orchestrator"))
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.38.1")
     implementation(Libs.Compose.swipeToRefreshLayout)
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)
@@ -58,7 +68,7 @@ dependencies {
     implementation(Libs.Compose.constraintLayout)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)
-
+    kapt(Libs.Hilt.hilt_compiler)
     testImplementation(UnitTestLibraries.junit)
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)

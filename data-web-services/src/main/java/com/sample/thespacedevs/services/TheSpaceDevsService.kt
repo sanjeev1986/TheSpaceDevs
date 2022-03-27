@@ -5,7 +5,7 @@ import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface TheSpaceDevsService {
+//interface TheSpaceDevsService {
 
     interface LaunchApi {
         @GET("launch/upcoming")
@@ -16,4 +16,4 @@ interface TheSpaceDevsService {
         @GET("spacecraft/")
         suspend fun fetchSpacecrafts(@Query("limit") limit: Int): SpacecraftResponse
     }
-}
+//}

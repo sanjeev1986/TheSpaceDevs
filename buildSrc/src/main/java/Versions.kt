@@ -32,4 +32,5 @@ object Versions {
     const val lifecycle_viewmodel_ktx = "2.3.1"
     const val lifecycle_runtime_ktx = "2.3.1"
     const val compose_version = "1.0.5"
+    const val hilt = "2.38.1"
 }

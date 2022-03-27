@@ -11,6 +11,7 @@ buildscript {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${Versions.kotlin}")
         classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.0")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
     }
 }
 

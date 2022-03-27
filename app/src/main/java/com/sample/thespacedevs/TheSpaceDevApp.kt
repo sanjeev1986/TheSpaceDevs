@@ -1,17 +1,10 @@
 package com.sample.thespacedevs
 
-import androidx.fragment.app.Fragment
-import com.sample.thespacedevs.di.DaggerApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-open class TheSpaceDevApp : DaggerApplication() {
-    companion object {
-
-        fun getInstance(fragment: Fragment): TheSpaceDevApp =
-            fragment.requireActivity().applicationContext as TheSpaceDevApp
-    }
-
+@HiltAndroidApp
+open class TheSpaceDevApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -30,9 +23,4 @@ open class TheSpaceDevApp : DaggerApplication() {
             )
         }*/
     }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApplicationComponent.factory().create(this)
-    }
-
 }

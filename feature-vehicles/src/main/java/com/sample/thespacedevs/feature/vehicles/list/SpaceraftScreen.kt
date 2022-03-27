@@ -6,6 +6,7 @@ import androidx.compose.material.TabRowDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -15,13 +16,14 @@ import com.sample.ds.compose.dividerGrey
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 
 @Composable
-fun SpaceCraftsScreen(repository: SpacecraftRepository) {
-    SpaceCraftsScreenInternal(
+fun SpaceCraftsScreen() {
+    /*SpaceCraftsScreenInternal(
         ViewModelProvider(
             LocalViewModelStoreOwner.current!!,
             SpacecraftListViewModelFactory(repository)
         ).get(SpacecraftListViewModel::class.java)
-    )
+    )*/
+    SpaceCraftsScreenInternal(viewModel = hiltViewModel<SpacecraftListViewModel>())
 }
 
 @Composable

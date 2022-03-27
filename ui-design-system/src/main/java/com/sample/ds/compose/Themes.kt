@@ -1,7 +1,6 @@
 package com.sample.ds.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 
 object DSTheme {

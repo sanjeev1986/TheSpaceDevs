@@ -44,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.dagger:hilt-android:2.38.1")
     api(project(":android-platform"))
     api(project(":ui-design-system"))
     api(project(":data-web-services"))
@@ -72,12 +73,6 @@ dependencies {
     api(Libs.Navigation.fragment_ktx)
     api(Libs.Navigation.compose)
 
-    api(Libs.Dagger.dagger)
-    kapt(Libs.Dagger.dagger_compiler)
-    kapt(Libs.Dagger.dagger_android_processor)
-    kaptAndroidTest(Libs.Dagger.dagger_compiler)
-    api(Libs.Dagger.dagger_android_support)
-
 
     api(Libs.Kotlin.kotlin_coroutines)
     api(Libs.Kotlin.kotlinx_coroutines_android)
@@ -95,6 +90,5 @@ dependencies {
     androidTestApi(UnitTestLibraries.core_runtime)
     api(UnitTestLibraries.espresso_idling_resource)
     api(Libs.Retrofit.gson)
-    api("com.github.bumptech.glide:glide:4.12.0")
-    kapt("com.github.bumptech.glide:compiler:4.12.0")
 }
+

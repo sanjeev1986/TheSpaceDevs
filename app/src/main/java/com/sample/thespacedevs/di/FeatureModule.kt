@@ -1,5 +1,6 @@
 package com.sample.thespacedevs.di
 
+/*
 import android.content.Context
 import com.sample.feature.launches.details.LaunchDetailsActivity
 import com.sample.thespacedevs.MainActivity
@@ -23,4 +24,4 @@ abstract class FeatureModule {
     @ContributesAndroidInjector
     abstract fun injectLaunchDetailsActivity(): LaunchDetailsActivity
 
-}
+}*/

@@ -1,8 +1,8 @@
 package com.sample.thespacedevs.feature.vehicles
 
 import com.sample.platform.hardware.ConnectivityApiManager
+import com.sample.thespacedevs.services.SpacecraftApi
 
-import com.sample.thespacedevs.services.TheSpaceDevsService
 import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
 import com.sample.thespacedevs.utils.InMemoryCache
 import com.sample.thespacedevs.utils.RepoResult
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class SpacecraftRepository @Inject constructor(
     private val connectivityApiManager: ConnectivityApiManager,
     private val inMemoryCache: InMemoryCache,
-    private val spacecraftApi: TheSpaceDevsService.SpacecraftApi
+    private val spacecraftApi: SpacecraftApi
 ) {
     companion object {
         private val LIMIT = 20

@@ -1,9 +1,9 @@
 package com.sample.feature.launches.list
 
-import com.sample.thespacedevs.services.TheSpaceDevsService
 import com.sample.thespacedevs.services.launch.Results
 import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
+import com.sample.thespacedevs.services.LaunchApi
 import com.sample.thespacedevs.utils.InMemoryCache
 import com.sample.thespacedevs.utils.RepoResult
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class LaunchRepository @Inject constructor(
     private val connectivityApiManager: ConnectivityApiManager,
     private val inMemoryCache: InMemoryCache,
-    private val launchApi: TheSpaceDevsService.LaunchApi
+    private val launchApi: LaunchApi
 ) {
 
     suspend fun getUpcomingLaunches(

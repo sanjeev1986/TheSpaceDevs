@@ -1,7 +1,10 @@
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -46,13 +49,23 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
 dependencies {
     implementation(project(":feature-orchestrator"))
+    implementation(Libs.Hilt.hilt_android)
+    kapt(Libs.Hilt.hilt_compiler)
+    implementation(Libs.Navigation.compose)
     implementation(Libs.Compose.constraintLayout)
     implementation(Libs.Maps.maps_ktx)
     implementation(Libs.play_services_maps)
     implementation(Libs.Compose.swipeToRefreshLayout)
     testImplementation(UnitTestLibraries.junit)
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation(UnitTestLibraries.espresso_core)
 }

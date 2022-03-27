@@ -7,9 +7,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sample.feature.launches.list.LaunchRepository
-import dagger.android.AndroidInjection
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class LaunchDetailsActivity : AppCompatActivity() {
 
     companion object {
@@ -18,16 +19,14 @@ class LaunchDetailsActivity : AppCompatActivity() {
 
         fun createLaunchDetailsIntent(id: String, context: Context): Intent {
             return Intent(context, LaunchDetailsActivity::class.java).apply {
-                putExtra(
-                    EXTRA_LAUNCH_ID,
-                    id
-                )
+                putExtra(EXTRA_LAUNCH_ID, id)
             }
         }
     }
 
     @Inject
     lateinit var repository: LaunchRepository
+
     private val viewModel by viewModels<LaunchDetailsViewModel> {
         LaunchDetailsViewModel.Factory(
             intent.getStringExtra(EXTRA_LAUNCH_ID)!!,
@@ -37,7 +36,6 @@ class LaunchDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
         setContent {
             LaunchDetails(viewModel)
         }

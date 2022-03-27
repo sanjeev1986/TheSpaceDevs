@@ -21,6 +21,11 @@ object Libs {
         const val coil = "io.coil-kt:coil-compose:2.0.0-rc01"
     }
 
+    object Hilt {
+        const val hilt_android = "com.google.dagger:hilt-android:${Versions.hilt}"
+        const val hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+    }
+
     object Dagger {
         const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
         const val dagger_compiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"

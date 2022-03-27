@@ -2,21 +2,22 @@ package com.sample.thespacedevs.feature.vehicles.list
 
 import androidx.lifecycle.*
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
-import com.sample.thespacedevs.services.spacecraft.SpaceCraft
 import com.sample.thespacedevs.utils.RepoResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-internal class SpacecraftListViewModel(private val repository: SpacecraftRepository) : ViewModel() {
+@HiltViewModel
+internal class SpacecraftListViewModel @Inject constructor(private val repository: SpacecraftRepository) :
+    ViewModel() {
 
     private val state = MutableStateFlow(SpaceCraftsViewState())
     val spaceCrafts = state.asLiveData().map { it.spaceCrafts }
     val loading = state.asLiveData().map { it.isError }
     val error = state.asLiveData().map { it.isError }
-    private val _spacecraftsLiveData = MutableLiveData<RepoResult<List<SpaceCraft>>>()
 
     init {
         fetchSpacecrafts()
@@ -48,12 +49,5 @@ internal class SpacecraftListViewModel(private val repository: SpacecraftReposit
                 }
             }
         }
-    }
-}
-
-open class SpacecraftListViewModelFactory @Inject constructor(private val repository: SpacecraftRepository) :
-    ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SpacecraftListViewModel(repository) as T
     }
 }

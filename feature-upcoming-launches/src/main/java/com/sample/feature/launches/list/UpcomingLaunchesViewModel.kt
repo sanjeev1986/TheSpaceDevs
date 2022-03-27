@@ -2,12 +2,14 @@ package com.sample.feature.launches.list
 
 import androidx.lifecycle.*
 import com.sample.thespacedevs.utils.RepoResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-internal class UpcomingLaunchesViewModel(
+@HiltViewModel
+class UpcomingLaunchesViewModel @Inject constructor(
     launchListMapper: LaunchListMapper = LaunchListMapper(),
     loadingMapper: LoadingMapper = LoadingMapper(),
     errorMapper: ErrorMapper = ErrorMapper(),
@@ -64,14 +66,5 @@ internal class UpcomingLaunchesViewModel(
                 }
             }
         }
-    }
-}
-
-@Suppress("UNCHECKED_CAST")
-class UpcomingLaunchesViewModelFactory @Inject constructor(
-    private val repository: LaunchRepository
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return UpcomingLaunchesViewModel(repository = repository) as T
     }
 }

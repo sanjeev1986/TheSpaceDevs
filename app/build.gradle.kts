@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -64,7 +65,7 @@ android {
         animationsDisabled = true
     }
     buildFeatures {
-        compose  = true
+        compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.0.5"
@@ -77,9 +78,6 @@ dependencies {
     implementation(Libs.play_services_maps)
     implementation(project(":feature-vehicles"))
     runtimeOnly(Libs.play_services_maps)
-    kapt(Libs.Dagger.dagger_compiler)
-    kapt(Libs.Dagger.dagger_android_processor)
-
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)
 
@@ -89,4 +87,10 @@ dependencies {
     debugImplementation("androidx.fragment:fragment-testing:1.3.2") {
         exclude("androidx.test", "core")
     }
+    implementation(Libs.Hilt.hilt_android)
+    kapt(Libs.Hilt.hilt_compiler)
+}
+
+kapt {
+    correctErrorTypes = true
 }

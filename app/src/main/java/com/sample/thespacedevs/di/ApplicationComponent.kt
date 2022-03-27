@@ -1,22 +1,16 @@
 package com.sample.thespacedevs.di
 
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-import com.sample.thespacedevs.TheSpaceDevApp
-import dagger.Component
-import dagger.android.AndroidInjector
-import javax.inject.Singleton
-
-@Singleton
-@Component(
-    modules = [
+@InstallIn(SingletonComponent::class)
+@Module(
+    includes = [
         APIModule::class,
         PlatformModule::class,
         StorageModule::class,
-        DispatchersModule::class,
-        FeatureModule::class
+        DispatchersModule::class
     ]
 )
-interface ApplicationComponent : AndroidInjector<TheSpaceDevApp> {
-    @Component.Factory
-    interface Builder : AndroidInjector.Factory<TheSpaceDevApp> {}
-}
+interface ApplicationModulesAggregator {}
