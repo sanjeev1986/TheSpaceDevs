@@ -55,4 +55,5 @@ dependencies {
     implementation(Libs.Compose.ui_compose)
     implementation(Libs.Compose.viewmodel_compose)
     implementation(Libs.Compose.activity_compose)
+    implementation(Libs.Compose.constraintLayout)
 }

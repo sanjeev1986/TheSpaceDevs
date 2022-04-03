@@ -17,4 +17,5 @@
     <string name="unknown">Unknown</string>
     <string name="launch_location_not_available">Launch coordinates not available</string>
     <string name="mission_concluded">mission concluded</string>
+    <string name="connectivity_error">Check your internet and try again</string>
 </resources>

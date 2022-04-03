@@ -1,6 +1,7 @@
 package com.sample.feature.launches.list
 
 import androidx.lifecycle.*
+import com.sample.base.IOResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -28,7 +29,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
         state.update { it.copy(isLoading = true, isError = false) }
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, refresh)) {
-                is com.sample.base.IOResult.Success -> {
+                is IOResult.Success ->
                     state.update {
                         it.copy(
                             isLoading = false,
@@ -36,10 +37,8 @@ class UpcomingLaunchesViewModel @Inject constructor(
                             isError = false
                         )
                     }
-                }
-                is com.sample.base.IOResult.Failure -> {
+                is IOResult.Failure ->
                     state.update { it.copy(isLoading = false, isError = true) }
-                }
             }
         }
     }
@@ -47,7 +46,7 @@ class UpcomingLaunchesViewModel @Inject constructor(
     fun search(name: String) {
         viewModelScope.launch {
             when (val result = repository.getUpcomingLaunches(10, false)) {
-                is com.sample.base.IOResult.Success -> {
+                is IOResult.Success -> {
                     state.update { launchDisplayModel ->
                         launchDisplayModel.copy(
                             isLoading = false,
@@ -60,10 +59,14 @@ class UpcomingLaunchesViewModel @Inject constructor(
                             })
                     }
                 }
-                is com.sample.base.IOResult.Failure -> {
+                is IOResult.Failure -> {
                     state.update { it.copy(isLoading = false, isError = true) }
                 }
             }
         }
+    }
+
+    fun dismissError(){
+        state.update { it.copy(isLoading = false, isError = false) }
     }
 }

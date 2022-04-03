@@ -1,6 +1,7 @@
 package com.sample.thespacedevs.feature.vehicles.list
 
 import androidx.lifecycle.*
+import com.sample.base.IOResult
 import com.sample.thespacedevs.feature.vehicles.SpacecraftRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                 repository.getSpacecrafts(isRefresh)
             }
             when (response) {
-                is com.sample.base.IOResult.Success -> {
+                is IOResult.Success -> {
                     state.value =
                         state.value.copy(
                             isLoading = false,
@@ -43,10 +44,14 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                                 )
                             })
                 }
-                is com.sample.base.IOResult.Failure -> {
+                is IOResult.Failure -> {
                     state.value = state.value.copy(isLoading = false, isError = true)
                 }
             }
         }
+    }
+
+    fun dismissError() {
+        state.value = state.value.copy(isError = false)
     }
 }
