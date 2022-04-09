@@ -11,5 +11,5 @@ data class SpaceCraft(
     val status: Status,
     val description: String,
     @SerializedName("spacecraft_config")
-    val spacecraftConfiguration: SpacecraftConfiguration,
+    val spacecraftConfiguration: SpacecraftConfiguration?,
 )

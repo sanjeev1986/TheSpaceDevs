@@ -37,7 +37,7 @@ internal class SpacecraftListViewModel @Inject constructor(private val repositor
                             isError = false,
                             spaceCrafts = response.result.results.map {
                                 SpaceCraftViewData(
-                                    imageUrl = it.spacecraftConfiguration.image_url,
+                                    imageUrl = it.spacecraftConfiguration?.image_url,
                                     name = it.name,
                                     status = it.status.name,
                                     description = it.description

@@ -83,7 +83,6 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
 
                         Divider(
                             color = dividerGrey, modifier = Modifier.padding(
-                                start = dimensionResource(id = R.dimen.form_widget_margin_half),
                                 top = dimensionResource(id = R.dimen.form_widget_margin_half),
                                 bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                             )
@@ -94,7 +93,6 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
 
                         Divider(
                             color = dividerGrey, modifier = Modifier.padding(
-                                start = dimensionResource(id = R.dimen.form_widget_margin_half),
                                 top = dimensionResource(id = R.dimen.form_widget_margin_half),
                                 bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
                             )
@@ -127,24 +125,26 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
 
 @Composable
 fun LaunchRow(label: String, data: String) {
-    Column {
-        Text(
-            text = label,
-            modifier = Modifier.padding(
-                top = dimensionResource(id = R.dimen.form_widget_margin)
-            ),
-            style = DSTheme.typography.ListItemTitle
-        )
-        Text(
-            text = data,
-            style = DSTheme.typography.ListItemSubTitle,
-            modifier = Modifier.padding(
-                start = dimensionResource(id = R.dimen.form_widget_margin_half),
-                top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
+    if (data.isNotEmpty()) {
+        Column {
+            Text(
+                text = label,
+                modifier = Modifier.padding(
+                    top = dimensionResource(id = R.dimen.form_widget_margin)
+                ),
+                style = DSTheme.typography.ListItemTitle
             )
-        )
+            Text(
+                text = data,
+                style = DSTheme.typography.ListItemSubTitle,
+                modifier = Modifier.padding(
+                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half)
+                )
+            )
+        }
     }
+
 }
 
 @Composable
