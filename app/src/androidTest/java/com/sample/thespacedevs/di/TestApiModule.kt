@@ -1,6 +1,6 @@
 package com.sample.thespacedevs.di
 
-import com.sample.thespacedevs.services.HttpStack
+import com.sample.base.HttpStack
 import com.sample.thespacedevs.services.TheSpaceDevsService
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.services
+package com.sample.base
 
 import com.google.gson.Gson
 import okhttp3.Cache

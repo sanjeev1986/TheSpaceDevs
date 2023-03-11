@@ -1,9 +1,9 @@
 package com.sample.thespacedevs.feature.vehicles
 
 import com.sample.platform.hardware.ConnectivityApiManager
-import com.sample.thespacedevs.services.spacecraft.SpacecraftApi
+import com.sample.thespacedevs.feature.vehicles.services.SpacecraftApi
 
-import com.sample.thespacedevs.services.spacecraft.SpacecraftResponse
+import com.sample.thespacedevs.feature.vehicles.services.SpacecraftResponse
 import com.sample.platform.storage.InMemoryCache
 import com.sample.base.IOResult
 import javax.inject.Inject

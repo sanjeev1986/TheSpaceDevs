@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.services.launch
+package com.sample.feature.launches.services
 
 import com.google.gson.annotations.SerializedName
 

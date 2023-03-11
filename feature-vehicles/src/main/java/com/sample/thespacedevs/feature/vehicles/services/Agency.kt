@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.services.spacecraft
+package com.sample.thespacedevs.feature.vehicles.services
 
 data class Agency (
 	val id : Int,

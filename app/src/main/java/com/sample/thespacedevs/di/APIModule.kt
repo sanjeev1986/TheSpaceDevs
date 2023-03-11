@@ -2,9 +2,9 @@ package com.sample.thespacedevs.di
 
 import android.content.Context
 import com.google.gson.Gson
-import com.sample.thespacedevs.services.HttpStack
-import com.sample.thespacedevs.services.launch.LaunchApi
-import com.sample.thespacedevs.services.spacecraft.SpacecraftApi
+import com.sample.base.HttpStack
+import com.sample.feature.launches.services.LaunchApi
+import com.sample.thespacedevs.feature.vehicles.services.SpacecraftApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

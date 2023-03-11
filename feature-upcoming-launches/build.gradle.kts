@@ -64,9 +64,7 @@ dependencies {
     implementation(Libs.Maps.maps_ktx)
     implementation(Libs.play_services_maps)
     implementation(Libs.Compose.swipeToRefreshLayout)
-    testImplementation(UnitTestLibraries.junit)
-
+    implementation(Libs.Retrofit.retrofit)
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation(UnitTestLibraries.espresso_core)
+    testImplementation(UnitTestLibraries.junit)
 }

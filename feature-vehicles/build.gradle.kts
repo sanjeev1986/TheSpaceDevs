@@ -69,8 +69,8 @@ dependencies {
     implementation(Libs.Compose.constraintLayout)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)
+    implementation(Libs.Retrofit.retrofit)
+
     kapt(Libs.Hilt.hilt_compiler)
     testImplementation(UnitTestLibraries.junit)
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation(UnitTestLibraries.espresso_core)
 }

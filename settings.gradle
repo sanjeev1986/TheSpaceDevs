@@ -3,7 +3,6 @@ rootProject.name = "TheSpaceDevs"
 include ':feature-upcoming-launches'
 include ':navigation'
 include ':ui-design-system'
-include ':data-web-services'
 include ':android-platform'
 include ':feature-vehicles'
 include ':base'

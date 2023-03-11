@@ -1,9 +1,9 @@
 package com.sample.feature.launches.list
 
-import com.sample.thespacedevs.services.launch.Results
+import com.sample.feature.launches.services.Results
 import com.sample.platform.errors.NotConnectedToInternet
 import com.sample.platform.hardware.ConnectivityApiManager
-import com.sample.thespacedevs.services.launch.LaunchApi
+import com.sample.feature.launches.services.LaunchApi
 import com.sample.platform.storage.InMemoryCache
 import com.sample.base.IOResult
 import com.sample.thespacedevs.utils.OpenForTesting

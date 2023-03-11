@@ -1,4 +1,4 @@
-package com.sample.thespacedevs.services.launch
+package com.sample.feature.launches.services
 
 import retrofit2.http.GET
 import retrofit2.http.Query

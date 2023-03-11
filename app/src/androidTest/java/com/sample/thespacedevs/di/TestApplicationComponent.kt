@@ -2,7 +2,6 @@ package com.sample.thespacedevs.di
 
 import android.app.Application
 import android.content.Context
-import com.sample.thespacedevs.upcoming.UpcomingLaunchesFragmentTest
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

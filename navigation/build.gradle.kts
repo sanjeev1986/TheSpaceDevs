@@ -46,7 +46,6 @@ android {
 dependencies {
     api(project(":android-platform"))
     api(project(":ui-design-system"))
-    api(project(":data-web-services"))
     api(Libs.lifecycle_viewmodel_ktx)
     api(Libs.lifecycle_runtime_ktx)
     api(Libs.Compose.compose_compiler)

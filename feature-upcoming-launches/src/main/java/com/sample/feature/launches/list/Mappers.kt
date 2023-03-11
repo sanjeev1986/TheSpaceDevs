@@ -1,7 +1,6 @@
 package com.sample.feature.launches.list
 
-import com.google.accompanist.swiperefresh.SwipeRefreshState
-import com.sample.thespacedevs.services.launch.Results
+import com.sample.feature.launches.services.Results
 import com.sample.base.UiStateMapper
 
 data class LaunchDisplayModel(
