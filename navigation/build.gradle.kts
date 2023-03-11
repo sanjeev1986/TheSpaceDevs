@@ -20,14 +20,14 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -70,11 +70,10 @@ dependencies {
     api(Libs.Navigation.fragment_ktx)
     api(Libs.Navigation.compose)
 
-
     api(Libs.Kotlin.kotlin_coroutines)
     api(Libs.Kotlin.kotlinx_coroutines_android)
 
-    //UI testing
+    // UI testing
     androidTestApi(UnitTestLibraries.junit)
     androidTestApi(UnitTestLibraries.espresso_core)
     androidTestApi(UnitTestLibraries.espresso_contrib)
@@ -89,4 +88,3 @@ dependencies {
     api(Libs.Retrofit.gson)
     implementation(Libs.Hilt.hilt_android)
 }
-

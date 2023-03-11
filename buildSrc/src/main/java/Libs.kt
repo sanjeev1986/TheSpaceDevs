@@ -57,7 +57,6 @@ object Libs {
 
     const val JUNIT = "junit:junit:${Versions.JUNIT}"
 
-
     const val core_ktx = "androidx.core:core-ktx:${Versions.corektx}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
@@ -73,7 +72,6 @@ object Libs {
 
     const val play_services_maps =
         "com.google.android.gms:play-services-maps:${Versions.play_services_maps}"
-
 
     const val livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 }

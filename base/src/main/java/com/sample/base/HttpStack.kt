@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 class HttpStack(
     private val baseUrl: String,
     private val gson: Gson,
-    private val cacheDir: File
+    private val cacheDir: File,
 ) {
     private val okhttpClient: OkHttpClient by lazy {
         val builder = OkHttpClient.Builder()

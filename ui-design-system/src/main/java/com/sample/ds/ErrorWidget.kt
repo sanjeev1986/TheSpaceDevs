@@ -29,7 +29,8 @@ class ErrorWidget(context: Context, attrs: AttributeSet?) : ConstraintLayout(con
         context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.ErrorWidget,
-            0, 0
+            0,
+            0,
         ).apply {
             try {
                 val message = getString(R.styleable.ErrorWidget_text)
@@ -40,9 +41,9 @@ class ErrorWidget(context: Context, attrs: AttributeSet?) : ConstraintLayout(con
                         context,
                         getResourceId(
                             R.styleable.ErrorWidget_actionIconTint,
-                            R.color.white
-                        )
-                    )
+                            R.color.white,
+                        ),
+                    ),
                 )
                 visibility = View.GONE
                 messageText.text = message

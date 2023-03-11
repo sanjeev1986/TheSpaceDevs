@@ -12,7 +12,7 @@ class DSColors(
     accent: Color,
     textPrimary: Color,
     error: Color,
-    windowBackground: Color
+    windowBackground: Color,
 ) {
     var primary: Color by mutableStateOf(primary)
     var secondary: Color by mutableStateOf(secondary)
@@ -21,7 +21,6 @@ class DSColors(
     var error: Color by mutableStateOf(error)
     var windowBackground: Color by mutableStateOf(windowBackground)
 }
-
 
 val colorPrimary = Color(0xff262626)
 val colorPrimaryDark = Color(0xff262626)

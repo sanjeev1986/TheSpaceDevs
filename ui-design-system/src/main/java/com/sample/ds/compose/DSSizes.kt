@@ -10,7 +10,7 @@ data class DSSizes(
     val listItemPadding: Dp = 8.dp,
     val formWidgetMargin: Dp = 16.dp,
     val formWidgetHalfMargin: Dp = 8.dp,
-    val widgetPadding: Dp = 8.dp
+    val widgetPadding: Dp = 8.dp,
 )
 
 internal val LocalDSSizeConfiguration = staticCompositionLocalOf { DSSizes() }

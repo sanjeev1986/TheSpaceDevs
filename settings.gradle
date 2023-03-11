@@ -1,8 +1,8 @@
 include ':app'
 rootProject.name = "TheSpaceDevs"
-include ':feature-upcoming-launches'
 include ':navigation'
 include ':ui-design-system'
 include ':android-platform'
-include ':feature-vehicles'
+include ':feature:vehicles'
+include ':feature:upcoming-launches'
 include ':base'

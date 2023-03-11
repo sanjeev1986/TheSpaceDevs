@@ -14,8 +14,8 @@ import javax.inject.Singleton
         GsonModuleTest::class,
         StorageModuleTest::class,
         DispatchersModuleTest::class,
-        RepoModule::class
-    ]
+        RepoModule::class,
+    ],
 )
 interface TestApplicationComponent : DaggerComponent {
     @Component.Builder

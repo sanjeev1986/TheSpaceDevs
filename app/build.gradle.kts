@@ -40,14 +40,14 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -75,14 +75,14 @@ android {
 dependencies {
     implementation(project(":navigation"))
     implementation(project(":base"))
-    implementation(project(":feature-upcoming-launches"))
-    implementation(project(":feature-vehicles"))
+    implementation(project(":feature:upcoming-launches"))
+    implementation(project(":feature:vehicles"))
     implementation(Libs.play_services_maps)
     runtimeOnly(Libs.play_services_maps)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)
 
-    //unit testing
+    // unit testing
     testImplementation(UnitTestLibraries.junit)
     testImplementation(UnitTestLibraries.mockk)
     debugImplementation("androidx.fragment:fragment-testing:1.3.2") {

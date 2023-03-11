@@ -1,14 +1,19 @@
 package com.sample.thespacedevs
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
@@ -17,12 +22,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.sample.ds.compose.platformBlack
+import com.sample.ds.compose.translucentTeal
 import com.sample.feature.launches.list.UpcomingLaunches
 import com.sample.thespacedevs.directions.MainMenu
 import com.sample.thespacedevs.directions.Path
-import androidx.compose.ui.Modifier
-import com.sample.ds.compose.platformBlack
-import com.sample.ds.compose.translucentTeal
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,11 +45,11 @@ class MainActivity : AppCompatActivity() {
 fun HomeScreen() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { HomeBottomNavigation(navController) }
+        bottomBar = { HomeBottomNavigation(navController) },
     ) {
         NavigationGraph(
             navController = navController,
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(it),
         )
     }
 }
@@ -54,11 +58,11 @@ fun HomeScreen() {
 fun HomeBottomNavigation(navController: NavController) {
     val items = listOf(
         BottomNavMenu(R.string.upcoming, R.drawable.sharp_rocket_launch_24, Path.Upcoming),
-        BottomNavMenu(R.string.vehicles, R.drawable.sharp_rocket_24, Path.Spacecrafts)
+        BottomNavMenu(R.string.vehicles, R.drawable.sharp_rocket_24, Path.Spacecrafts),
     )
     BottomNavigation(
         backgroundColor = translucentTeal,
-        contentColor = platformBlack
+        contentColor = platformBlack,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -67,7 +71,7 @@ fun HomeBottomNavigation(navController: NavController) {
                 icon = {
                     Icon(
                         painter = painterResource(it.iconId),
-                        contentDescription = ""
+                        contentDescription = "",
                     )
                 },
                 label = { BottomNavLabel(stringResource(it.title)) },
@@ -96,12 +100,12 @@ fun BottomNavLabel(label: String) {
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     NavHost(
         navController = navController,
         startDestination = MainMenu.Upcoming.path.route,
-        modifier = modifier
+        modifier = modifier,
     ) {
         composable(MainMenu.Upcoming.path.route) {
             UpcomingLaunches()

@@ -1,13 +1,19 @@
 package com.sample.ds.compose.widget
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,27 +26,28 @@ import com.sample.ds.compose.DSTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun ErrorWidget(displayState: State<Boolean>, message: String, onDismiss: () -> Unit) {
+fun ErrorWidget(displayState: Boolean, message: String, onDismiss: () -> Unit) {
     val density = LocalDensity.current
     val scope = rememberCoroutineScope()
     AnimatedVisibility(
-        visible = displayState.value,
+        visible = displayState,
         enter = slideInVertically {
             with(density) { -40.dp.roundToPx() }
         } + expandVertically(
-            expandFrom = Alignment.Bottom
+            expandFrom = Alignment.Bottom,
         ),
 
-        exit = slideOutVertically() + shrinkVertically() + fadeOut()
+        exit = slideOutVertically() + shrinkVertically() + fadeOut(),
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Red)
-                .padding(DSTheme.sizes.widgetPadding)
+                .padding(DSTheme.sizes.widgetPadding),
         ) {
-            val (messageConstraint,
-                actionConstraint
+            val (
+                messageConstraint,
+                actionConstraint,
             ) = createRefs()
 
             Image(
@@ -56,14 +63,16 @@ fun ErrorWidget(displayState: State<Boolean>, message: String, onDismiss: () -> 
                         scope.launch {
                             onDismiss()
                         }
-                    })
-            Text(text = message, modifier = Modifier.constrainAs(messageConstraint) {
-                start.linkTo(parent.start)
-                top.linkTo(parent.top)
-                end.linkTo(actionConstraint.start)
-            })
-
-
+                    },
+            )
+            Text(
+                text = message,
+                modifier = Modifier.constrainAs(messageConstraint) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    end.linkTo(actionConstraint.start)
+                },
+            )
         }
     }
 }

@@ -9,7 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.sample.ds.compose.*
+import com.sample.ds.compose.DSTheme
+import com.sample.ds.compose.platformBlack
+import com.sample.ds.compose.platformWhite
 
 @Composable
 fun Chip(
@@ -18,22 +20,21 @@ fun Chip(
     textColor: Color = platformBlack,
     backgroundColor: Color = platformWhite,
     isToggleOn: Boolean = false,
-    onToggleListener: (Boolean) -> Unit = {}
+    onToggleListener: (Boolean) -> Unit = {},
 ) {
     if (text.isNotEmpty()) {
         Surface(
             elevation = DSTheme.elevation.raised,
             shape = DSTheme.shape.roundedCornerWidget,
-            color = if (enableToggle) DSTheme.colors.accent else backgroundColor
+            color = if (enableToggle) DSTheme.colors.accent else backgroundColor,
         ) {
-
             Row(
                 modifier = Modifier
                     .padding(DSTheme.sizes.widgetPadding)
                     .toggleable(
                         value = isToggleOn,
-                        onValueChange = onToggleListener
-                    )
+                        onValueChange = onToggleListener,
+                    ),
             ) {
                 Text(
                     text = text,

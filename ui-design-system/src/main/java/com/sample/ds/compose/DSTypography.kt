@@ -13,10 +13,10 @@ data class DSTypography(
         fontFamily = FontFamily(
             typeface = Typeface.create(
                 "sans-serif-condensed-medium",
-                Typeface.NORMAL
-            )
+                Typeface.NORMAL,
+            ),
         ),
-        fontSize = 18.sp
+        fontSize = 18.sp,
     ),
 
     val ListItemTitle: TextStyle = TextStyle(
@@ -24,10 +24,10 @@ data class DSTypography(
         fontFamily = FontFamily(
             typeface = Typeface.create(
                 "sans-serif-condensed-medium",
-                Typeface.NORMAL
-            )
+                Typeface.NORMAL,
+            ),
         ),
-        fontSize = 16.sp
+        fontSize = 16.sp,
     ),
 
     val ListItemSubTitle: TextStyle = TextStyle(
@@ -35,10 +35,10 @@ data class DSTypography(
         fontFamily = FontFamily(
             typeface = Typeface.create(
                 "sans-serif-condensed-light",
-                Typeface.NORMAL
-            )
+                Typeface.NORMAL,
+            ),
         ),
-        fontSize = 14.sp
+        fontSize = 14.sp,
     ),
 
     val ListItemBody: TextStyle = TextStyle(
@@ -46,10 +46,10 @@ data class DSTypography(
         fontFamily = FontFamily(
             typeface = Typeface.create(
                 "sans-serif-condensed-light",
-                Typeface.NORMAL
-            )
+                Typeface.NORMAL,
+            ),
         ),
-        fontSize = 12.sp
+        fontSize = 12.sp,
     ),
 
     val Widget: TextStyle = TextStyle(
@@ -57,11 +57,11 @@ data class DSTypography(
         fontFamily = FontFamily(
             typeface = Typeface.create(
                 "sans-serif-condensed-medium",
-                Typeface.NORMAL
-            )
+                Typeface.NORMAL,
+            ),
         ),
-        fontSize = 12.sp
-    )
+        fontSize = 12.sp,
+    ),
 )
 
 internal val LocalDSTypographyConfiguration = staticCompositionLocalOf { DSTypography() }

@@ -15,9 +15,7 @@ class InMemoryCache(size: Int = 1 * 1024 * 1024/* Default 1 MB cache*/) {
         return data
     }
 
-
     fun <T> removeFromCache(key: String) = memoryCache.remove(key) as? T
 
     fun clear() = memoryCache.evictAll()
-
 }

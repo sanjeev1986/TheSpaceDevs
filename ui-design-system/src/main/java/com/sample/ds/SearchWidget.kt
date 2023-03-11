@@ -9,18 +9,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.sample.ds.compose.platformWhite
 
 class SearchWidget @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : AppCompatEditText(ContextThemeWrapper(context, R.style.DS_SearchWidget), attrs, defStyleAttr)
 
 @Composable
 fun SearchWidget(callback: (String) -> Unit) {
-    var contentText: String by remember { mutableStateOf("") }
+    var contentText by remember { mutableStateOf("") }
     OutlinedTextField(
         value = contentText,
         onValueChange = {
@@ -36,7 +42,7 @@ fun SearchWidget(callback: (String) -> Unit) {
         singleLine = true,
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = platformWhite,
-            unfocusedBorderColor = platformWhite
+            unfocusedBorderColor = platformWhite,
         ),
     )
 }

@@ -1,6 +1,5 @@
 package com.sample.thespacedevs.di
 
-import android.content.Context
 import com.sample.repositories.localstorage.InMemoryCache
 import dagger.Module
 import dagger.Provides

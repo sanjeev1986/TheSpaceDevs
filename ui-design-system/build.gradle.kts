@@ -17,14 +17,14 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -46,9 +46,9 @@ android {
 }
 
 dependencies {
-    implementation (Libs.Kotlin.kotlin_stdlib)
-    implementation (Libs.appcompat)
-    implementation (Libs.material)
+    implementation(Libs.Kotlin.kotlin_stdlib)
+    implementation(Libs.appcompat)
+    implementation(Libs.material)
     implementation(Libs.Compose.material_compose)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)

@@ -13,6 +13,7 @@ buildscript {
         classpath(Classpaths.googleMaps)
         classpath(Classpaths.hilt)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
+        classpath("com.android.tools.build:gradle:7.4.2")
     }
 }
 
