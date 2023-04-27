@@ -12,6 +12,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.sample.ds.compose.DSTheme
 import com.sample.feature.launches.R
+import com.sample.ds.R as RDs
 
 @Composable
 internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: (String) -> Unit) {
@@ -28,12 +29,12 @@ internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: (String) -> Unit)
                 .padding(
                     PaddingValues(
                         start = dimensionResource(
-                            id = R.dimen.list_item_padding,
+                            id = RDs.dimen.list_item_padding,
                         ),
                         top = dimensionResource(
-                            id = R.dimen.list_item_padding,
+                            id = RDs.dimen.list_item_padding,
                         ),
-                        end = dimensionResource(id = R.dimen.list_item_padding),
+                        end = dimensionResource(id = RDs.dimen.list_item_padding),
                     ),
                 ),
         )
@@ -44,12 +45,12 @@ internal fun UpcomingLaunchItem(item: LaunchListItem, onClick: (String) -> Unit)
                 .padding(
                     PaddingValues(
                         start = dimensionResource(
-                            id = R.dimen.list_item_padding,
+                            id = com.sample.ds.R.dimen.list_item_padding,
                         ),
                         top = dimensionResource(
-                            id = R.dimen.list_item_padding,
+                            id = com.sample.ds.R.dimen.list_item_padding,
                         ),
-                        end = dimensionResource(id = R.dimen.list_item_padding),
+                        end = dimensionResource(id = RDs.dimen.list_item_padding),
                     ),
                 ),
         )

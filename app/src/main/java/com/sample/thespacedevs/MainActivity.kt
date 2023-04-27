@@ -29,6 +29,7 @@ import com.sample.thespacedevs.directions.MainMenu
 import com.sample.thespacedevs.directions.Path
 import com.sample.thespacedevs.feature.vehicles.list.SpaceCraftsScreen
 import dagger.hilt.android.AndroidEntryPoint
+import com.sample.ds.R as RDs
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -57,8 +58,16 @@ fun HomeScreen() {
 @Composable
 fun HomeBottomNavigation(navController: NavController) {
     val items = listOf(
-        BottomNavMenu(R.string.upcoming, R.drawable.sharp_rocket_launch_24, Path.Upcoming),
-        BottomNavMenu(R.string.vehicles, R.drawable.sharp_rocket_24, Path.Spacecrafts),
+        BottomNavMenu(
+            com.sample.feature.launches.R.string.upcoming,
+            RDs.drawable.sharp_rocket_launch_24,
+            Path.Upcoming
+        ),
+        BottomNavMenu(
+            com.sample.feature.launches.R.string.vehicles,
+            RDs.drawable.sharp_rocket_24,
+            Path.Spacecrafts
+        ),
     )
     BottomNavigation(
         backgroundColor = translucentTeal,

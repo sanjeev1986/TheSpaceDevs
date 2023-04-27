@@ -28,6 +28,7 @@ import com.sample.ds.compose.DSTheme
 import com.sample.ds.compose.dividerGrey
 import com.sample.ds.compose.platformWhite
 import com.sample.feature.launches.R
+import com.sample.ds.R as RDs
 import kotlinx.coroutines.launch
 
 @Composable
@@ -75,7 +76,7 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
                     }
                     Column(
                         modifier = Modifier
-                            .padding(horizontal = dimensionResource(id = R.dimen.screen_margin))
+                            .padding(horizontal = dimensionResource(id = RDs.dimen.screen_margin))
                             .constrainAs(detailsConstraint) {
                                 top.linkTo(mapsConstraint.bottom)
                                 start.linkTo(parent.start)
@@ -89,8 +90,8 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
                         Divider(
                             color = dividerGrey,
                             modifier = Modifier.padding(
-                                top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                                bottom = dimensionResource(id = R.dimen.form_widget_margin_half),
+                                top = dimensionResource(id = RDs.dimen.form_widget_margin_half),
+                                bottom = dimensionResource(id = RDs.dimen.form_widget_margin_half),
                             ),
                         )
                         launchAgencyName.apply {
@@ -100,8 +101,8 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
                         Divider(
                             color = dividerGrey,
                             modifier = Modifier.padding(
-                                top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                                bottom = dimensionResource(id = R.dimen.form_widget_margin_half),
+                                top = dimensionResource(id = RDs.dimen.form_widget_margin_half),
+                                bottom = dimensionResource(id = RDs.dimen.form_widget_margin_half),
                             ),
                         )
                         launchDescription.apply {
@@ -114,7 +115,7 @@ internal fun LaunchDetailsInternal(state: LaunchDetailViewState) {
                             text = this,
                             modifier = Modifier
                                 .padding(
-                                    top = dimensionResource(id = R.dimen.form_widget_margin),
+                                    top = dimensionResource(id = RDs.dimen.form_widget_margin),
                                 )
                                 .constrainAs(timeTextConstraint) {
                                     bottom.linkTo(mapsConstraint.bottom)
@@ -136,7 +137,7 @@ fun LaunchRow(label: String, data: String) {
             Text(
                 text = label,
                 modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.form_widget_margin),
+                    top = dimensionResource(id = RDs.dimen.form_widget_margin),
                 ),
                 style = DSTheme.typography.ListItemTitle,
             )
@@ -144,8 +145,8 @@ fun LaunchRow(label: String, data: String) {
                 text = data,
                 style = DSTheme.typography.ListItemSubTitle,
                 modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.form_widget_margin_half),
-                    bottom = dimensionResource(id = R.dimen.form_widget_margin_half),
+                    top = dimensionResource(id = RDs.dimen.form_widget_margin_half),
+                    bottom = dimensionResource(id = RDs.dimen.form_widget_margin_half),
                 ),
             )
         }
@@ -173,7 +174,7 @@ fun MapAvailable(coordinates: LatLng) {
                         .icon(
                             convertToBitmapDescriptor(
                                 mv.context,
-                                R.drawable.ic_launch_marker,
+                                com.sample.ds.R.drawable.ic_launch_marker,
                             ),
                         ),
                 )

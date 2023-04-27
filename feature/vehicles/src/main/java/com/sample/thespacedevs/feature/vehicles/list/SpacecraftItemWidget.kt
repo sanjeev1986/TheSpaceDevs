@@ -20,7 +20,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sample.ds.compose.DSTheme
 import com.sample.ds.compose.widget.Chip
-import com.sample.thespacedevs.feature.spacecrafts.R
+import com.sample.ds.R as RDs
 
 @Composable
 fun SpacecraftItemWidget(
@@ -45,7 +45,7 @@ fun SpacecraftItemWidget(
         ) = createRefs()
 
         AsyncImage(
-            placeholder = painterResource(id = R.drawable.ic_space_vehicle),
+            placeholder = painterResource(id = RDs.drawable.ic_space_vehicle),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
                 .crossfade(true)
