@@ -36,7 +36,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
-        viewBinding = true
         compose = true
     }
 
@@ -49,6 +48,7 @@ dependencies {
     implementation(Libs.Kotlin.kotlin_stdlib)
     implementation(Libs.appcompat)
     implementation(Libs.material)
+    implementation(platform(Libs.Compose.bom))
     implementation(Libs.Compose.material_compose)
     implementation(Libs.Compose.compose_compiler)
     implementation(Libs.Compose.compose_runtime)

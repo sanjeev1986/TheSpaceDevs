@@ -1,21 +1,19 @@
 object Libs {
 
     object Compose {
+        const val bom = "androidx.compose:compose-bom:2023.04.01"
         const val activity_compose = "androidx.activity:activity-compose:1.3.1"
         const val viewmodel_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
-        const val material_compose =
-            "androidx.compose.material:material:${Versions.compose_version}"
-        const val animation_compose =
-            "androidx.compose.animation:animation:${Versions.compose_version}"
-        const val ui_compose = "androidx.compose.ui:ui-tooling:${Versions.compose_version}"
+        const val material_compose = "androidx.compose.material:material"
+        const val animation_compose = "androidx.compose.animation:animation"
+        const val ui_compose = "androidx.compose.ui:ui-tooling"
         const val mdc_compose =
             "com.google.android.material:compose-theme-adapter:${Versions.compose_version}"
         const val appcompat_compose = "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
-        const val compose_runtime = "androidx.compose.runtime:runtime:${Versions.compose_version}"
+        const val compose_runtime = "androidx.compose.runtime:runtime:1.4.1"
         const val compose_compiler =
             "androidx.compose.compiler:compiler:${Versions.compose_version}"
-        const val compose_livedata =
-            "androidx.compose.runtime:runtime-livedata:${Versions.compose_version}"
+        const val compose_livedata = "androidx.compose.runtime:runtime-livedata"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.0-rc02"
         const val swipeToRefreshLayout = "com.google.accompanist:accompanist-swiperefresh:0.23.1"
         const val coil = "io.coil-kt:coil-compose:2.0.0-rc01"

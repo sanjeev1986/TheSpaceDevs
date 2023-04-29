@@ -40,7 +40,7 @@ internal class LaunchDetailsViewModel(
         private val id: String,
         private val repository: LaunchRepository,
     ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return LaunchDetailsViewModel(id = id, repository = repository) as T
         }
     }

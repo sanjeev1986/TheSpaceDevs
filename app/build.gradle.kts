@@ -77,6 +77,7 @@ dependencies {
     implementation(project(":base"))
     implementation(project(":feature:upcoming-launches"))
     implementation(project(":feature:vehicles"))
+    implementation(platform(Libs.Compose.bom))
     implementation(Libs.play_services_maps)
     runtimeOnly(Libs.play_services_maps)
     implementation(Libs.Compose.compose_compiler)

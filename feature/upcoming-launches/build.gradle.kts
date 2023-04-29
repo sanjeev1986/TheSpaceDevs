@@ -16,7 +16,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
     buildFeatures {
-        viewBinding = true
         compose = true
     }
     composeOptions {
@@ -65,6 +64,7 @@ dependencies {
     implementation(Libs.core_ktx)
     implementation(Libs.appcompat)
     implementation(Libs.material)
+    implementation(platform(Libs.Compose.bom))
     implementation(Libs.lifecycle_viewmodel_ktx)
     implementation(Libs.lifecycle_runtime_ktx)
     implementation(Libs.Compose.constraintLayout)
